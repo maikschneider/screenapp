@@ -1,32 +1,26 @@
-# screenapp
+# Screenapp
+
 SCC 2016 Project
 
-# Model
+## Overview
 
-* User
-** username
-** password
+* Software Stack
+* Installation
+* Model
 
-* Apps
-** servicename
+## Software Stack
 
-* Playlist
-** PlaylistItem
+* [sails.js](http://sailsjs.org)
+    * ORM [Waterline](https://github.com/balderdashy/waterline-docs)
+    * Adapters (MySQL, [NeDB](https://github.com/louischatriot/nedb)?)
+* [reveal.js](http://lab.hakim.se/reveal-js/#/)
 
-* PlaylistItem
-** App
-** duration
+## Model
 
-
-## Apps
-
-* Wetter
-* Message (Headline + Text)
-* Bild
-* Twitter
-
+![uml](plantuml.png)
 
 ## Webclient (Anzeige)
 
-* reveal.js
-* iOS App
+* [reveal.js](http://lab.hakim.se/reveal-js/#/)
+* iOS App 
+

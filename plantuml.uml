@@ -1,0 +1,56 @@
+@startuml
+scale 1000 width
+
+class Screen {
+	- id
+	- name
+}
+
+Screen "*" --> "1" Playlist
+
+class Playlist {
+	- id
+	- name
+}
+
+Playlist "1" o-- "*" PlaylistItem
+
+class PlaylistItem {
+	- id
+	- duration
+}
+
+PlaylistItem "1" -- "1" AppServ
+
+class AppServ {
+	- id
+	- serviceName
+}
+
+AppServ <|-- AppServWeather
+
+class AppServWeather {
+	- location
+	- unit
+	- fontColor
+	- backgroundImage
+}
+
+AppServ <|-- AppServTwitter
+
+class AppServTwitter {
+	- filter
+	- tweetDuration
+	- showRetweets
+}
+
+AppServ <|-- AppServMessage 
+
+class AppServMessage {
+	- headline
+	- text
+	- image
+}
+
+
+@enduml
