@@ -17,40 +17,22 @@ Playlist "1" o-- "*" PlaylistItem
 
 class PlaylistItem {
 	- id
+	- name
 	- duration
+	- appType : enum
+	..
+	- weatherLocation
+	- weatherUnit
+	- weatherFontColor
+	- weatherBackgroundImage
+	..
+	- twitterFilter
+	- twitterTweetDuration
+	- twitterShowRetweets
+	..
+	- msgHeadline
+	- msgText
+	- msgImage
 }
-
-PlaylistItem "1" -- "1" AppServ
-
-class AppServ {
-	- id
-	- serviceName
-}
-
-AppServ <|-- AppServWeather
-
-class AppServWeather {
-	- location
-	- unit
-	- fontColor
-	- backgroundImage
-}
-
-AppServ <|-- AppServTwitter
-
-class AppServTwitter {
-	- filter
-	- tweetDuration
-	- showRetweets
-}
-
-AppServ <|-- AppServMessage 
-
-class AppServMessage {
-	- headline
-	- text
-	- image
-}
-
 
 @enduml

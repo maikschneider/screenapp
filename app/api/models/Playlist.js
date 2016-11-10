@@ -8,7 +8,19 @@
 module.exports = {
 
   attributes: {
+    name: {
+      type: 'text',
+      required: true
+    },
 
+    screens: {
+      collection: 'screen',
+      via: 'list'
+    },
+    items: {
+      collection: 'playlistitem',
+      via: 'playlist'
+    }
   }
 };
 

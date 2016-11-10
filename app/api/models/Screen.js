@@ -8,7 +8,13 @@
 module.exports = {
 
   attributes: {
+    name: {
+      type: 'text'
+    },
 
+    list: {
+      model: 'playlist'
+    }
   }
 };
 

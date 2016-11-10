@@ -8,6 +8,37 @@
 module.exports = {
 
   attributes: {
+    name: {
+      type: 'text',
+      required: true,
+    },
+    duration: {
+      type: 'integer',
+      defaultsTo: 30,
+    },
+    appType: {
+      type: 'string',
+      enum: ['weather', 'twitter', 'msg']
+    },
+
+    // Weather settings
+    weatherLocation: 'text',
+    weatherUnit: 'boolean',
+    weatherFontColor: 'text',
+    weatherBackgroundImage: 'text',
+    // Twiiter settings
+    twitterFilter: 'text',
+    twitterTweetDuration: 'integer',
+    twitterShowRetweets: 'boolean',
+    // Message settings
+    msgHeadline: 'text',
+    msgText: 'text',
+    msgImage: 'text',
+
+
+    playlist: {
+      model: 'playlist',
+    },
 
   }
 };
