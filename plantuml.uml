@@ -6,7 +6,7 @@ class Screen {
 	- name
 }
 
-Screen "*" --> "1" Playlist
+Screen "*" -- "1" Playlist
 
 class Playlist {
 	- id
