@@ -1,5 +1,4 @@
 @startuml
-scale 1000 width
 
 class Screen {
 	- id
