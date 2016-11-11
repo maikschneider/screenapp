@@ -7,6 +7,7 @@ SCC 2016 Project
 * Software Stack
 * Install
 * Model
+* API
 * Usage
 * Webclients (Anzeige)
 
@@ -15,6 +16,7 @@ SCC 2016 Project
 * [sails.js](http://sailsjs.org)
     * ORM [Waterline](https://github.com/balderdashy/waterline-docs)
     * Adapters (MySQL, [NeDB](https://github.com/louischatriot/nedb)?)
+* [swagger.io](http://swagger.io/)
 * [reveal.js](http://lab.hakim.se/reveal-js/#/)
 
 ## Install
@@ -25,6 +27,12 @@ SCC 2016 Project
 ## Model
 
 ![uml](plantuml.png)
+
+## API
+
+After `sails lift`, navigate to [http://localhost:1337/docs/](http://localhost:1337/docs/) to see the swagger-ui doc.
+
+![uml](swagger.png)
 
 ## Usage
 
