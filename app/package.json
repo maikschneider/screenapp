@@ -21,7 +21,8 @@
     "include-all": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.8",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "sails-swagger": "^0.5.1"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -33,5 +34,8 @@
     "url": "git://github.com/mschneider/app.git"
   },
   "author": "mschneider",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "swagger-ui": "^2.2.6"
+  }
 }
