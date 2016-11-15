@@ -8,7 +8,19 @@
 module.exports = {
 
   index: function(req, res) {
-    res.view('screen/index')
+
+    Screen.find().exec(function(err, screens){
+      Playlist.find().exec(function(err, lists){
+        PlaylistItem.find().exec(function(err, items){
+
+          res.view('screen/index', {'data': [screens, lists, items]});
+
+        });
+      });
+
+    });
+
+
   }
 };
 
