@@ -9,6 +9,7 @@ SCC 2016 Project
 * Model
 * API
 * Usage
+* Backend
 * Webclients (Anzeige)
 
 ## Software Stack
@@ -18,11 +19,14 @@ SCC 2016 Project
     * Adapters (MySQL, [NeDB](https://github.com/louischatriot/nedb)?)
 * [swagger.io](http://swagger.io/)
 * [reveal.js](http://lab.hakim.se/reveal-js/#/)
+* [bower](https://bower.io/)
+    * [Foundation 6](http://foundation.zurb.com/)
 
 ## Install
 
 * run `npm install` inside app directory
 * to start the server, run `sails lift`
+* navigate into the **assets** directory and run `bower install`
 
 ## Model
 
@@ -130,6 +134,10 @@ Response:
   }
 ]
 ```
+
+## Backend
+
+![backend](backend.png)
 
 ## Webclients (Anzeige)
 
