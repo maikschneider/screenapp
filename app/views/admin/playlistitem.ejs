@@ -1,0 +1,151 @@
+<h1><i class="fa fa-play-circle"></i> Add new PlaylistItem</h1>
+<hr />
+
+<form action="/playlistitem" method="POST">
+
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Name</label>
+    </div>
+    <div class="small-9 columns">
+      <input type="text" id="middle-label" name="name" placeholder="Item name" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Duration in seconds</label>
+    </div>
+    <div class="small-9 columns">
+      <input type="text" id="middle-label" name="duration" placeholder="30">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Service</label>
+    </div>
+    <div class="small-9 columns">
+
+      <ul class="tabs" data-tabs id="playlistitem-tabs">
+        <li data-apptype="twitter" class="tabs-title is-active"><a href="#panel1" aria-selected="true"><i class="fa fa-twitter"></i> Twitter</a></li>
+        <li data-apptype="weather" class="tabs-title"><a href="#panel2"><i class="fa fa-sun-o"></i> Weather</a></li>
+        <li data-apptype="msg" class="tabs-title"><a href="#panel3"><i class="fa fa-comment"></i> Message</a></li>
+      </ul>
+
+      <div class="tabs-content" data-tabs-content="playlistitem-tabs">
+        <div class="tabs-panel is-active" id="panel1" data-apptype="twitter">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Twitter Filter</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" id="middle-label" name="twitterFilter" placeholder="30">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Tweet duration in seconds</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" id="middle-label" name="twitterTweetDuration">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Show Retweets</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="checkbox" name="twitterShowRetweets" />
+            </div>
+          </div>
+
+        </div>
+        <div class="tabs-panel" id="panel2" data-apptype="weather">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Location</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="weatherLocation">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Unit</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="radio" name="weatherUnit" value="true" id="c" required><label for="c">°C</label>
+              <input disabled type="radio" name="weatherUnit" value="Blue" id="f"><label for="f">°F</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Font color</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="weatherFontColor">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Background image</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="weatherBackgroundImage">
+            </div>
+          </div>
+        </div>
+        <div class="tabs-panel" id="panel3" data-apptype="msg">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Headline</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="msgHeadline">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Text</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="msgText">
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">Image</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="msgImage">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Add to these Playlists</label>
+    </div>
+    <div class="small-9 columns">
+      <select name="lists" multiple>
+        <% for(var i=0; i<lists.length; i++){ %>
+          <option value="<%= lists[i].id %>"><%= lists[i].name %></option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-9 medium-offset-3 columns">
+      <input type="hidden" name="appType" value="twitter" id="appType" />
+      <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
+    </div>
+  </div>
+
+</form>
+
+<hr />
+<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>

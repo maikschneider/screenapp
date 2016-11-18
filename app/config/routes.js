@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    controller: 'ScreenController',
+    controller: 'AdminController',
     action: 'index'
   }
 
