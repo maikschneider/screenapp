@@ -1,0 +1,87 @@
+<h1>AdminController.index</h1>
+
+<hr />
+
+<%
+var screens = data[0];
+var lists = data[1];
+var items = data[2];
+%>
+
+<div class="row">
+  <div class="medium-4 columns">
+    <h2><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<screens.length; i++){ %>
+            <tr>
+              <td><%= screens[i].id %></td>
+              <td>
+                <a href='screen/<%= screens[i].id %>'>
+                  <%= screens[i].name %>
+                </a>
+              </td>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/admin/screen" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+  </div>
+
+  <div class="medium-4 columns">
+    <h2><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<lists.length; i++){ %>
+            <tr>
+              <td><%= lists[i].id %></td>
+              <td>
+                <a href='playlist/<%= lists[i].id %>'>
+                  <%= lists[i].name %>
+                </a>
+              </td>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/admin/playlist" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+  </div>
+
+  <div class="medium-4 columns">
+    <h2><i class="fa fa-play-circle" aria-hidden="true"></i> Items</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<items.length; i++){ %>
+            <tr>
+              <td><%= items[i].id %></td>
+              <td>
+                <a href='playlistitem/<%= items[i].id %>'>
+                  <%= items[i].name %>
+                </a>
+              </td>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/admin/playlistitem" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+  </div>
+
+</div>

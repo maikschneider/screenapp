@@ -1,0 +1,50 @@
+<h1><i class="fa fa-list"></i> Add new Playlist</h1>
+<hr />
+
+<%
+var screens = data[0];
+var items = data[1];
+%>
+
+<form action="/playlist" method="POST">
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Name</label>
+    </div>
+    <div class="small-9 columns">
+      <input type="text" id="middle-label" name="name" placeholder="Playlist name" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Screens to display this Playlist</label>
+    </div>
+    <div class="small-9 columns">
+      <select name="screens" multiple>
+        <% for(var i=0; i<screens.length; i++){ %>
+          <option value="<%= screens[i].id %>"><%= screens[i].name %></option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Items to add to this Playlist</label>
+    </div>
+    <div class="small-9 columns">
+      <select name="items" multiple>
+        <% for(var i=0; i<items.length; i++){ %>
+          <option value="<%= items[i].id %>"><%= items[i].name %></option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-9 medium-offset-3 columns">
+      <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
+    </div>
+  </div>
+</form>
+
+<hr />
+<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>

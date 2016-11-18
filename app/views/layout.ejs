@@ -29,12 +29,36 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/app.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
   <body>
-    <%- body %>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">Screen App</li>
+          <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+          <li><a href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
+          <!-- <li><a href="#">Play</a></li> -->
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <!-- <ul class="menu">
+          <li><input type="search" placeholder="Search"></li>
+          <li><button type="button" class="button">Search</button></li>
+        </ul> -->
+      </div>
+    </div>
+
+    <main>
+      <div class="row">
+        <div class="small-12 columns">
+          <%- body %>
+        </div>
+      </div>
+    </main>
 
 
 
@@ -60,7 +84,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
 
@@ -90,5 +114,22 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/foundation-sites/dist/foundation.min.js"></script>
+    <script type="text/javascript">
+      $(document)
+        .foundation()
+        .ready(function(){
+
+          $('#playlistitem-tabs').on('change.zf.tabs', function(i, e){
+            var apptype = $(e).attr('data-apptype');
+            $('input#appType').attr('value', apptype);
+            $('form .tabs-panel').find('input').prop('disabled', true);
+            $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input').prop('disabled', false);
+          });
+
+        });
+    </script>
   </body>
 </html>
