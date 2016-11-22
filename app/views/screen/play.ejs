@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Screen<%= screen.id %> &#9658; Playlist<%= screen.list %> </title>
+</head>
+<body>
+  <h1>Live</h1>
+  <p>See console for updates.</p>
+  <div id="content"></div>
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script type="text/javascript">
+
+  io.socket.get('/screen/live/<%= screen.id %>', function(body, response){
+    console.log('Started BroadcastService for the following Playlist: ', body);
+  });
+
+  io.socket.on('playlist', function (event) {
+    console.log('Playlist changed: ', event);
+  });
+
+  // Subscribe to changes on the current playlist
+  io.socket.get('/playlist/<%= screen.list %>', function(resData, jwres) {
+    console.log('The Playlist: ', resData);
+  });
+
+  io.socket.on('playlistitem', function(data){
+    console.log('PlaylistItem changed:', data);
+  });
+
+  // Subscribe to all PlaylistItems on this playlist
+  io.socket.get('/playlist/<%= screen.list %>/items', function(resData, jwres) {
+    console.log('The PlaylistItems: ', resData);
+  });
+
+
+  </script>
+</body>
+</html>

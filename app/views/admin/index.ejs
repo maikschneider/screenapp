@@ -16,6 +16,7 @@ var items = data[2];
         <tr>
           <td>ID</td>
           <td>Name</td>
+          <td>Play</td>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,11 @@ var items = data[2];
               <td>
                 <a href='screen/<%= screens[i].id %>'>
                   <%= screens[i].name %>
+                </a>
+              </td>
+              <td>
+                <a href='screen/play/<%= screens[i].id %>'>
+                  <i class='fa fa-play-circle'></i>
                 </a>
               </td>
             </tr>
