@@ -131,7 +131,7 @@
       <label for="middle-label" class="text-right middle">Add to these Playlists</label>
     </div>
     <div class="small-9 columns">
-      <select name="lists" multiple>
+      <select name="playlist" multiple>
         <% for(var i=0; i<lists.length; i++){ %>
           <option value="<%= lists[i].id %>"><%= lists[i].name %></option>
         <% } %>
