@@ -7,31 +7,17 @@
 //
 
 import UIKit
-import RestEssentials
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let rest = RestController.make(urlString: "http://httpbin.org/get") else {
-            print("Bad URL")
-            return
-        }
-        
-        rest.get { result, httpResponse in
-            do {
-                let json = try result.value()
-                print(json["url"].string as Any) // "http://httpbin.org/get"
-            } catch {
-                print("Error performing GET: \(error)")
-            }
-        }
+        restClient.get(url: "example.com")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
