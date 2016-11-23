@@ -11,8 +11,29 @@ module.exports = {
 
     var id = req.param('id',null);
 
-    Screen.findOne(id).exec(function(err, screen){
-      res.view('screen/play', {layout: false, 'screen':screen});
+    Screen.findOne(id).then(function(screen){
+
+      // set playlist live
+      Playlist.update(screen.list, {live:true}).exec(function(err, playlist){
+        res.view('screen/play', {layout: false, 'screen':screen});
+      });
+
+    }).catch(function(err){
+      // @todo implement error message
+    });
+
+  },
+
+  stop: function(req, res) {
+
+    var id = req.param('id',null);
+
+    Screen.findOne(id).then(function(screen){
+      Playlist.update(screen.list, {live:false}).exec(function(err, playlist){
+        res.redirect('/');
+      });
+    }).catch(function(err){
+      // @todo implement error message
     });
 
   },

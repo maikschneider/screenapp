@@ -23,13 +23,19 @@ module.exports = {
 
     // Weather settings
     weatherLocation: 'text',
-    weatherUnit: 'boolean',
+    weatherUnit: {
+      type: 'boolean',
+      defaultsTo: true
+    },
     weatherFontColor: 'text',
     weatherBackgroundImage: 'text',
     // Twiiter settings
     twitterFilter: 'text',
     twitterTweetDuration: 'integer',
-    twitterShowRetweets: 'boolean',
+    twitterShowRetweets: {
+      type: 'boolean',
+      defaultsTo: true
+    },
     // Message settings
     msgHeadline: 'text',
     msgText: 'text',

@@ -5554,3 +5554,9 @@ table.hover tbody tr:nth-of-type(even):hover {
 
 .long-delay {
   animation-delay: 700ms !important; }
+
+a.danger {
+  color: #ec5840; }
+
+a.success {
+  color: #3adb76; }

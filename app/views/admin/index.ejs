@@ -29,9 +29,16 @@ var items = data[2];
                 </a>
               </td>
               <td>
-                <a href='screen/play/<%= screens[i].id %>'>
-                  <i class='fa fa-play-circle'></i>
-                </a>
+                <% if(screens[i].list){ %>
+                  <%  if(screens[i].list.live){ %>
+                    <a class="danger" href='screen/stop/<%= screens[i].id %>'>
+                      <i class='fa fa-stop-circle'></i>
+                    </a>
+                  <% } %>
+                  <a class="success" href='screen/play/<%= screens[i].id %>'>
+                    <i class='fa fa-play-circle'></i>
+                  </a>
+                <% } %>
               </td>
             </tr>
         <% } %>
@@ -91,3 +98,4 @@ var items = data[2];
   </div>
 
 </div>
+
