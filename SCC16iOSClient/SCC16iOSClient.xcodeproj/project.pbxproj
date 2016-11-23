@@ -12,6 +12,7 @@
 		72513DF91DD90254002925C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DF71DD90254002925C9 /* Main.storyboard */; };
 		72513DFB1DD90254002925C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFA1DD90254002925C9 /* Assets.xcassets */; };
 		72513DFE1DD90254002925C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */; };
+		725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BE0AA1DE454EC00586926 /* RestClient.swift */; };
 		CDD3EC60E0F41B31919772B7 /* Pods_SCC16iOSClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CE78BF46BF2461AE60FAE /* Pods_SCC16iOSClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		72513DFA1DD90254002925C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72513DFD1DD90254002925C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72513DFF1DD90254002925C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		725BE0AA1DE454EC00586926 /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		D2EAA52E7770DA33C3A23C97 /* Pods-SCC16iOSClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCC16iOSClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-SCC16iOSClient/Pods-SCC16iOSClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				72513DFA1DD90254002925C9 /* Assets.xcassets */,
 				72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */,
 				72513DFF1DD90254002925C9 /* Info.plist */,
+				725BE0AA1DE454EC00586926 /* RestClient.swift */,
 			);
 			path = SCC16iOSClient;
 			sourceTree = "<group>";
@@ -202,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72513DF61DD90254002925C9 /* ViewController.swift in Sources */,
+				725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */,
 				72513DF41DD90254002925C9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +381,7 @@
 				72513E041DD90254002925C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
