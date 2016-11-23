@@ -19,12 +19,30 @@ module.exports = {
       var _this = this;
 
       setTimeout(function(){
+
+        if(!_this.checkStatus(playlist)) return false;
+
         _this.runService(playlist.items[index]);
 
         var newIndex = ((index + 1) < playlist.items.length) ? index+1 : 0;
         _this.loopPlaylist(playlist, newIndex);
+
       }, 5000);
 
+    },
+
+    checkStatus: function(playlist) {
+      var status = true;
+      // check if playlist has active subscribers
+      // caution: not working in multi-server enviorment: http://sailsjs.com/documentation/reference/web-sockets/sails-sockets/sails-sockets-subscribers
+      sails.sockets.subscribers('playlistsocket'+playlist.id, function(err, socketIds){
+        if(!socketIds.length) status = false;
+      });
+
+      // cancel if playlist was stopped
+      status = playlist.live;
+
+      return status;
     },
 
     runService: function(playlistitem) {
@@ -38,7 +56,7 @@ module.exports = {
           TwitterService.run(playlistitem);
           break;
         case 'weather':
-          WeatherService.run(playlistitem);
+          WeatherService.init(playlistitem.id);
           break;
         default:
           //@todo return something
