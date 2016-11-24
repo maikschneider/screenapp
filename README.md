@@ -6,6 +6,10 @@ SCC 2016 Project
 
 * Software Stack
 * Install
+* Services
+  * BroadcastService
+  * WeatherService
+  * GeocodeService
 * Model
 * API
 * Usage
@@ -27,6 +31,34 @@ SCC 2016 Project
 * run `npm install` inside app directory
 * to start the server, run `sails lift`
 * navigate into the **assets** directory and run `bower install`
+
+## Services
+
+Services are defined in `app/api/services`. They can be called from everywhere inside the node application.
+
+### BroadcastService (very alpha)
+
+The perpose of this service is to controll the play state of all connected screens via socket. It should loop through the Playlists and synchronise the screens by firing up socket events.
+
+### WeatherService
+
+Gets weather forecast from [openweathermap.org](http://openweathermap.org/). Caches the received data inside the PlaylistItem. Fires a socket event after updating a PlaylistItem.
+
+### GeocodeService
+
+Requests a list of places by a name. Example response for **halle saale**:
+```JSON
+{ latitude: 51.4825041,
+    longitude: 11.9705452,
+    country: 'Deutschland',
+    city: 'Halle (Saale)',
+    state: 'Sachsen-Anhalt',
+    zipcode: undefined,
+    streetName: undefined,
+    streetNumber: undefined,
+    countryCode: 'DE',
+    provider: 'openstreetmap' }
+```    
 
 ## Model
 
