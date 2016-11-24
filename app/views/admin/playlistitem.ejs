@@ -153,8 +153,14 @@
 <hr />
 <a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
 
-<% if(item){ %>
 <script type="text/javascript">
+
+  $.PlaylistItem = function(){
+    <% if(item){ %>
+      $.PlaylistItemEdit();
+    <% } %>
+    $.Geocoder();
+  };
 
   $.PlaylistItemEdit = function(){
     io.socket.get('/playlistitem/<%= item %>', function(resData, jwres) {
@@ -196,7 +202,7 @@
     $('#location-dropdown').foundation('open');
   };
 
-  $.Geocode = function(){
+  $.Geocoder = function(){
     $('input[name="weatherLocation"]').on('input', function(){
       $('input[name="weatherLocationCode"]').attr('value','');
       io.socket.get('/admin/geocode?location='+$(this).val(), function(resData, jwres){
@@ -208,4 +214,3 @@
   };
 
 </script>
-<% } %>
