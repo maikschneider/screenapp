@@ -1,7 +1,7 @@
 <h1><i class="fa fa-play-circle"></i> Add new PlaylistItem</h1>
 <hr />
 
-<form action="/playlistitem" method="POST">
+<form action="/playlistitem<% if(item){ %>/<%= item %><% } %>" method="POST">
 
   <div class="row">
     <div class="small-3 columns">
@@ -39,7 +39,7 @@
               <label for="middle-label" class="text-right middle">Twitter Filter</label>
             </div>
             <div class="small-9 columns">
-              <input type="text" id="middle-label" name="twitterFilter" placeholder="30">
+              <input type="text" id="middle-label" name="twitterFilter" placeholder="q=#music">
             </div>
           </div>
           <div class="row">
@@ -74,8 +74,8 @@
               <label for="middle-label" class="text-right middle">Unit</label>
             </div>
             <div class="small-9 columns">
-              <input disabled type="radio" name="weatherUnit" value="true" id="c" required><label for="c">°C</label>
-              <input disabled type="radio" name="weatherUnit" value="Blue" id="f"><label for="f">°F</label>
+              <input disabled type="radio" name="weatherUnit" value="true" id="c" checked><label for="c">°C</label>
+              <input disabled type="radio" name="weatherUnit" value="false" id="f"><label for="f">°F</label>
             </div>
           </div>
           <div class="row">
@@ -149,3 +149,27 @@
 
 <hr />
 <a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+
+<% if(item){ %>
+<script type="text/javascript">
+
+  $.PlaylistItemEdit = function(){
+    io.socket.get('/playlistitem/<%= item %>', function(resData, jwres) {
+
+      // open right tab
+      $('#playlistitem-tabs').foundation('selectTab', $('.tabs-panel[data-apptype="'+resData.appType+'"]'));
+
+      // insert data into form inputs
+      $.each(resData, function(index, value) {
+          $('form input[name="'+index+'"]:text').attr('value', value);
+          $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
+          $('form input[name="'+index+'"]:checkbox').prop('checked', value);
+          if(typeof(value) === 'object' && value !== null)
+            $('form select[name="'+index+'"] option[value="'+value.id+'"]').attr('selected','');
+      });
+
+    });
+  };
+
+</script>
+<% } %>

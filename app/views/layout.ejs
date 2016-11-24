@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="/styles/app.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   </head>
 
   <body>
@@ -84,7 +86,7 @@
     -->
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
 
@@ -115,7 +117,6 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
 
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/foundation-sites/dist/foundation.min.js"></script>
     <script type="text/javascript">
       $(document)
@@ -129,7 +130,13 @@
             $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input').prop('disabled', false);
           });
 
+          try{
+            $.PlaylistItemEdit();
+          } catch(err){
+
+          }
         });
+
     </script>
   </body>
 </html>

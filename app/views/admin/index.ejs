@@ -79,6 +79,7 @@ var items = data[2];
         <tr>
           <td>ID</td>
           <td>Name</td>
+          <td>Action</td>
         </tr>
       </thead>
       <tbody>
@@ -88,6 +89,11 @@ var items = data[2];
               <td>
                 <a href='playlistitem/<%= items[i].id %>'>
                   <%= items[i].name %>
+                </a>
+              </td>
+              <td>
+                <a href='admin/playlistitem/<%= items[i].id %>'>
+                  <i class="fa fa-pencil"></i>
                 </a>
               </td>
             </tr>

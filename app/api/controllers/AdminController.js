@@ -31,9 +31,9 @@ module.exports = {
   },
 
   playlistitem: function(req, res) {
-
+    var id = req.param('id', false);
     Playlist.find().exec(function(err, lists){
-        res.view('admin/playlistitem', {'lists': lists});
+        res.view('admin/playlistitem', {'lists': lists, 'item': id});
     });
 
   }

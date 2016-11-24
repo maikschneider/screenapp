@@ -20,9 +20,17 @@ module.exports = {
       type: 'string',
       enum: ['weather', 'twitter', 'msg']
     },
+    data: {
+      type: 'json',
+      defaultsTo: [],
+    },
 
     // Weather settings
     weatherLocation: 'text',
+    weatherLocationPoint: {
+      type: 'json',
+      point: true,
+    },
     weatherUnit: {
       type: 'boolean',
       defaultsTo: true
@@ -31,10 +39,13 @@ module.exports = {
     weatherBackgroundImage: 'text',
     // Twiiter settings
     twitterFilter: 'text',
-    twitterTweetDuration: 'integer',
+    twitterTweetDuration: {
+      type: 'integer',
+      defaultsTo: 5
+    },
     twitterShowRetweets: {
       type: 'boolean',
-      defaultsTo: true
+      defaultsTo: false
     },
     // Message settings
     msgHeadline: 'text',
@@ -45,7 +56,22 @@ module.exports = {
     playlist: {
       model: 'playlist',
     },
+  },
 
-  }
+  // custom validator
+  // see: https://github.com/balderdashy/waterline-docs/blob/master/models/validations.md
+  types: {
+    point: function(latlong) {
+      return latlong.x && latlong.y
+    }
+  },
+
+  // Lifecycle Callbacks
+  // see: https://github.com/balderdashy/waterline-docs/blob/master/models/lifecycle-callbacks.md
+  beforeValidate: function(values, next) {
+    values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
+    next();
+  },
+
 };
 
