@@ -155,13 +155,40 @@
 
 <script type="text/javascript">
 
+/**
+ * Onload function for all PlaylistItem forms
+ */
   $.PlaylistItem = function(){
+    $.changeAppTab();
+    $.Geocoder();
+
     <% if(item){ %>
       $.PlaylistItemEdit();
     <% } %>
-    $.Geocoder();
   };
 
+  /**
+   * Changes the Tabs between different Apps: important for hidden field
+   * @param  {String} apptype [weather,twitter,msg]
+   */
+  $.changeAppTab = function(apptype) {
+    if(!apptype) apptype = $('#playlistitem-tabs li.is-active').attr('data-apptype');
+    $('input#appType').attr('value', apptype);
+    $('form .tabs-panel').find('input').prop('disabled', true);
+    $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input').prop('disabled', false);
+  };
+
+  /**
+   * Event Listener for changing tabs
+   */
+  $('#playlistitem-tabs').on('change.zf.tabs', function(i, e){
+    var apptype = $(e).attr('data-apptype');
+    $.changeAppTab(apptype);
+  });
+
+  /**
+   * Changes the create form to an update form
+   */
   $.PlaylistItemEdit = function(){
     io.socket.get('/playlistitem/<%= item %>', function(resData, jwres) {
 
@@ -180,6 +207,10 @@
     });
   };
 
+  /**
+   * Shows Dropdown of weather locations and binds them on click
+   * @param  {Array} data List of location objects with infos about country, country code, etc..
+   */
   $.openGeocodeDropdown = function(data){
     var menu = $('<ul class="menu vertical">');
     for(var i=0; i<data.message.length; i++){
@@ -202,6 +233,9 @@
     $('#location-dropdown').foundation('open');
   };
 
+  /**
+   * Event Listener for the weather location input. Calls the geocoder socket to obtain location data
+   */
   $.Geocoder = function(){
     $('input[name="weatherLocation"]').on('input', function(){
       $('input[name="weatherLocationCode"]').attr('value','');

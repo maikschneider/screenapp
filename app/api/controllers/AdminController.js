@@ -39,6 +39,7 @@ module.exports = {
   },
 
   geocode: function(req, res) {
+    if (!req.isSocket) {return res.badRequest();}
     var location = req.param('location', false);
     GeocodeService.getCoordinatesByLocationName(location, function(data){
       return res.ok({

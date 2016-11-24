@@ -1,25 +1,24 @@
 module.exports = {
 
+  /**
+   * Receive Information for a location string
+   * @param  {String}   location
+   * @param  {Function} cb       callback function
+   * @return {Array}            Objects locations with geolat, geolong, geocode, country etc.
+   */
   getCoordinatesByLocationName: function(location, cb) {
-
-    console.log('Geocode ' + location);
 
     var NodeGeocoder = require('node-geocoder');
     var options = {
-      // provider: 'google',
-
-      // // Optional depending on the providers
-      // httpAdapter: 'https', // Default
-      // apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
-      // formatter: null         // 'gpx', 'string', ...
       provider: 'openstreetmap'
     };
     var geocoder = NodeGeocoder(options);
 
     geocoder.geocode(location, function(err, res){
-      console.log(res);
 
       if(cb) return cb(res);
+
+      return res;
     });
 
   },

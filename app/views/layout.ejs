@@ -123,12 +123,6 @@
         .foundation()
         .ready(function(){
 
-          $('#playlistitem-tabs').on('change.zf.tabs', function(i, e){
-            var apptype = $(e).attr('data-apptype');
-            $('input#appType').attr('value', apptype);
-            $('form .tabs-panel').find('input').prop('disabled', true);
-            $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input').prop('disabled', false);
-          });
 
           try{
             $.PlaylistItem();
