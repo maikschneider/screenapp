@@ -36,6 +36,15 @@ module.exports = {
         res.view('admin/playlistitem', {'lists': lists, 'item': id});
     });
 
+  },
+
+  geocode: function(req, res) {
+    var location = req.param('location', false);
+    GeocodeService.getCoordinatesByLocationName(location, function(data){
+      return res.ok({
+          message: data
+      });
+    });
   }
 
 }

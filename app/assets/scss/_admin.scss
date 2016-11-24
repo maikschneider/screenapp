@@ -4,3 +4,19 @@ a.danger{
 a.success{
   color: $success-color;
 }
+
+
+.weatherLocation-column{
+  position: relative;
+  #location-dropdown{
+    width: calc(100% - 31px);
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 300px;
+    overflow: scroll;
+    .menu li a{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

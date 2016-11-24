@@ -27,9 +27,9 @@ module.exports = {
 
     // Weather settings
     weatherLocation: 'text',
-    weatherLocationPoint: {
-      type: 'json',
-      point: true,
+    weatherLocationCode: {
+      type: 'text',
+      defaultsTo: false
     },
     weatherUnit: {
       type: 'boolean',
@@ -58,12 +58,10 @@ module.exports = {
     },
   },
 
-  // custom validator
-  // see: https://github.com/balderdashy/waterline-docs/blob/master/models/validations.md
-  types: {
-    point: function(latlong) {
-      return latlong.x && latlong.y
-    }
+  geocode: function(location, cb) {
+
+    var geoData = GeocodeService.getCoordinatesByLocationName(location, cb);
+
   },
 
   // Lifecycle Callbacks
@@ -72,6 +70,14 @@ module.exports = {
     values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
     next();
   },
+  beforeCreate: function(values, next){
+    //this.geocode(values.weatherLocation, next);
+    next();
+  },
+  beforeUpdate: function(values, next){
+    //this.geocode(values.weatherLocation, next);
+    next();
+  }
 
 };
 

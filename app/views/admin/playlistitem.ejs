@@ -65,8 +65,11 @@
             <div class="small-3 columns">
               <label for="middle-label" class="text-right middle">Location</label>
             </div>
-            <div class="small-9 columns">
-              <input disabled type="text" id="middle-label" name="weatherLocation">
+            <div class="small-9 columns weatherLocation-column">
+              <input disabled type="text" id="middle-label" name="weatherLocation" autocomplete="off" spellcheck="off" data-toggle="location-dropdown">
+              <div class="dropdown-pane bottom" id="location-dropdown" data-dropdown>
+              </div>
+              <input disabled type="hidden" name="weatherLocationCode" value="">
             </div>
           </div>
           <div class="row">
@@ -169,6 +172,39 @@
       });
 
     });
+  };
+
+  $.openGeocodeDropdown = function(data){
+    var menu = $('<ul class="menu vertical">');
+    for(var i=0; i<data.message.length; i++){
+      var menuItem = $('<a>')
+          .html(data.message[i].city + ', ' + data.message[i].state + ', ' + data.message[i].country)
+          .attr('data-weatherLocationCode', data.message[i].city + ',' + data.message[i].countryCode)
+          .attr('data-weatherLocation', data.message[i].city)
+          .appendTo(menu)
+          .bind('click', function(e){
+            e.preventDefault();
+            $('input[name="weatherLocation"]')
+              .attr('value', $(this).attr('data-weatherLocation'))
+              .val($(this).attr('data-weatherLocation'));
+            $('input[name="weatherLocationCode"]').attr('value', $(this).attr('data-weatherLocationCode'));
+            $('#location-dropdown').foundation('close');
+          })
+          .wrapAll('<li />');
+    }
+    $('#location-dropdown').html(menu);
+    $('#location-dropdown').foundation('open');
+  };
+
+  $.Geocode = function(){
+    $('input[name="weatherLocation"]').on('input', function(){
+      $('input[name="weatherLocationCode"]').attr('value','');
+      io.socket.get('/admin/geocode?location='+$(this).val(), function(resData, jwres){
+        if(!resData) return;
+        $.openGeocodeDropdown(resData);
+      });
+    });
+
   };
 
 </script>

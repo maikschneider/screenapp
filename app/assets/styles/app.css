@@ -5560,3 +5560,15 @@ a.danger {
 
 a.success {
   color: #3adb76; }
+
+.weatherLocation-column {
+  position: relative; }
+  .weatherLocation-column #location-dropdown {
+    width: calc(100% - 31px);
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 300px;
+    overflow: scroll; }
+    .weatherLocation-column #location-dropdown .menu li a {
+      padding-left: 0;
+      padding-right: 0; }
