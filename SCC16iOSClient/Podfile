@@ -1,0 +1,4 @@
+target 'SCC16iOSClient' do
+  use_frameworks!
+  pod 'RestEssentials', '~> 3.0'
+end

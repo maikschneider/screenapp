@@ -12,6 +12,10 @@ module.exports = {
       type: 'text',
       required: true
     },
+    live: {
+      type: 'boolean',
+      defaultsTo: false
+    },
 
     screens: {
       collection: 'screen',

@@ -20,16 +20,33 @@ module.exports = {
       type: 'string',
       enum: ['weather', 'twitter', 'msg']
     },
+    data: {
+      type: 'json',
+      defaultsTo: [],
+    },
 
     // Weather settings
     weatherLocation: 'text',
-    weatherUnit: 'boolean',
+    weatherLocationCode: {
+      type: 'text',
+      defaultsTo: false
+    },
+    weatherUnit: {
+      type: 'boolean',
+      defaultsTo: true
+    },
     weatherFontColor: 'text',
     weatherBackgroundImage: 'text',
     // Twiiter settings
     twitterFilter: 'text',
-    twitterTweetDuration: 'integer',
-    twitterShowRetweets: 'boolean',
+    twitterTweetDuration: {
+      type: 'integer',
+      defaultsTo: 5
+    },
+    twitterShowRetweets: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     // Message settings
     msgHeadline: 'text',
     msgText: 'text',
@@ -39,7 +56,28 @@ module.exports = {
     playlist: {
       model: 'playlist',
     },
+  },
 
+  geocode: function(location, cb) {
+
+    var geoData = GeocodeService.getCoordinatesByLocationName(location, cb);
+
+  },
+
+  // Lifecycle Callbacks
+  // see: https://github.com/balderdashy/waterline-docs/blob/master/models/lifecycle-callbacks.md
+  beforeValidate: function(values, next) {
+    values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
+    next();
+  },
+  beforeCreate: function(values, next){
+    //this.geocode(values.weatherLocation, next);
+    next();
+  },
+  beforeUpdate: function(values, next){
+    //this.geocode(values.weatherLocation, next);
+    next();
   }
+
 };
 

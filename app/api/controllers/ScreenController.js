@@ -6,6 +6,64 @@
  */
 
 module.exports = {
-	
+
+  play: function(req, res) {
+
+    var id = req.param('id',null);
+
+    Screen.findOne(id).then(function(screen){
+
+      // set playlist live
+      Playlist.update(screen.list, {live:true}).exec(function(err, playlist){
+        res.view('screen/play', {layout: false, 'screen':screen});
+      });
+
+    }).catch(function(err){
+      // @todo implement error message
+    });
+
+  },
+
+  stop: function(req, res) {
+
+    var id = req.param('id',null);
+
+    Screen.findOne(id).then(function(screen){
+      Playlist.update(screen.list, {live:false}).exec(function(err, playlist){
+        res.redirect('/');
+      });
+    }).catch(function(err){
+      // @todo implement error message
+    });
+
+  },
+
+  /**
+   * See http://sailsjs.org/documentation/concepts/realtime
+   */
+  live: function(req, res) {
+
+    if (!req.isSocket) {return res.badRequest();}
+
+    var id = req.param('id',null);
+
+    Screen.findOne(id).exec(function(err, screen){
+
+      Playlist.findOne(screen.list).populate('items').exec(function(err, playlist){
+
+        sails.sockets.join(req, 'playlistsocket'+playlist.id);
+
+        //sails.sockets.broadcast(screenSocketName, 'hello', {id: 'my id'}, req);
+        BroadcastService.start(playlist);
+
+        return res.ok({
+            message: "OK"
+        });
+
+      });
+    });
+
+  }
+
 };
 

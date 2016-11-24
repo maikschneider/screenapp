@@ -1,0 +1,12 @@
+PODS:
+  - RestEssentials (3.0.0)
+
+DEPENDENCIES:
+  - RestEssentials (~> 3.0)
+
+SPEC CHECKSUMS:
+  RestEssentials: 5f82f9e77a712efef38fb4b139bb7b5f93b25d18
+
+PODFILE CHECKSUM: 54fbd91258ca103bf930392e75a733716b93e067
+
+COCOAPODS: 1.1.1
