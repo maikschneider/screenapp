@@ -1,48 +1,13 @@
 module.exports = {
 
-    playlist: null,
-
-    start: function(playlist) {
-
-      // abort if no playlist or no playlist items / empty items
-      if(!playlist || typeof(playlist.items) === 'undefined' || playlist.items.length == 0) return false;
-
-      this.playlist = playlist;
-
-      this.loopPlaylist(playlist, 0);
-
-
-    },
-
-    loopPlaylist: function(playlist, index) {
-
-      var _this = this;
-
-      setTimeout(function(){
-
-        if(!_this.checkStatus(playlist)) return false;
-
-        _this.runService(playlist.items[index]);
-
-        var newIndex = ((index + 1) < playlist.items.length) ? index+1 : 0;
-        _this.loopPlaylist(playlist, newIndex);
-
-      }, 5000);
-
-    },
-
-    checkStatus: function(playlist) {
-      var status = true;
-      // check if playlist has active subscribers
-      // caution: not working in multi-server enviorment: http://sailsjs.com/documentation/reference/web-sockets/sails-sockets/sails-sockets-subscribers
-      sails.sockets.subscribers('playlistsocket'+playlist.id, function(err, socketIds){
-        if(!socketIds.length) status = false;
-      });
-
-      // cancel if playlist was stopped
-      status = playlist.live;
-
-      return status;
+    isStarted: false,
+    onAir: {
+      /*
+      playlistID11: {
+        timeLeft: 30,     // playlistitem duration that gets decreased
+        nextItem: 0       // offset of the next playlistitem
+      }
+      */
     },
 
     runService: function(playlistitem) {
@@ -62,6 +27,64 @@ module.exports = {
           //@todo return something
       }
     },
+
+    startCron: function() {
+      if(this.isStarted) return false;
+
+      sails.log.info('Starting Cron');
+
+      var _this = this;
+      var schedule = require('node-schedule');
+
+      var j = schedule.scheduleJob('*/5 * * * * *', function(){
+        _this.tick();
+      });
+
+      this.isStarted = true;
+    },
+
+    /**
+     * Called from cron job
+     */
+    tick: function() {
+      sails.log.info(this.onAir);
+    },
+
+    initPlaylist: function(playlist) {
+
+      sails.log.info(this.onAir);
+
+      if(this._isOnAir(playlist)){
+        sails.log.info('Playlist ' + playlist.id + ' already in broadcast queue.');
+        return false;
+      }
+
+      if(_.isUndefined(playlist.items) || playlist.items.length<1){
+        sails.log.info('Playlist '+ playlist.id +' has no items');
+        return false;
+      }
+
+      this.onAir[playlist.id] = {
+        timeLeft: playlist.items[0].duration,
+        nextItem: (playlist.items.length > 1) ? 1 : 0,
+      };
+
+      if(!this.isStarted) this.startCron();
+
+      sails.log.info('BroadcastsService: Added Playlist ' + playlist.id);
+    },
+
+    _isOnAir: function(playlist) {
+      return (_.findKey(this.onAir, playlist.id) === undefined) ? false : true;
+    },
+
+    stopPlaylist: function(playlist) {
+
+      if(!this._isOnAir(playlist)) return false;
+
+      delete this.onAir[playlist.id];
+
+    }
 
 
 

@@ -15,6 +15,11 @@ module.exports = {
 
       // set playlist live
       Playlist.update(screen.list, {live:true}).exec(function(err, playlist){
+
+        Playlist.findOne(playlist[0].id).populate('items').then(function(p){
+          BroadcastService.initPlaylist(p);
+        });
+
         res.view('screen/play', {layout: false, 'screen':screen});
       });
 
@@ -54,7 +59,6 @@ module.exports = {
         sails.sockets.join(req, 'playlistsocket'+playlist.id);
 
         //sails.sockets.broadcast(screenSocketName, 'hello', {id: 'my id'}, req);
-        BroadcastService.start(playlist);
 
         return res.ok({
             message: "OK"
