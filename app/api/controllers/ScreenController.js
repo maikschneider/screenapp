@@ -35,6 +35,7 @@ module.exports = {
 
     Screen.findOne(id).then(function(screen){
       Playlist.update(screen.list, {live:false}).exec(function(err, playlist){
+        BroadcastService.stopPlaylist(playlist[0]);
         res.redirect('/');
       });
     }).catch(function(err){

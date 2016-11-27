@@ -47,7 +47,36 @@ module.exports = {
      * Called from cron job
      */
     tick: function() {
+
+      _this = this;
+
       sails.log.info(this.onAir);
+
+      _.each(this.onAir, function(playlistData, playlistID){
+        _this.onAir[playlistID].timeLeft -= 5;
+        if(_this.onAir[playlistID].timeLeft < 0) _this.triggerSlideChange(playlistID);
+      });
+
+    },
+
+    triggerSlideChange: function(playlistID) {
+      sails.log.info('BroadcastsService:triggerSlideChange()');
+      var _this = this;
+      Playlist.findOne(playlistID).populate('items').then(function(playlist){
+
+        if(_this.validatePlaylistItems(playlist)) return false;
+
+        // set next item and duration
+        var nextItem = _this.onAir[playlistID].nextItem + 1;
+        _this.onAir[playlistID].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
+        _this.onAir[playlistID].timeLeft = playlist.items[_this.onAir[playlistID].nextItem].duration;
+
+        sails.log.info('Playlist ID' + playlist.id +' changes Slide');
+
+      }).catch(function(err){
+        sails.log.warn(err);
+      });
+
     },
 
     initPlaylist: function(playlist) {
@@ -59,10 +88,7 @@ module.exports = {
         return false;
       }
 
-      if(_.isUndefined(playlist.items) || playlist.items.length<1){
-        sails.log.info('Playlist '+ playlist.id +' has no items');
-        return false;
-      }
+      if(this.validatePlaylistItems(playlist)) return false;
 
       this.onAir[playlist.id] = {
         timeLeft: playlist.items[0].duration,
@@ -74,16 +100,27 @@ module.exports = {
       sails.log.info('BroadcastsService: Added Playlist ' + playlist.id);
     },
 
+    /**
+     * If Playlist has no Items, it becomes removed
+     * @param  {Playlist} playlist
+     * @return {Boolean}
+     */
+    validatePlaylistItems: function(playlist) {
+      if(_.isUndefined(playlist.items) || playlist.items.length<1){
+        sails.log.info('Playlist '+ playlist.id +' has no items');
+        this.stopPlaylist(playlist);
+        return true;
+      }
+      return false;
+    },
+
     _isOnAir: function(playlist) {
-      return (_.findKey(this.onAir, playlist.id) === undefined) ? false : true;
+      return _.isUndefined(this.onAir[playlist.id]) ? false : true;
     },
 
     stopPlaylist: function(playlist) {
-
       if(!this._isOnAir(playlist)) return false;
-
       delete this.onAir[playlist.id];
-
     }
 
 
