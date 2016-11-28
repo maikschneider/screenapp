@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import RestEssentials
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        restClient.get(url: "localhost:1337/playlist")
+        func printJson(json: RestEssentials.JSON) {
+            print(json)
+            
+            print("Screen name: " + json[0]["screens"][0]["name"].string!)
+            print("Playlist name: " + json[0]["name"].string!)
+            print("Playlist Id: " + json[0]["id"].int!)
+            
+            var screens = []
+        }
+        
+        restClient.get(url: "localhost:1337/playlist", callback: printJson)
     }
 
     override func didReceiveMemoryWarning() {

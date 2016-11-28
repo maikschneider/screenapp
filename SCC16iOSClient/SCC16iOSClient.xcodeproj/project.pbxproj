@@ -13,6 +13,11 @@
 		72513DFB1DD90254002925C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFA1DD90254002925C9 /* Assets.xcassets */; };
 		72513DFE1DD90254002925C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */; };
 		725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BE0AA1DE454EC00586926 /* RestClient.swift */; };
+		728573F01DEC82ED00D23D6A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573EF1DEC82ED00D23D6A /* Screen.swift */; };
+		728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F11DEC82FD00D23D6A /* Playlist.swift */; };
+		728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F31DEC830C00D23D6A /* PlaylistItem.swift */; };
+		728573F61DEC834200D23D6A /* TwitterPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F51DEC834200D23D6A /* TwitterPlaylistItem.swift */; };
+		728573F81DEC83A100D23D6A /* WeatherPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F71DEC83A100D23D6A /* WeatherPlaylistItem.swift */; };
 		CDD3EC60E0F41B31919772B7 /* Pods_SCC16iOSClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CE78BF46BF2461AE60FAE /* Pods_SCC16iOSClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +32,11 @@
 		72513DFD1DD90254002925C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72513DFF1DD90254002925C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725BE0AA1DE454EC00586926 /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		728573EF1DEC82ED00D23D6A /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		728573F11DEC82FD00D23D6A /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		728573F31DEC830C00D23D6A /* PlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistItem.swift; sourceTree = "<group>"; };
+		728573F51DEC834200D23D6A /* TwitterPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPlaylistItem.swift; sourceTree = "<group>"; };
+		728573F71DEC83A100D23D6A /* WeatherPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherPlaylistItem.swift; sourceTree = "<group>"; };
 		D2EAA52E7770DA33C3A23C97 /* Pods-SCC16iOSClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCC16iOSClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-SCC16iOSClient/Pods-SCC16iOSClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +73,7 @@
 		72513DF21DD90254002925C9 /* SCC16iOSClient */ = {
 			isa = PBXGroup;
 			children = (
+				728573EE1DEC82DD00D23D6A /* Model */,
 				72513DF31DD90254002925C9 /* AppDelegate.swift */,
 				72513DF51DD90254002925C9 /* ViewController.swift */,
 				72513DF71DD90254002925C9 /* Main.storyboard */,
@@ -72,6 +83,18 @@
 				725BE0AA1DE454EC00586926 /* RestClient.swift */,
 			);
 			path = SCC16iOSClient;
+			sourceTree = "<group>";
+		};
+		728573EE1DEC82DD00D23D6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				728573EF1DEC82ED00D23D6A /* Screen.swift */,
+				728573F11DEC82FD00D23D6A /* Playlist.swift */,
+				728573F31DEC830C00D23D6A /* PlaylistItem.swift */,
+				728573F51DEC834200D23D6A /* TwitterPlaylistItem.swift */,
+				728573F71DEC83A100D23D6A /* WeatherPlaylistItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7DC1A5C47606EBEF4E5196B3 /* Frameworks */ = {
@@ -215,9 +238,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				728573F61DEC834200D23D6A /* TwitterPlaylistItem.swift in Sources */,
 				72513DF61DD90254002925C9 /* ViewController.swift in Sources */,
 				725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */,
 				72513DF41DD90254002925C9 /* AppDelegate.swift in Sources */,
+				728573F01DEC82ED00D23D6A /* Screen.swift in Sources */,
+				728573F81DEC83A100D23D6A /* WeatherPlaylistItem.swift in Sources */,
+				728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */,
+				728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
