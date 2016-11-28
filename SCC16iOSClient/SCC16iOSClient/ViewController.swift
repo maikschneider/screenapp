@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        restClient.get(url: "example.com")
+        restClient.get(url: "localhost:1337/playlist")
     }
 
     override func didReceiveMemoryWarning() {
