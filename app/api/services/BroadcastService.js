@@ -66,6 +66,9 @@ module.exports = {
 
         if(_this.validatePlaylistItems(playlist)) return false;
 
+        // broadcast slidechange to playlist room
+        sails.sockets.broadcast('playlistsocket'+playlist.id, 'slideChange', {item: playlist.items[_this.onAir[playlistID].nextItem]});
+
         // set next item and duration
         var nextItem = _this.onAir[playlistID].nextItem + 1;
         _this.onAir[playlistID].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
