@@ -67,7 +67,7 @@ module.exports = {
   saveWeatherData: function() {
     var _this = this;
     // Update Item
-    PlaylistItem.update({id: this.playlistitem.id}).set({data: _this.data, name: 'Neuername3'}).exec(function(err, updatedPlaylistitems){
+    PlaylistItem.update({id: this.playlistitem.id}).set({data: _this.data}).exec(function(err, updatedPlaylistitems){
       if(err){
         console.log(err);
       }
