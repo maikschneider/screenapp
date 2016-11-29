@@ -14,9 +14,6 @@ module.exports = {
 
       switch(playlistitem.appType) {
 
-        case 'msg':
-          MsgService.run(playlistitem);
-          break;
         case 'twitter':
           TwitterService.run(playlistitem);
           break;

@@ -150,3 +150,16 @@ section.weather{
   }
 
 }
+
+section.msg{
+  background: #f85032; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f85032 , #e73827); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f85032 , #e73827); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 5vh 0;
+  .msg__card{
+    padding: rem-calc(20);
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(#000,0.2);
+  }
+}
