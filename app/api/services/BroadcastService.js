@@ -54,7 +54,7 @@ module.exports = {
 
       _.each(this.onAir, function(playlistData, playlistID){
         _this.onAir[playlistID].timeLeft -= 5;
-        if(_this.onAir[playlistID].timeLeft < 0) _this.triggerSlideChange(playlistID);
+        if(_this.onAir[playlistID].timeLeft <= 0) _this.triggerSlideChange(playlistID);
       });
 
     },
@@ -85,9 +85,9 @@ module.exports = {
     afterSlideChange: function(playlist) {
 
         // set next item and duration
+        this.onAir[playlist.id].timeLeft = playlist.items[this.onAir[playlist.id].nextItem].duration;
         var nextItem = this.onAir[playlist.id].nextItem + 1;
         this.onAir[playlist.id].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
-        this.onAir[playlist.id].timeLeft = playlist.items[this.onAir[playlist.id].nextItem].duration;
 
         // run API for next item
         var nextItemOffset = this.onAir[playlist.id].nextItem;
