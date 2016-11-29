@@ -73,10 +73,7 @@ module.exports = {
       }
 
       // broadcast a message to subscribers with updated data
-      // see: http://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/publish-update
-      PlaylistItem.publishUpdate(updatedPlaylistitems[0].id, {
-        data: updatedPlaylistitems[0].data
-      }, null, {previous: this.playlistitem});
+      sails.sockets.broadcast('playlistsocket'+updatedPlaylistitems[0].playlist, 'itemUpdate', {item: updatedPlaylistitems[0]});
 
     });
   },

@@ -13,15 +13,16 @@
 
   <main style="width:<%= playlist.items.length %>00vw">
     <div class="row expanded collapse">
-    <% for(var i=0; i<playlist.items.length; i++){
+      <% for(var i=0; i<playlist.items.length; i++){
 
-        var item = playlist.items[i];
-        var template = item.appType;
-      %>
+          var item = playlist.items[i];
+          var template = item.appType;
+        %>
 
-      <%- partial(template, {item: item}) %>
+        <%- partial(template, {item: item}) %>
 
-    <% } %>
+      <% } %>
+    </div>
   </main>
 
   <script src="/js/dependencies/sails.io.js"></script>
@@ -55,6 +56,9 @@
   //   console.log('slideChange: ', data);
   // });
 
+  io.socket.on('itemUpdate', function (data){
+    console.log('itemUpdate', data);
+  });
 
   io.socket.on('slideChange', function (data){
     console.log('slideChange', data);

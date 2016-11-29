@@ -64,21 +64,34 @@ module.exports = {
       var _this = this;
       Playlist.findOne(playlistID).populate('items').then(function(playlist){
 
+        // check Playlist for items
         if(_this.validatePlaylistItems(playlist)) return false;
 
         // broadcast slidechange to playlist room
         sails.sockets.broadcast('playlistsocket'+playlist.id, 'slideChange', {item: _this.onAir[playlistID].nextItem});
 
-        // set next item and duration
-        var nextItem = _this.onAir[playlistID].nextItem + 1;
-        _this.onAir[playlistID].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
-        _this.onAir[playlistID].timeLeft = playlist.items[_this.onAir[playlistID].nextItem].duration;
-
-        sails.log.info('Playlist ID' + playlist.id +' changes Slide');
+        _this.afterSlideChange(playlist);
 
       }).catch(function(err){
         sails.log.warn(err);
       });
+
+    },
+
+    /**
+     * Set next item, trigger Service API
+     * @param  {Playlidt} playlist
+     */
+    afterSlideChange: function(playlist) {
+
+        // set next item and duration
+        var nextItem = this.onAir[playlist.id].nextItem + 1;
+        this.onAir[playlist.id].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
+        this.onAir[playlist.id].timeLeft = playlist.items[this.onAir[playlist.id].nextItem].duration;
+
+        // run API for next item
+        var nextItemOffset = this.onAir[playlist.id].nextItem;
+        this.runService(playlist.items[nextItemOffset]);
 
     },
 
