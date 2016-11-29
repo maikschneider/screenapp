@@ -11,13 +11,17 @@ import Foundation
 class Screen: NSObject {
     
     var name: String
-    var list: Int
+    var listId: Int
     var createdAt: String
     var updatedAt: String
     var id: Int
     
-    init() -> Screen? {
-        
+    init(name: String, listId: Int, createdAt: String, updatedAt: String, id: Int) {
+        self.name = name
+        self.listId = listId
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.id = id
     }
     
 }
