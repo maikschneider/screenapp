@@ -2,12 +2,6 @@
 
 <hr />
 
-<%
-var screens = data[0];
-var lists = data[1];
-var items = data[2];
-%>
-
 <div class="row">
   <div class="medium-4 columns">
     <h2><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
@@ -24,7 +18,7 @@ var items = data[2];
             <tr>
               <td><%= screens[i].id %></td>
               <td>
-                <a href='screen/<%= screens[i].id %>'>
+                <a href='screen/<%= screens[i].id %>' data-modal>
                   <%= screens[i].name %>
                 </a>
               </td>
@@ -61,7 +55,7 @@ var items = data[2];
             <tr>
               <td><%= lists[i].id %></td>
               <td>
-                <a href='playlist/<%= lists[i].id %>'>
+                <a href='playlist/<%= lists[i].id %>' data-modal>
                   <%= lists[i].name %>
                 </a>
               </td>
@@ -87,7 +81,7 @@ var items = data[2];
             <tr>
               <td><%= items[i].id %></td>
               <td>
-                <a href='playlistitem/<%= items[i].id %>'>
+                <a href='playlistitem/<%= items[i].id %>' data-modal>
                   <%= items[i].name %>
                 </a>
               </td>
@@ -105,3 +99,25 @@ var items = data[2];
 
 </div>
 
+<div class="reveal" id="modal" data-reveal>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<script>
+
+$.adminIndex = function() {
+
+  $modal = $('#modal');
+
+  $('a[data-modal').on('click', function(e){
+    e.preventDefault();
+    $.ajax('/'+$(this).attr('href'))
+      .done(function(resp){
+        $modal.html(JSON.stringify(resp)).foundation('open');
+    });
+  });
+
+};
+</script>
