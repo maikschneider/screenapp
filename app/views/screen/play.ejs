@@ -9,9 +9,9 @@
   </head>
 <body>
 
+<% var activeItemOffset = -100 * activeItem; %>
 
-
-  <main style="width:<%= playlist.items.length %>00vw">
+  <main style="width:<%= playlist.items.length %>00vw; margin-left:<%= activeItemOffset %>vw">
     <div class="row expanded collapse">
       <% for(var i=0; i<playlist.items.length; i++){
 

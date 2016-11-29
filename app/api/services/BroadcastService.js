@@ -134,7 +134,17 @@ module.exports = {
     stopPlaylist: function(playlist) {
       if(!this._isOnAir(playlist)) return false;
       delete this.onAir[playlist.id];
-    }
+    },
+
+    _getActiveItem(playlist) {
+      if(!this._isOnAir(playlist)) return 0;
+      if(_.isUndefined(playlist.items) || playlist.items.length<=1) return 0;
+
+      var activeItem = this.onAir[playlist.id].nextItem - 1;
+      activeItem == -1 ? playlist.items.length - 1 : activeItem;
+
+      return activeItem;
+    },
 
 
 
