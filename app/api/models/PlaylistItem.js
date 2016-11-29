@@ -70,12 +70,12 @@ module.exports = {
     values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
     next();
   },
-  beforeCreate: function(values, next){
-    //this.geocode(values.weatherLocation, next);
+  afterUpdate: function(values, next){
+    BroadcastService.runService(values);
     next();
   },
-  beforeUpdate: function(values, next){
-    //this.geocode(values.weatherLocation, next);
+  afterCreate: function(values, next){
+    BroadcastService.runService(values);
     next();
   }
 
