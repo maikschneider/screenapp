@@ -20,7 +20,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 // @include foundation-badge;
 // @include foundation-breadcrumbs;
 // @include foundation-button-group;
-// @include foundation-callout;
+@include foundation-callout;
 // @include foundation-close-button;
 // @include foundation-menu;
 // @include foundation-menu-icon;
@@ -53,10 +53,16 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
+@import "weathericons";
+
+.icon-cloud{
+  color: #4CBBD5;
+}
+
 body{
   width: 100%;
   height: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 main{
@@ -64,7 +70,80 @@ main{
   @include transition(margin-left, 1s, linear);
 }
 
-section {
+section{
   height: 100vh;
-  background:#CCC;
+  &.slide > .row{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+section.weather{
+  background: #E0EAFC; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #E0EAFC , #CFDEF3); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #E0EAFC , #CFDEF3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 5vh 0;
+  .weather__card{
+    padding: rem-calc(20);
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(#000,0.2);
+  }
+  h1{
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  hr{
+    border-color: rgba(#000,0.1);
+  }
+  .weather__now__icon{
+    font-size: rem-calc(75);
+  }
+  p.temp{
+    font-weight: 200;
+    color: #888;
+    margin: 0;
+    line-height: 1;
+    font-size: rem-calc(28);
+  }
+  p.desc{
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+    color:#999;
+    font-size: rem-calc(18);
+  }
+  .weather__now{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: rem-calc(30);
+    .weather__now__icon{
+      font-size: rem-calc(120);
+      margin-right: rem-calc(20);
+    }
+    p.temp{
+      font-size: rem-calc(80);
+    }
+    p.desc{
+      font-size: rem-calc(30);
+    }
+  }
+  .weather__later{
+    position: relative;
+    &:not(.weather__later--4):after{
+      content:'';
+      width: 1px;
+      height: 80%;
+      background: rgba(#000,0.1);
+      position: absolute;
+      right: 0;
+      top: 10%;
+    }
+    p.desc{
+      margin: rem-calc(20 0);
+    }
+  }
+
 }

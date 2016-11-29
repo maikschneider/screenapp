@@ -1,0 +1,75 @@
+<%
+var icons = {
+  '01d' : '<span class="icon-sun"></span>',
+  '01n' : '<span class="icon-night"><span class="path1"></span><span class="path2"></span></span>',
+  '02d' : '<span class="icon-sun-cloud"><span class="path1"></span><span class="path2"></span></span>',
+  '02n' : '<span class="icon-cloud"></span>',
+  '03d' : '<span class="icon-cloud"></span>',
+  '03n' : '<span class="icon-cloud"></span>',
+  '04d' : '<span class="icon-clouds"><span class="path1"></span><span class="path2"></span></span>',
+  '04n' : '<span class="icon-clouds"><span class="path1"></span><span class="path2"></span></span>',
+  '09d' : '<span class="icon-cloud-rain"><span class="path1"></span><span class="path2"></span></span>',
+  '09n' : '<span class="icon-cloud-rain"><span class="path1"></span><span class="path2"></span></span>',
+  '10d' : '<span class="icon-sun-rain"><span class="path1"></span><span class="path2"></span></span>',
+  '10n' : '<span class="icon-rain"><span class="path1"></span><span class="path2"></span></span>',
+  '11d' : '<span class="icon-thunderstorm"><span class="path1"></span><span class="path2"></span></span>',
+  '11n' : '<span class="icon-thunderstorm"><span class="path1"></span><span class="path2"></span></span>',
+  '13d' : '<span class="icon-snow"></span>',
+  '13n' : '<span class="icon-snow"></span>',
+  '50d' : '<span class="icon-mist"></span>',
+  '50n' : '<span class="icon-mist"></span>',
+};
+function getTemp(kelvin){
+  if(item.weatherUnit) return Math.round(kelvin - 273.15) + '°C';
+  return kelvin;
+}
+%>
+
+<section class="columns slide weather">
+
+    <div class="row align-center">
+      <div class="small-10 columns">
+
+        <div class="weather__card">
+          <% if(typeof(item.data.list)!='undefined') { %>
+          <div class="row">
+            <div class="small-12 columns">
+              <h1 class="text-center"><%= item.weatherLocation %></h1>
+              <hr />
+              <div class="weather__now align-center">
+                <div class="weather__now__icon">
+                 <%- icons[item.data.list[0].weather[0].icon] %>
+                </div>
+                <div class="weather__now__text">
+                  <p class="temp"><%= getTemp(item.data.list[0].main.temp) %></p>
+                  <p class="desc"><%= item.data.list[0].weather[0].description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <% for(var i=1; i<5; i++){ %>
+            <div class="columns">
+              <div class="weather__later text-center weather__later--<%= i %>">
+                <div class="weather__now__icon">
+                 <%- icons[item.data.list[i].weather[0].icon] %>
+                </div>
+                <div class="weather__now__text">
+                  <p class="temp"><%= getTemp(item.data.list[i].main.temp) %></p>
+                  <p class="desc"><i class="fa fa-clock-o"></i> <%= item.data.list[i].dt_txt.substring(11, 16) %></p>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+          <% } else { %>
+          <div class="callout alert">
+            <h5><i class="fa fa-frown-o"></i> No weather data</h5>
+          </div>
+          <% } %>
+        </div>
+
+      </div>
+    </div>
+
+</section>

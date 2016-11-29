@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?wmhnn5');
+  src:  url('../fonts/icomoon.eot?wmhnn5#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.woff2?wmhnn5') format('woff2'),
+    url('../fonts/icomoon.ttf?wmhnn5') format('truetype'),
+    url('../fonts/icomoon.woff?wmhnn5') format('woff'),
+    url('../fonts/icomoon.svg?wmhnn5#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cloud-rain .path1:before {
+  content: "\e900";
+  color: rgb(76, 187, 213);
+}
+.icon-cloud-rain .path2:before {
+  content: "\e901";
+  margin-left: -1.125em;
+  color: rgb(57, 136, 151);
+}
+.icon-cloud:before {
+  content: "\e905";
+}
+.icon-clouds .path1:before {
+  content: "\e906";
+  color: rgb(76, 187, 213);
+}
+.icon-clouds .path2:before {
+  content: "\e907";
+  margin-left: -0.96875em;
+  color: rgb(57, 136, 151);
+}
+.icon-drop:before {
+  content: "\e908";
+}
+.icon-mist:before {
+  content: "\e909";
+}
+.icon-night .path1:before {
+  content: "\e90a";
+  color: rgb(222, 188, 49);
+}
+.icon-night .path2:before {
+  content: "\e90b";
+  margin-left: -0.84375em;
+  color: rgb(76, 187, 213);
+}
+.icon-rain-2:before {
+  content: "\e90d";
+}
+.icon-rain .path1:before {
+  content: "\e90e";
+  color: rgb(57, 136, 151);
+}
+.icon-rain .path2:before {
+  content: "\e90f";
+  margin-left: -1.125em;
+  color: rgb(76, 187, 213);
+}
+.icon-snow:before {
+  content: "\e912";
+}
+.icon-sun-cloud .path1:before {
+  content: "\e913";
+  color: rgb(76, 187, 213);
+}
+.icon-sun-cloud .path2:before {
+  content: "\e914";
+  margin-left: -1.4375em;
+  color: rgb(221, 193, 44);
+}
+.icon-sun-rain .path1:before {
+  content: "\e91b";
+  color: rgb(221, 193, 44);
+}
+.icon-sun-rain .path2:before {
+  content: "\e91c";
+  margin-left: -1.0625em;
+  color: rgb(76, 187, 213);
+}
+.icon-sun:before {
+  content: "\e926";
+}
+.icon-sunset:before {
+  content: "\e927";
+}
+.icon-thunderstorm .path1:before {
+  content: "\e928";
+  color: rgb(76, 187, 213);
+}
+.icon-thunderstorm .path2:before {
+  content: "\e929";
+  margin-left: -1.09375em;
+  color: rgb(221, 193, 44);
+}
+.icon-umbrella:before {
+  content: "\e92a";
+}
+

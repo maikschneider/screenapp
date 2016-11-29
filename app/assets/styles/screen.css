@@ -3529,6 +3529,39 @@ kbd {
   h3 {
     page-break-after: avoid; } }
 
+.callout {
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(10, 10, 10, 0.25);
+  border-radius: 0;
+  position: relative;
+  color: #0a0a0a;
+  background-color: white; }
+  .callout > :first-child {
+    margin-top: 0; }
+  .callout > :last-child {
+    margin-bottom: 0; }
+  .callout.primary {
+    background-color: #def0fc; }
+  .callout.secondary {
+    background-color: #ebebeb; }
+  .callout.success {
+    background-color: #e1faea; }
+  .callout.warning {
+    background-color: #fff3d9; }
+  .callout.alert {
+    background-color: #fce6e2; }
+  .callout.small {
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem; }
+  .callout.large {
+    padding-top: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem; }
+
 .flex-video {
   position: relative;
   height: 0;
@@ -4280,10 +4313,120 @@ kbd {
 .long-delay {
   animation-delay: 700ms !important; }
 
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?wmhnn5");
+  src: url("../fonts/icomoon.eot?wmhnn5#iefix") format("embedded-opentype"), url("../fonts/icomoon.woff2?wmhnn5") format("woff2"), url("../fonts/icomoon.ttf?wmhnn5") format("truetype"), url("../fonts/icomoon.woff?wmhnn5") format("woff"), url("../fonts/icomoon.svg?wmhnn5#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-cloud-rain .path1:before {
+  content: "\e900";
+  color: #4cbbd5; }
+
+.icon-cloud-rain .path2:before {
+  content: "\e901";
+  margin-left: -1.125em;
+  color: #398897; }
+
+.icon-cloud:before {
+  content: "\e905"; }
+
+.icon-clouds .path1:before {
+  content: "\e906";
+  color: #4cbbd5; }
+
+.icon-clouds .path2:before {
+  content: "\e907";
+  margin-left: -0.96875em;
+  color: #398897; }
+
+.icon-drop:before {
+  content: "\e908"; }
+
+.icon-mist:before {
+  content: "\e909"; }
+
+.icon-night .path1:before {
+  content: "\e90a";
+  color: #debc31; }
+
+.icon-night .path2:before {
+  content: "\e90b";
+  margin-left: -0.84375em;
+  color: #4cbbd5; }
+
+.icon-rain-2:before {
+  content: "\e90d"; }
+
+.icon-rain .path1:before {
+  content: "\e90e";
+  color: #398897; }
+
+.icon-rain .path2:before {
+  content: "\e90f";
+  margin-left: -1.125em;
+  color: #4cbbd5; }
+
+.icon-snow:before {
+  content: "\e912"; }
+
+.icon-sun-cloud .path1:before {
+  content: "\e913";
+  color: #4cbbd5; }
+
+.icon-sun-cloud .path2:before {
+  content: "\e914";
+  margin-left: -1.4375em;
+  color: #ddc12c; }
+
+.icon-sun-rain .path1:before {
+  content: "\e91b";
+  color: #ddc12c; }
+
+.icon-sun-rain .path2:before {
+  content: "\e91c";
+  margin-left: -1.0625em;
+  color: #4cbbd5; }
+
+.icon-sun:before {
+  content: "\e926"; }
+
+.icon-sunset:before {
+  content: "\e927"; }
+
+.icon-thunderstorm .path1:before {
+  content: "\e928";
+  color: #4cbbd5; }
+
+.icon-thunderstorm .path2:before {
+  content: "\e929";
+  margin-left: -1.09375em;
+  color: #ddc12c; }
+
+.icon-umbrella:before {
+  content: "\e92a"; }
+
+.icon-cloud {
+  color: #4CBBD5; }
+
 body {
   width: 100%;
   height: 100%;
-  overflow-y: hidden; }
+  overflow: hidden; }
 
 main {
   height: 100vh;
@@ -4292,5 +4435,65 @@ main {
   transition: margin-left, 1s, linear; }
 
 section {
-  height: 100vh;
-  background: #CCC; }
+  height: 100vh; }
+  section.slide > .row {
+    margin-left: auto !important;
+    margin-right: auto !important; }
+
+section.weather {
+  background: #E0EAFC;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #E0EAFC, #CFDEF3);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #E0EAFC, #CFDEF3);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 5vh 0; }
+  section.weather .weather__card {
+    padding: 1.25rem;
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+  section.weather h1 {
+    font-weight: 300;
+    letter-spacing: 1px; }
+  section.weather hr {
+    border-color: rgba(0, 0, 0, 0.1); }
+  section.weather .weather__now__icon {
+    font-size: 4.6875rem; }
+  section.weather p.temp {
+    font-weight: 200;
+    color: #888;
+    margin: 0;
+    line-height: 1;
+    font-size: 1.75rem; }
+  section.weather p.desc {
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+    color: #999;
+    font-size: 1.125rem; }
+  section.weather .weather__now {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 1.875rem; }
+    section.weather .weather__now .weather__now__icon {
+      font-size: 7.5rem;
+      margin-right: 1.25rem; }
+    section.weather .weather__now p.temp {
+      font-size: 5rem; }
+    section.weather .weather__now p.desc {
+      font-size: 1.875rem; }
+  section.weather .weather__later {
+    position: relative; }
+    section.weather .weather__later:not(.weather__later--4):after {
+      content: '';
+      width: 1px;
+      height: 80%;
+      background: rgba(0, 0, 0, 0.1);
+      position: absolute;
+      right: 0;
+      top: 10%; }
+    section.weather .weather__later p.desc {
+      margin: 1.25rem 0; }
