@@ -94,8 +94,6 @@ module.exports = {
 
     initPlaylist: function(playlist) {
 
-      sails.log.info(this.onAir);
-
       if(this._isOnAir(playlist)){
         sails.log.info('Playlist ' + playlist.id + ' already in broadcast queue.');
         return false;
@@ -108,9 +106,9 @@ module.exports = {
         nextItem: (playlist.items.length > 1) ? 1 : 0,
       };
 
-      if(!this.isStarted) this.startCron();
+      this.startCron();
 
-      sails.log.info('BroadcastsService: Added Playlist ' + playlist.id);
+      sails.log.info('BroadcastsService: init Playlist ' + playlist.id);
     },
 
     /**
