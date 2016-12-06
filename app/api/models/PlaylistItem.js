@@ -70,13 +70,19 @@ module.exports = {
     values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
     next();
   },
-  afterUpdate: function(values, next){
-    BroadcastService.runService(values);
-    next();
+  beforeUpdate: function(values, next){
+    if(values.appType == 'weather') {
+      WeatherService.runBeforeUpdate(values, next);
+    } else {
+      next();
+    }
   },
-  afterCreate: function(values, next){
-    BroadcastService.runService(values);
-    next();
+  beforeCreate: function(values, next){
+    if(values.appType == 'weather'){
+      WeatherService.runBeforeCreate(values, next);
+    } else {
+      next();
+    }
   }
 
 };

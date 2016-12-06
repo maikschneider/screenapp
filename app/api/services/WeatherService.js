@@ -1,6 +1,49 @@
 module.exports = {
 
   playlistitem: null,
+  apiKey: '87c00245aa4be44f589fe378a50dc13c',
+  data: null,
+  cacheTimeInMin: 2,
+
+  runAndSave: function(playlistitemId) {
+    sails.log.info('WeatherService: runAndSave('+playlistitemId+')');
+    this.init(playlistitemId, this.updatePlaylistitem);
+  },
+
+  runBeforeCreate: function(values, callback) {
+    sails.log.info('WeatherService: runBeforeCreate()');
+    var _this = this;
+
+    this.playlistitem = values;
+
+    _this.getWeatherData(function(){
+      values.data = _this.data;
+      callback();
+    });
+
+  },
+
+  runBeforeUpdate: function(values, callback) {
+    sails.log.info('WeatherService: runBeforeUpdate('+values.id+')');
+    var _this = this;
+
+    // get old item from database
+    this.init(values.id, function(){
+      // if location changed or cachetime is over
+      if(values.weatherLocation != _this.playlistitem.weatherLocation || _this.needDataUpdate()){
+        // set to new location
+        _this.playlistitem.weatherLocation = values.weatherLocation;
+
+        _this.getWeatherData(function(){
+          values.data = _this.data;
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
+
+  },
 
   /**
    * WeatherService
@@ -14,26 +57,24 @@ module.exports = {
    *  4. save      WeatherData
    *  5. broadcast WeatherData
    */
-  init: function(playlistitemId) {
+  init: function(playlistitemId, callback) {
 
-    sails.log.info('WeatherService: init()');
     var _this = this;
 
     PlaylistItem.findOne(playlistitemId).then(function(playlistitem){
       _this.playlistitem = playlistitem;
-      _this.apiKey = '87c00245aa4be44f589fe378a50dc13c';
-      _this.data = null;
-      _this.cacheTimeInMin = 2;
 
-      _this.run();
+      callback();
     }).catch(function(err){
-      sails.log.err('No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn('No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn(err);
     });
   },
 
-  run: function() {
+  updatePlaylistitem: function() {
     if(this.needDataUpdate()){
-      this.updateWeatherData();
+      var callback = this.saveWeatherData;
+      this.getWeatherData(callback);
     } else {
 
     }
@@ -57,11 +98,6 @@ module.exports = {
     if(nowDate.getTime() > cacheDateUntil.getTime()) doUpdate = true;
 
     return doUpdate;
-  },
-
-  updateWeatherData: function() {
-    var callback = this.saveWeatherData;
-    this.getWeatherData(callback);
   },
 
   saveWeatherData: function() {

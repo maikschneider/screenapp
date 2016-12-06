@@ -18,7 +18,7 @@ module.exports = {
           TwitterService.run(playlistitem);
           break;
         case 'weather':
-          WeatherService.init(playlistitem.id);
+          WeatherService.runAndSave(playlistitem.id);
           break;
         default:
           //@todo return something
