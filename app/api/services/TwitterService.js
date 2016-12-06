@@ -1,17 +1,127 @@
 module.exports = {
 
-  run: function(playlistitem) {
+  consumer_key: 'pixRh7PZGXNdSeVsFAXAZ9Bag',
+  consumer_secret: 'RucPX4H4lrPiDGydAlyJWGFOH16GI3Bi0pgy2hnfUHE7JFe4l7',
+  bearer_token: undefined,
+  data: null,
+  playlistitem: null,
 
-    // @todo: receive data
-    //
-    // @todo: update item (optional)
-    //
-    // message subscribers
-    // http://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/message
+  runAndSave: function(playlistitemId) {
+    sails.log.info('TwitterService runAndSave('+playlistitemId+')');
+    this.init(playlistitemId, this.updatePlaylistitem);
+  },
 
-    PlaylistItem.message(playlistitem.id, {
+  runBeforeUpdate: function(values, callback) {
+    sails.log.info('TwitterService: runBeforeUpdate('+values.id+')');
+    var _this = this;
 
-    }, null, {previous: playlistitem});
+    // get old item from database
+    this.init(values.id, function(){
+      // if location changed or cachetime is over
+      if(values.twitterFilter != _this.playlistitem.twitterFilter || _this.needDataUpdate()){
+        // set to new location
+        _this.playlistitem.twitterFilter = values.twitterFilter;
+
+        _this.getTwitterData(function(){
+          values.data = _this.data;
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
+
+  },
+
+  updatePlaylistitem: function() {
+
+  },
+
+  init: function(playlistitemId, callback) {
+    var _this = this;
+
+    PlaylistItem.findOne(playlistitemId).then(function(playlistitem){
+      _this.playlistitem = playlistitem;
+
+      callback();
+    }).catch(function(err){
+      sails.log.warn('No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn(err);
+    });
+  },
+
+  needDataUpdate: function() {
+    return true;
+  },
+
+  obtainBearerToken: function(callback){
+    var _this = this;
+    var bearer_token_credentials = encodeURI(this.consumer_key) + ':' + encodeURI(this.consumer_secret);
+    var base64url = require('base64-url');
+    bearer_token_credentials = base64url.encode(bearer_token_credentials);
+
+    var request = require('request');
+    var options  = {
+      baseUrl : 'https://api.twitter.com/',
+      uri : 'oauth2/token',
+      method : 'POST',
+      headers: {
+          'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Authorization' : 'Basic ' + bearer_token_credentials
+      },
+      body: 'grant_type=client_credentials'
+    };
+
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var res = JSON.parse(body);
+          _this.bearer_token = res.access_token;
+        } else {
+          sails.log.warn(error);
+          sails.log.warn(response);
+          sails.log.warn(body);
+        }
+        callback();
+    });
+  },
+
+  getTwitterData: function(callback) {
+    var _this = this;
+
+    if(_.isUndefined(this.bearer_token)) {
+      this.obtainBearerToken(function(){
+        _this.getTwitterData(callback);
+      });
+    }
+    else{
+      this.obtainTwitterData(callback);
+    }
+
+  },
+
+  obtainTwitterData: function(callback) {
+    var _this = this;
+
+    var request = require('request');
+    var options  = {
+      baseUrl : 'https://api.twitter.com/',
+      uri : '1.1/search/tweets.json?q=' + encodeURI( _this.playlistitem.twitterFilter ),
+      method : 'GET',
+      auth : {
+        'bearer' : _this.bearer_token
+      }
+    };
+
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          _this.data = body;
+        } else {
+          sails.log.warn(error);
+          sails.log.warn(response);
+          sails.log.warn(body);
+        }
+        callback();
+    });
   }
 
 }
