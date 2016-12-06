@@ -39,6 +39,10 @@
       $(document)
         .foundation()
         .ready(function(){
+
+          // fix space bar bug in weather dropdown
+          Foundation.Keyboard.register('Dropdown', {});
+
           try{
             //$.adminIndex();
           } catch(err){
