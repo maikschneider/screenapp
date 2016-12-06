@@ -25,7 +25,7 @@ module.exports = {
       }
     },
 
-    startCron: function() {
+    startPlaylistCron: function() {
       if(this.isStarted) return false;
 
       sails.log.info('Starting Cron');
@@ -38,6 +38,24 @@ module.exports = {
       });
 
       this.isStarted = true;
+    },
+
+    startTwitterCron: function(playlist) {
+        sails.log.info('Starting Twitter Cron');
+
+        var _this = this;
+        var schedule = require('node-schedule');
+
+        var activeItemOffset = this._getActiveItem(playlist);
+        var seconds = playlist.items[activeItemOffset].twitterTweetDuration;
+
+        var startTime = new Date(Date.now());
+        var endTime = new Date(startTime.getTime() + (playlist.items[activeItemOffset].duration * 1000));
+
+        var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/'+seconds+' * * * * *' }, function(){
+          sails.log.info('BroadcastsService: TweetChange');
+          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {});
+        });
     },
 
     /**
@@ -66,6 +84,9 @@ module.exports = {
 
         // broadcast slidechange to playlist room
         sails.sockets.broadcast('playlistsocket'+playlist.id, 'slideChange', {item: _this.onAir[playlistID].nextItem});
+
+        // start twitter cron job if necessary
+        if(playlist.items[_this.onAir[playlistID].nextItem].appType == 'twitter') _this.startTwitterCron(playlist);
 
         _this.afterSlideChange(playlist);
 
@@ -106,7 +127,10 @@ module.exports = {
         nextItem: (playlist.items.length > 1) ? 1 : 0,
       };
 
-      this.startCron();
+      // start twitter cron if first item is twitter item
+      if(playlist.items[0].appType == 'twitter') this.startTwitterCron(playlist);
+
+      this.startPlaylistCron();
 
       sails.log.info('BroadcastsService: init Playlist ' + playlist.id);
     },
