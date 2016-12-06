@@ -67,7 +67,7 @@
             </div>
             <div class="small-9 columns weatherLocation-column">
               <input disabled type="text" id="middle-label" name="weatherLocation" autocomplete="off" spellcheck="off" data-toggle="location-dropdown">
-              <div class="dropdown-pane bottom" id="location-dropdown" data-dropdown>
+              <div class="dropdown-pane bottom" id="location-dropdown" data-dropdown data-close-on-click="true">
               </div>
               <input disabled type="hidden" name="weatherLocationCode" value="">
             </div>
@@ -112,7 +112,7 @@
               <label for="middle-label" class="text-right middle">Text</label>
             </div>
             <div class="small-9 columns">
-              <input disabled type="text" id="middle-label" name="msgText">
+              <textarea disabled id="middle-label" name="msgText"></textarea>
             </div>
           </div>
           <div class="row">
@@ -174,8 +174,8 @@
   $.changeAppTab = function(apptype) {
     if(!apptype) apptype = $('#playlistitem-tabs li.is-active').attr('data-apptype');
     $('input#appType').attr('value', apptype);
-    $('form .tabs-panel').find('input').prop('disabled', true);
-    $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input').prop('disabled', false);
+    $('form .tabs-panel').find('input, textarea').prop('disabled', true);
+    $('form .tabs-panel[data-apptype="'+apptype+'"]').find('input, textarea').prop('disabled', false);
   };
 
   /**
@@ -198,6 +198,7 @@
       // insert data into form inputs
       $.each(resData, function(index, value) {
           $('form input[name="'+index+'"]:text').attr('value', value);
+          $('form textarea[name="'+index+'"]').html(value);
           $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
           $('form input[name="'+index+'"]:checkbox').prop('checked', value);
           if(typeof(value) === 'object' && value !== null)

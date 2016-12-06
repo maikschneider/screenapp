@@ -16,9 +16,13 @@ module.exports = {
 
     geocoder.geocode(location, function(err, res){
 
-      if(cb) return cb(res);
+      var data = _.filter(res, function(obj){
+        return !_.isUndefined(obj.city);
+      });
 
-      return res;
+      if(cb) return cb(data);
+
+      return data;
     });
 
   },
