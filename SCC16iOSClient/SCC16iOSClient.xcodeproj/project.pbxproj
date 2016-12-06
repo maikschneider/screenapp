@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		724B3E8A1DF6D6940026F340 /* MessagePlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B3E891DF6D6940026F340 /* MessagePlaylistItem.swift */; };
 		72513DF41DD90254002925C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72513DF31DD90254002925C9 /* AppDelegate.swift */; };
 		72513DF61DD90254002925C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72513DF51DD90254002925C9 /* ViewController.swift */; };
 		72513DF91DD90254002925C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DF71DD90254002925C9 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		385CE78BF46BF2461AE60FAE /* Pods_SCC16iOSClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SCC16iOSClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F497741F84C6EB447CE8A91 /* Pods-SCC16iOSClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCC16iOSClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SCC16iOSClient/Pods-SCC16iOSClient.debug.xcconfig"; sourceTree = "<group>"; };
+		724B3E891DF6D6940026F340 /* MessagePlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePlaylistItem.swift; sourceTree = "<group>"; };
 		72513DF01DD90254002925C9 /* SCC16iOSClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCC16iOSClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72513DF31DD90254002925C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72513DF51DD90254002925C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				728573F31DEC830C00D23D6A /* PlaylistItem.swift */,
 				728573F51DEC834200D23D6A /* TwitterPlaylistItem.swift */,
 				728573F71DEC83A100D23D6A /* WeatherPlaylistItem.swift */,
+				724B3E891DF6D6940026F340 /* MessagePlaylistItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				728573F01DEC82ED00D23D6A /* Screen.swift in Sources */,
 				728573F81DEC83A100D23D6A /* WeatherPlaylistItem.swift in Sources */,
 				728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */,
+				724B3E8A1DF6D6940026F340 /* MessagePlaylistItem.swift in Sources */,
 				728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

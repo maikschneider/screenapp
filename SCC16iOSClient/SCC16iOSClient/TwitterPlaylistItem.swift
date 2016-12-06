@@ -10,15 +10,15 @@ import Foundation
 
 class TwitterPlaylistItem: PlaylistItem {
     
-    var twitterFilter: String
-    var twitterTweetDuration: Int
-    var twitterShowRetweets: Bool
+    var filter: String
+    var tweetDuration: Int
+    var showRetweets: Bool
     
-    init(name: String, duration: Int, appType: String, data: [String: Any], twitterFilter: String, twitterTweetDuration: Int, twitterShowRetweets: Bool) {
-        super.init(name: name, duration: duration, appType, data: data)
-        self.twitterFilter = twitterFilter
-        self.twitterTweetDuration = twitterTweetDuration
-        self.twitterShowRetweets = twitterShowRetweets
+    init(id: Int, name: String, duration: Int, appType: String, data: [String: Any], filter: String, tweetDuration: Int, showRetweets: Bool) {
+        super.init(id: id, name: name, duration: duration, appType, data: data)
+        self.filter = filter
+        self.tweetDuration = tweetDuration
+        self.showRetweets = showRetweets
     }
     
 }

@@ -10,12 +10,14 @@ import Foundation
 
 class PlaylistItem: NSObject {
     
+    var id: Int
     var name: String
     var duration: Int
     var appType: String
     var data: [String: Any]
     
-    init(name: String, duration: Int, appType: String, data: [String: Any]) {
+    init(id: Int, name: String, duration: Int, appType: String, data: [String: Any]) {
+        self.id = id
         self.name = name
         self.duration = duration
         self.appType = appType

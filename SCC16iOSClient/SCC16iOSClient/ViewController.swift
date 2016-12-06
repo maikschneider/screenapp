@@ -15,13 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         func printJson(json: RestEssentials.JSON) {
-            print(json)
-            
-            print("Screen name: " + json[0]["screens"][0]["name"].string!)
-            print("Playlist name: " + json[0]["name"].string!)
-            print("Playlist Id: " + json[0]["id"].int!)
-            
-            var screens = []
+            let playlists = restClient.parsePlaylists(json: json)
+            print(playlists)
         }
         
         restClient.get(url: "localhost:1337/playlist", callback: printJson)
