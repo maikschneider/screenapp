@@ -13,6 +13,13 @@ class PlaylistItem: NSObject {
     var name: String
     var duration: Int
     var appType: String
-    var data: []
+    var data: [String: Any]
+    
+    init(name: String, duration: Int, appType: String, data: [String: Any]) {
+        self.name = name
+        self.duration = duration
+        self.appType = appType
+        self.data = data
+    }
     
 }
