@@ -1,0 +1,24 @@
+<%
+  var tweets = item.data.statuses;
+  var height = tweets.length * 90;
+%>
+
+<section class="columns slide twitter" style="min-height: <%= height %>vh">
+
+  <div class="row align-center">
+    <div class="small-10 columns">
+
+      <div class="twitter__card">
+        <% if(tweets.length){ %>
+          tweets kommen hier..
+        <% } else { %>
+          <div class="callout alert">
+            <h5><i class="fa fa-frown-o"></i> No Twitter data</h5>
+          </div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+
+</section>

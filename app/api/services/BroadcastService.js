@@ -15,7 +15,7 @@ module.exports = {
       switch(playlistitem.appType) {
 
         case 'twitter':
-          TwitterService.run(playlistitem);
+          TwitterService.runAndSave(playlistitem.id);
           break;
         case 'weather':
           WeatherService.runAndSave(playlistitem.id);
