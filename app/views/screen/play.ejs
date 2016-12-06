@@ -65,10 +65,21 @@
     $.Slider.slideChange(data.item);
   });
 
+  io.socket.on('tweetChange', function (data){
+    console.log('tweetChange', data);
+    $.Slider.tweetChange(data.tweet);
+  });
+
   $.Slider = {
+    activeSlide: 0,
     slideChange: function(index) {
+      this.activeSlide = index;
       var marginLeft = -100 * index;
       $('main').css('marginLeft', marginLeft+'vw');
+    },
+    tweetChange: function(index) {
+      var marginTop = -100 * index;
+      $('section:nth-child('+ (this.activeSlide + 1) +')').css('marginTop', marginTop+'vh');
     }
   }
 

@@ -44,6 +44,7 @@ module.exports = {
         sails.log.info('Starting Twitter Cron');
 
         var _this = this;
+        var activeTweet = 0;
         var schedule = require('node-schedule');
 
         var activeItemOffset = this._getActiveItem(playlist);
@@ -54,7 +55,8 @@ module.exports = {
 
         var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/'+seconds+' * * * * *' }, function(){
           sails.log.info('BroadcastsService: TweetChange');
-          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {});
+          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: activeTweet});
+          activeTweet++;
         });
     },
 

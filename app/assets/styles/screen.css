@@ -4501,13 +4501,29 @@ section.weather {
     section.weather .weather__later p.desc {
       margin: 1.25rem 0; }
 
+section.msg {
+  background: #f85032;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f85032, #e73827);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f85032, #e73827);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  section.msg .msg__card {
+    padding: 1.25rem;
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+
 section.twitter {
   background: #457fca;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #457fca, #5691c8);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #457fca, #5691c8);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-transition: margin-top, 1s, linear;
+  -moz-transition: margin-top, 1s, linear;
+  transition: margin-top, 1s, linear; }
   section.twitter .twitter__card {
     padding: 1.25rem;
     background: #FFF;
