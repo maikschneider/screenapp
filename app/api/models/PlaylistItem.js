@@ -83,10 +83,15 @@ module.exports = {
     }
   },
   beforeCreate: function(values, next){
-    if(values.appType == 'weather'){
-      WeatherService.runBeforeCreate(values, next);
-    } else {
-      next();
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.runBeforeCreate(values, next);
+        break;
+      case 'weather':
+        WeatherService.runBeforeCreate(values, next);
+        break;
+      default:
+        next();
     }
   },
   afterUpdate: function(values, next){

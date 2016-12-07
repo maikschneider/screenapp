@@ -33,6 +33,18 @@ module.exports = {
 
   },
 
+  runBeforeCreate: function(values, callback) {
+    sails.log.info('TwitterService: runBeforeCreate()');
+    var _this = this;
+
+    this.playlistitem = values;
+
+    _this.getTwitterData(function(){
+      values.data = _this.data;
+      callback();
+    });
+  },
+
   updatePlaylistitem: function() {
     if(this.needDataUpdate()){
       var callback = this.saveTwitterData;
