@@ -5,7 +5,7 @@ if(tweets){
     var marginTop = activeTweet * -100;
 %>
 
-<section class="columns slide twitter" style="min-height: <%= height %>vh; margin-top: <%= marginTop %>vh">
+<section class="columns slide twitter" style="min-height: <%= height %>vh; margin-top: <%= marginTop %>vh" data-id="<%= item.id %>">
 
   <% for(var i=0; i<tweets.length; i++){ %>
     <div class="twitter__tweet row expanded align-middle">

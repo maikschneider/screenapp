@@ -67,7 +67,7 @@
 
   io.socket.on('tweetChange', function (data){
     console.log('tweetChange', data);
-    $.Slider.tweetChange(data.tweet);
+    $.Slider.tweetChange(data.tweet, data.playlistitem_id);
   });
 
   $.Slider = {
@@ -81,9 +81,9 @@
         $('section:not(:nth-child('+ ($.Slider.activeSlide + 1) +'))').css('marginTop', '0vh');
       }, 1000);
     },
-    tweetChange: function(index) {
+    tweetChange: function(index, id) {
       var marginTop = -100 * index;
-      $('section:nth-child('+ (this.activeSlide + 1) +')').css('marginTop', marginTop+'vh');
+      $('section[data-id="'+id+'"]').css('marginTop', marginTop+'vh');
     }
   }
 

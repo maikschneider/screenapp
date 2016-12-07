@@ -56,7 +56,7 @@ module.exports = {
         var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/'+seconds+' * * * * *' }, function(){
           sails.log.info('BroadcastsService: TweetChange');
           _this.onAir[playlist.id].currentTweet += 1;
-          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: _this.onAir[playlist.id].currentTweet });
+          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: _this.onAir[playlist.id].currentTweet, playlistitem_id: playlist.items[activeItemOffset].id });
         });
     },
 
