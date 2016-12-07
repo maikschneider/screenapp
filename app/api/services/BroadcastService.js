@@ -5,7 +5,8 @@ module.exports = {
       /*
       playlistID11: {
         timeLeft: 30,     // playlistitem duration that gets decreased
-        nextItem: 0       // offset of the next playlistitem
+        nextItem: 0       // offset of the next playlistitem.
+        currentTweet: 0   // offset of the twitter data
       }
       */
     },
@@ -44,7 +45,6 @@ module.exports = {
         sails.log.info('Starting Twitter Cron');
 
         var _this = this;
-        var nextTweet = 1;
         var schedule = require('node-schedule');
 
         var activeItemOffset = this._getActiveItem(playlist);
@@ -55,8 +55,8 @@ module.exports = {
 
         var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/'+seconds+' * * * * *' }, function(){
           sails.log.info('BroadcastsService: TweetChange');
-          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: nextTweet});
-          nextTweet++;
+          _this.onAir[playlist.id].currentTweet += 1;
+          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: _this.onAir[playlist.id].currentTweet });
         });
     },
 
@@ -83,6 +83,9 @@ module.exports = {
 
         // check Playlist for items
         if(_this.validatePlaylistItems(playlist)) return false;
+
+        // reset twitter offset
+        _this.onAir[playlist.id].currentTweet = 0;
 
         // broadcast slidechange to playlist room
         sails.sockets.broadcast('playlistsocket'+playlist.id, 'slideChange', {item: _this.onAir[playlistID].nextItem});
@@ -127,12 +130,13 @@ module.exports = {
       this.onAir[playlist.id] = {
         timeLeft: playlist.items[0].duration,
         nextItem: (playlist.items.length > 1) ? 1 : 0,
+        currentTweet: 0,
       };
-
-      this.startPlaylistCron();
 
       // start twitter cron if first item is twitter item
       if(playlist.items[0].appType == 'twitter') this.startTwitterCron(playlist);
+
+      this.startPlaylistCron();
 
       sails.log.info('BroadcastsService: init Playlist ' + playlist.id);
     },
@@ -168,6 +172,13 @@ module.exports = {
       activeItem = (activeItem == -1) ? playlist.items.length - 1 : activeItem;
 
       return activeItem;
+    },
+
+    _getActiveTweet(playlist) {
+      if(!this._isOnAir(playlist)) return 0;
+      if(_.isUndefined(playlist.items) || playlist.items.length<=1) return 0;
+
+      return this.onAir[playlist.id].currentTweet;
     },
 
 

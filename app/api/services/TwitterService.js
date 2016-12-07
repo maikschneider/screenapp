@@ -34,7 +34,12 @@ module.exports = {
   },
 
   updatePlaylistitem: function() {
+    if(this.needDataUpdate()){
+      var callback = this.saveTwitterData;
+      this.getTwitterData(callback);
+    } else {
 
+    }
   },
 
   init: function(playlistitemId, callback) {
@@ -123,6 +128,20 @@ module.exports = {
         }
         callback();
     });
-  }
+  },
+
+  saveTwitterData: function() {
+    var _this = this;
+    // Update Item
+    PlaylistItem.update({id: this.playlistitem.id}).set({data: _this.data}).exec(function(err, updatedPlaylistitems){
+      if(err){
+        console.log(err);
+      }
+
+      // broadcast a message to subscribers with updated data
+      sails.sockets.broadcast('playlistsocket'+updatedPlaylistitems[0].playlist, 'itemUpdate', {item: updatedPlaylistitems[0]});
+
+    });
+  },
 
 }

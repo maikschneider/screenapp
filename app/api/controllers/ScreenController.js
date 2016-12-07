@@ -18,7 +18,13 @@ module.exports = {
 
         Playlist.findOne(playlist[0].id).populate('items').then(function(p){
           BroadcastService.initPlaylist(p);
-          res.view('screen/play', {layout: false, 'screen': screen, 'playlist': p, 'activeItem': BroadcastService._getActiveItem(p)});
+          res.view('screen/play', {
+            layout: false,
+            'screen': screen,
+            'playlist': p,
+            'activeItem': BroadcastService._getActiveItem(p),
+            'activeTweet': BroadcastService._getActiveTweet(p)
+          });
         });
 
       });

@@ -2,9 +2,10 @@
 var tweets = item.data.statuses;
 if(tweets){
     var height = tweets.length * 100;
+    var marginTop = activeTweet * -100;
 %>
 
-<section class="columns slide twitter" style="min-height: <%= height %>vh">
+<section class="columns slide twitter" style="min-height: <%= height %>vh; margin-top: <%= marginTop %>vh">
 
   <% for(var i=0; i<tweets.length; i++){ %>
     <div class="twitter__tweet row expanded align-middle">
