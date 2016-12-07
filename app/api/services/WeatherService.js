@@ -109,7 +109,7 @@ module.exports = {
       }
 
       // broadcast a message to subscribers with updated data
-      sails.sockets.broadcast('playlistsocket'+updatedPlaylistitems[0].playlist, 'itemUpdate', {item: updatedPlaylistitems[0]});
+      _this.publishUpdate(updatedPlaylistitems[0]);
 
     });
   },
@@ -133,6 +133,16 @@ module.exports = {
         }
         callback();
     });
+  },
+
+  publishUpdate: function(playlistitem, callback) {
+
+    sails.hooks.views.render('screen/weather', {layout: false, item: playlistitem}, function(err,html){
+      if(err) sails.log.warn(err);
+      sails.sockets.broadcast('playlistsocket'+playlistitem.playlist, 'itemUpdate', {'item': playlistitem, 'html': html});
+      if(callback) callback();
+    });
+
   }
 
 }

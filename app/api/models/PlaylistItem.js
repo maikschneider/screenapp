@@ -88,6 +88,18 @@ module.exports = {
     } else {
       next();
     }
+  },
+  afterUpdate: function(values, next){
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.publishUpdate(values, next);
+        break;
+      case 'weather':
+        WeatherService.publishUpdate(values, next);
+        break;
+      default:
+        next();
+    }
   }
 
 };

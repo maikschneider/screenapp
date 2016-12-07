@@ -120,7 +120,7 @@ module.exports = {
 
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          _this.data = body;
+          _this.data = JSON.parse(body);;
         } else {
           sails.log.warn(error);
           sails.log.warn(response);
@@ -137,11 +137,16 @@ module.exports = {
       if(err){
         console.log(err);
       }
-
-      // broadcast a message to subscribers with updated data
-      sails.sockets.broadcast('playlistsocket'+updatedPlaylistitems[0].playlist, 'itemUpdate', {item: updatedPlaylistitems[0]});
-
     });
   },
+
+  publishUpdate: function(playlistitem, callback) {
+    sails.hooks.views.render('screen/twitter', {layout: false, item: playlistitem, activeTweet:0}, function(err,html){
+      if(err) sails.log.warn(err);
+      sails.sockets.broadcast('playlistsocket'+playlistitem.playlist, 'itemUpdate', {'item': playlistitem, 'html': html});
+      if(callback) callback();
+    });
+
+  }
 
 }

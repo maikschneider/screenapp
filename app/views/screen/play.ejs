@@ -58,6 +58,7 @@
 
   io.socket.on('itemUpdate', function (data){
     console.log('itemUpdate', data);
+    $('section[data-id="'+data.item.id+'"]').replaceWith(data.html);
   });
 
   io.socket.on('slideChange', function (data){
