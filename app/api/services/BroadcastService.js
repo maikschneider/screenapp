@@ -44,7 +44,7 @@ module.exports = {
         sails.log.info('Starting Twitter Cron');
 
         var _this = this;
-        var activeTweet = 0;
+        var nextTweet = 1;
         var schedule = require('node-schedule');
 
         var activeItemOffset = this._getActiveItem(playlist);
@@ -55,8 +55,8 @@ module.exports = {
 
         var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/'+seconds+' * * * * *' }, function(){
           sails.log.info('BroadcastsService: TweetChange');
-          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: activeTweet});
-          activeTweet++;
+          sails.sockets.broadcast('playlistsocket'+playlist.id, 'tweetChange', {tweet: nextTweet});
+          nextTweet++;
         });
     },
 
@@ -87,9 +87,6 @@ module.exports = {
         // broadcast slidechange to playlist room
         sails.sockets.broadcast('playlistsocket'+playlist.id, 'slideChange', {item: _this.onAir[playlistID].nextItem});
 
-        // start twitter cron job if necessary
-        if(playlist.items[_this.onAir[playlistID].nextItem].appType == 'twitter') _this.startTwitterCron(playlist);
-
         _this.afterSlideChange(playlist);
 
       }).catch(function(err){
@@ -108,6 +105,9 @@ module.exports = {
         this.onAir[playlist.id].timeLeft = playlist.items[this.onAir[playlist.id].nextItem].duration;
         var nextItem = this.onAir[playlist.id].nextItem + 1;
         this.onAir[playlist.id].nextItem = playlist.items.length == nextItem ? 0 : nextItem;
+
+        // start twitter cron job if necessary
+        if(playlist.items[_this._getActiveItem(playlist)].appType == 'twitter') _this.startTwitterCron(playlist);
 
         // run API for next item
         var nextItemOffset = this.onAir[playlist.id].nextItem;
@@ -129,10 +129,10 @@ module.exports = {
         nextItem: (playlist.items.length > 1) ? 1 : 0,
       };
 
+      this.startPlaylistCron();
+
       // start twitter cron if first item is twitter item
       if(playlist.items[0].appType == 'twitter') this.startTwitterCron(playlist);
-
-      this.startPlaylistCron();
 
       sails.log.info('BroadcastsService: init Playlist ' + playlist.id);
     },
@@ -165,7 +165,7 @@ module.exports = {
       if(_.isUndefined(playlist.items) || playlist.items.length<=1) return 0;
 
       var activeItem = this.onAir[playlist.id].nextItem - 1;
-      activeItem == -1 ? playlist.items.length - 1 : activeItem;
+      activeItem = (activeItem == -1) ? playlist.items.length - 1 : activeItem;
 
       return activeItem;
     },

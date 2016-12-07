@@ -76,6 +76,10 @@
       this.activeSlide = index;
       var marginLeft = -100 * index;
       $('main').css('marginLeft', marginLeft+'vw');
+      // reset vertical scroll
+      setTimeout(function(){
+        $('section:not(:nth-child('+ ($.Slider.activeSlide + 1) +'))').css('marginTop', '0vh');
+      }, 1000);
     },
     tweetChange: function(index) {
       var marginTop = -100 * index;

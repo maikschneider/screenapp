@@ -1,6 +1,7 @@
 <%
-  var tweets = item.data.statuses;
-  var height = tweets.length * 100;
+var tweets = item.data.statuses;
+if(tweets){
+    var height = tweets.length * 100;
 %>
 
 <section class="columns slide twitter" style="min-height: <%= height %>vh">
@@ -13,15 +14,17 @@
           <div class="small-10 columns">
 
             <div class="twitter__card">
-              <% if(tweets.length){ %>
-                <p><%= tweets[i].text %></p>
-              <% } else { %>
-                <div class="callout alert">
-                  <h5><i class="fa fa-frown-o"></i> No Twitter data</h5>
+              <div class="row">
+                <div class="small-4 columns">
+                <% var pic = tweets[i].user.profile_image_url;
+                pic = pic.replace('_normal', '_bigger'); %>
+                <img src="<%= pic %>" />
                 </div>
-              <% } %>
+                <div class="small-8 coloumns">
+                  <p><%= tweets[i].text %></p>
+                </div>
+              </div>
             </div>
-
           </div>
         </div>
 
@@ -30,3 +33,21 @@
   <% } %>
 
 </section>
+
+<% } else { %>
+<section class="columns slide twitter">
+  <div class="twitter__tweet row expanded align-middle">
+    <div class="twitter__tweet__inner column">
+      <div class="row align-center">
+        <div class="small-10 columns">
+          <div class="twitter__card">
+            <div class="callout alert">
+              <h5><i class="fa fa-frown-o"></i> No Twitter data</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% } %>
