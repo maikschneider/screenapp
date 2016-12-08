@@ -123,7 +123,7 @@ module.exports = {
     var request = require('request');
     var options  = {
       baseUrl : 'https://api.twitter.com/',
-      uri : '1.1/search/tweets.json?q=' + encodeURI( _this.playlistitem.twitterFilter ),
+      uri : '1.1/search/tweets.json?q=' + encodeURIComponent( _this.playlistitem.twitterFilter ),
       method : 'GET',
       auth : {
         'bearer' : _this.bearer_token
