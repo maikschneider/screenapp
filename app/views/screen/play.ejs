@@ -19,7 +19,7 @@
           var template = item.appType;
         %>
 
-        <%- partial(template, {item: item}) %>
+        <%- partial(template, {item: item, activeTweet: activeTweet}) %>
 
       <% } %>
     </div>
@@ -58,6 +58,7 @@
 
   io.socket.on('itemUpdate', function (data){
     console.log('itemUpdate', data);
+    $('section[data-id="'+data.item.id+'"]').replaceWith(data.html);
   });
 
   io.socket.on('slideChange', function (data){
@@ -65,10 +66,25 @@
     $.Slider.slideChange(data.item);
   });
 
+  io.socket.on('tweetChange', function (data){
+    console.log('tweetChange', data);
+    $.Slider.tweetChange(data.tweet, data.playlistitem_id);
+  });
+
   $.Slider = {
+    activeSlide: 0,
     slideChange: function(index) {
+      this.activeSlide = index;
       var marginLeft = -100 * index;
       $('main').css('marginLeft', marginLeft+'vw');
+      // reset vertical scroll
+      setTimeout(function(){
+        $('section:not(:nth-child('+ ($.Slider.activeSlide + 1) +'))').css('marginTop', '0vh');
+      }, 1000);
+    },
+    tweetChange: function(index, id) {
+      var marginTop = -100 * index;
+      $('section[data-id="'+id+'"]').css('marginTop', marginTop+'vh');
     }
   }
 

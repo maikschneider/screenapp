@@ -71,17 +71,39 @@ module.exports = {
     next();
   },
   beforeUpdate: function(values, next){
-    if(values.appType == 'weather') {
-      WeatherService.runBeforeUpdate(values, next);
-    } else {
-      next();
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.runBeforeUpdate(values, next);
+        break;
+      case 'weather':
+        WeatherService.runBeforeUpdate(values, next);
+        break;
+      default:
+        next();
     }
   },
   beforeCreate: function(values, next){
-    if(values.appType == 'weather'){
-      WeatherService.runBeforeCreate(values, next);
-    } else {
-      next();
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.runBeforeCreate(values, next);
+        break;
+      case 'weather':
+        WeatherService.runBeforeCreate(values, next);
+        break;
+      default:
+        next();
+    }
+  },
+  afterUpdate: function(values, next){
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.publishUpdate(values, next);
+        break;
+      case 'weather':
+        WeatherService.publishUpdate(values, next);
+        break;
+      default:
+        next();
     }
   }
 
