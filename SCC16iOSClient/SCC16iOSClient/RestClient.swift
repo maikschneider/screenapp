@@ -13,16 +13,17 @@ class RestClient {
     
     let prefix: String = "http://"
     
-    func get(url: String) {
+    func get(url: String, callback: @escaping (RestEssentials.JSON) -> Void) {
         guard let rest = RestController.make(urlString: prefix + url) else {
             print("Bad URL")
             return
         }
+        print(rest)
         
         rest.get { result, httpResponse in
             do {
                 let json = try result.value()
-                print(json.string)
+                callback(json)
             } catch {
                 print("Error performing GET: \(error)")
             }

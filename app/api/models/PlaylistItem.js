@@ -70,13 +70,41 @@ module.exports = {
     values.twitterShowRetweets = (values.twitterShowRetweets=='on' || values.twitterShowRetweets === true) ? true: false;
     next();
   },
-  beforeCreate: function(values, next){
-    //this.geocode(values.weatherLocation, next);
-    next();
-  },
   beforeUpdate: function(values, next){
-    //this.geocode(values.weatherLocation, next);
-    next();
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.runBeforeUpdate(values, next);
+        break;
+      case 'weather':
+        WeatherService.runBeforeUpdate(values, next);
+        break;
+      default:
+        next();
+    }
+  },
+  beforeCreate: function(values, next){
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.runBeforeCreate(values, next);
+        break;
+      case 'weather':
+        WeatherService.runBeforeCreate(values, next);
+        break;
+      default:
+        next();
+    }
+  },
+  afterUpdate: function(values, next){
+    switch(values.appType) {
+      case 'twitter':
+        TwitterService.publishUpdate(values, next);
+        break;
+      case 'weather':
+        WeatherService.publishUpdate(values, next);
+        break;
+      default:
+        next();
+    }
   }
 
 };

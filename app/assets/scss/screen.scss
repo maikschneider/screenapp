@@ -1,0 +1,181 @@
+@charset 'utf-8';
+
+@import 'bourbon';
+@import 'settings';
+@import 'foundation';
+@import 'motion-ui';
+$fa-font-path: '../bower_components/font-awesome/fonts';
+@import 'font-awesome';
+
+
+@include foundation-global-styles;
+//@include foundation-grid;
+@include foundation-flex-grid;
+@include foundation-typography;
+// @include foundation-button;
+// @include foundation-forms;
+// @include foundation-range-input;
+// @include foundation-accordion;
+// @include foundation-accordion-menu;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+@include foundation-callout;
+// @include foundation-close-button;
+// @include foundation-menu;
+// @include foundation-menu-icon;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown;
+// @include foundation-dropdown-menu;
+@include foundation-flex-video;
+// @include foundation-label;
+@include foundation-media-object;
+// @include foundation-off-canvas;
+@include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-progress-element;
+// @include foundation-meter-element;
+// @include foundation-slider;
+// @include foundation-sticky;
+// @include foundation-reveal;
+// @include foundation-switch;
+// @include foundation-table;
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes;
+
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+@import "weathericons";
+
+.icon-cloud, .icon-snow{
+  color: #4CBBD5;
+}
+.icon-sun{
+  color: #DDC12C;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+main{
+  height: 100vh;
+  @include transition(margin-left, 1s, linear);
+}
+
+section{
+  height: 100vh;
+  &.slide > .row, .twitter__tweet__inner > .row{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+// Gradients: http://uigradients.com/#ManofSteel
+section.weather{
+  background: #E0EAFC; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #E0EAFC , #CFDEF3); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #E0EAFC , #CFDEF3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 5vh 0;
+  .weather__card{
+    padding: rem-calc(20);
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(#000,0.2);
+  }
+  h1{
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  hr{
+    border-color: rgba(#000,0.1);
+  }
+  .weather__now__icon{
+    font-size: rem-calc(75);
+  }
+  p.temp{
+    font-weight: 200;
+    color: #888;
+    margin: 0;
+    line-height: 1;
+    font-size: rem-calc(28);
+  }
+  p.desc{
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+    color:#999;
+    font-size: rem-calc(18);
+  }
+  .weather__now{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: rem-calc(30);
+    .weather__now__icon{
+      font-size: rem-calc(120);
+      margin-right: rem-calc(20);
+    }
+    p.temp{
+      font-size: rem-calc(80);
+    }
+    p.desc{
+      font-size: rem-calc(30);
+    }
+  }
+  .weather__later{
+    position: relative;
+    &:not(.weather__later--4):after{
+      content:'';
+      width: 1px;
+      height: 80%;
+      background: rgba(#000,0.1);
+      position: absolute;
+      right: 0;
+      top: 10%;
+    }
+    p.desc{
+      margin: rem-calc(20 0);
+    }
+  }
+
+}
+
+section.msg{
+  background: #f85032; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f85032 , #e73827); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f85032 , #e73827); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  .msg__card{
+    padding: rem-calc(20);
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(#000,0.2);
+  }
+}
+
+section.twitter{
+  background: #457fca; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #457fca , #5691c8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #457fca , #5691c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  @include transition(margin-top, 1s, linear);
+  .twitter__card{
+    padding: rem-calc(20);
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(#000,0.2);
+  }
+  .twitter__tweet{
+    height: 100vh;
+  }
+}

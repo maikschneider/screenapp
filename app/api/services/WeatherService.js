@@ -1,6 +1,49 @@
 module.exports = {
 
   playlistitem: null,
+  apiKey: '87c00245aa4be44f589fe378a50dc13c',
+  data: null,
+  cacheTimeInMin: 2,
+
+  runAndSave: function(playlistitemId) {
+    sails.log.info('WeatherService: runAndSave('+playlistitemId+')');
+    this.init(playlistitemId, this.updatePlaylistitem);
+  },
+
+  runBeforeCreate: function(values, callback) {
+    sails.log.info('WeatherService: runBeforeCreate()');
+    var _this = this;
+
+    this.playlistitem = values;
+
+    _this.getWeatherData(function(){
+      values.data = _this.data;
+      callback();
+    });
+
+  },
+
+  runBeforeUpdate: function(values, callback) {
+    sails.log.info('WeatherService: runBeforeUpdate('+values.id+')');
+    var _this = this;
+
+    // get old item from database
+    this.init(values.id, function(){
+      // if location changed or cachetime is over
+      if(values.weatherLocation != _this.playlistitem.weatherLocation || _this.needDataUpdate()){
+        // set to new location
+        _this.playlistitem.weatherLocation = values.weatherLocation;
+
+        _this.getWeatherData(function(){
+          values.data = _this.data;
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
+
+  },
 
   /**
    * WeatherService
@@ -14,26 +57,24 @@ module.exports = {
    *  4. save      WeatherData
    *  5. broadcast WeatherData
    */
-  init: function(playlistitemId) {
+  init: function(playlistitemId, callback) {
 
-    sails.log.info('WeatherService: init()');
     var _this = this;
 
     PlaylistItem.findOne(playlistitemId).then(function(playlistitem){
       _this.playlistitem = playlistitem;
-      _this.apiKey = '87c00245aa4be44f589fe378a50dc13c';
-      _this.data = null;
-      _this.cacheTimeInMin = 2;
 
-      _this.run();
+      callback();
     }).catch(function(err){
-      sails.log.err('No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn('No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn(err);
     });
   },
 
-  run: function() {
+  updatePlaylistitem: function() {
     if(this.needDataUpdate()){
-      this.updateWeatherData();
+      var callback = this.saveWeatherData;
+      this.getWeatherData(callback);
     } else {
 
     }
@@ -59,24 +100,16 @@ module.exports = {
     return doUpdate;
   },
 
-  updateWeatherData: function() {
-    var callback = this.saveWeatherData;
-    this.getWeatherData(callback);
-  },
-
   saveWeatherData: function() {
     var _this = this;
     // Update Item
-    PlaylistItem.update({id: this.playlistitem.id}).set({data: _this.data, name: 'Neuername3'}).exec(function(err, updatedPlaylistitems){
+    PlaylistItem.update({id: this.playlistitem.id}).set({data: _this.data}).exec(function(err, updatedPlaylistitems){
       if(err){
         console.log(err);
       }
 
       // broadcast a message to subscribers with updated data
-      // see: http://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/publish-update
-      PlaylistItem.publishUpdate(updatedPlaylistitems[0].id, {
-        data: updatedPlaylistitems[0].data
-      }, null, {previous: this.playlistitem});
+      _this.publishUpdate(updatedPlaylistitems[0]);
 
     });
   },
@@ -100,6 +133,16 @@ module.exports = {
         }
         callback();
     });
+  },
+
+  publishUpdate: function(playlistitem, callback) {
+
+    sails.hooks.views.render('screen/weather', {layout: false, item: playlistitem}, function(err,html){
+      if(err) sails.log.warn(err);
+      sails.sockets.broadcast('playlistsocket'+playlistitem.playlist, 'itemUpdate', {'item': playlistitem, 'html': html});
+      if(callback) callback();
+    });
+
   }
 
 }
