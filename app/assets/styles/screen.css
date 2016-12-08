@@ -4420,7 +4420,7 @@ kbd {
 .icon-umbrella:before {
   content: "\e92a"; }
 
-.icon-cloud {
+.icon-cloud, .icon-snow {
   color: #4CBBD5; }
 
 .icon-sun {
