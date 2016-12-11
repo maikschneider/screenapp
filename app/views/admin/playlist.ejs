@@ -1,12 +1,8 @@
-<h1><i class="fa fa-list"></i> Add new Playlist</h1>
+<% var title = playlist ? 'Edit Playlist' : 'Add new Playlist'; %>
+<h1><i class="fa fa-list"></i> <%= title %></h1>
 <hr />
 
-<%
-var screens = data[0];
-var items = data[1];
-%>
-
-<form action="/playlist" method="POST">
+<form action="/playlist<% if(playlist){ %>/<%= playlist %><% } %>" method="POST">
   <div class="row">
     <div class="small-3 columns">
       <label for="middle-label" class="text-right middle">Name</label>
@@ -48,3 +44,36 @@ var items = data[1];
 
 <hr />
 <a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+
+<script type="text/javascript">
+
+/**
+ * Onload function for all PlaylistItem forms
+ */
+  $.Playlist = function(){
+
+    <% if(playlist){ %>
+      $.PlaylistEdit();
+    <% } %>
+  };
+
+  /**
+   * Changes the create form to an update form
+   */
+  $.PlaylistEdit = function(){
+    io.socket.get('/playlist/<%= playlist %>', function(resData, jwres) {
+
+      // insert data into form inputs
+      $.each(resData, function(index, value) {
+          $('form input[name="'+index+'"]:text').attr('value', value);
+          $('form textarea[name="'+index+'"]').html(value);
+          $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
+          $('form input[name="'+index+'"]:checkbox').prop('checked', value);
+          if(typeof(value) === 'object' && value !== null)
+            $('form select[name="'+index+'"] option[value="'+value.id+'"]').attr('selected','');
+      });
+
+    });
+  };
+
+</script>

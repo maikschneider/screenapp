@@ -21,10 +21,11 @@ module.exports = {
   },
 
   playlist: function(req, res) {
-
-    Screen.find().exec(function(err, screens){
+    var id = req.param('id', false);
+    var filter = id ? {list: id} : {};
+    Screen.find().where(filter).exec(function(err, screens){
       PlaylistItem.find().exec(function(err, items){
-          res.view('admin/playlist', {'data': [screens, items]});
+          res.view('admin/playlist', {'screens': screens, 'items': items, 'playlist': id});
       });
     });
 
