@@ -31,7 +31,7 @@ function getTemp(kelvin){
       <div class="small-10 columns">
 
         <div class="weather__card">
-          <% if(typeof(item.data.list)!='undefined') { %>
+          <% if(item.data && typeof(item.data.list)!='undefined') { %>
           <div class="row">
             <div class="small-12 columns">
               <h1 class="text-center"><%= item.weatherLocation %></h1>

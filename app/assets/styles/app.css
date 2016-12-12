@@ -5581,30 +5581,32 @@ ul.playlistitems {
   padding: 1.25rem;
   color: #FFF; }
   ul.playlistitems li {
-    margin-bottom: 0.3125rem; }
+    margin-bottom: 0.3125rem;
+    cursor: pointer; }
     ul.playlistitems li.twitter {
       background-color: #1da1f2; }
     ul.playlistitems li.weather {
       background-color: #ffb900; }
     ul.playlistitems li.msg {
       background-color: #2baf2b; }
-  ul.playlistitems .fa-bars, ul.playlistitems .fa-plus {
-    background: rgba(0, 0, 0, 0.2);
+    ul.playlistitems li.hidden {
+      display: none; }
+    ul.playlistitems li:hover .fa-times {
+      color: rgba(0, 0, 0, 0.6); }
+  ul.playlistitems .fa-bars {
+    cursor: row-resize;
+    background: #656565;
     color: #FFF;
     padding: 0.4375rem 0.625rem;
     margin-right: 0.3125rem;
     border-right: 1px solid #F7F7F7; }
-  ul.playlistitems .fa-bars {
-    cursor: row-resize; }
-  ul.playlistitems .fa-times {
+  ul.playlistitems .fa-times, ul.playlistitems .fa-plus {
     float: right;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.3);
     line-height: 1.9;
     margin-right: 0.625rem; }
-    ul.playlistitems .fa-times:hover {
-      color: rgba(0, 0, 0, 0.7); }
   ul.playlistitems.inactive li {
-    cursor: pointer; }
+    padding-left: 0.625rem; }
   ul.playlistitems.inactive li:not(:hover) {
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);

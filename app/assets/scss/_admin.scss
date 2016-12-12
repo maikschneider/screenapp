@@ -30,6 +30,7 @@ ul.playlistitems{
   color: #FFF;
   li{
     margin-bottom: rem-calc(5);
+    cursor: pointer;
     &.twitter{
       background-color:#1da1f2;
     }
@@ -39,29 +40,30 @@ ul.playlistitems{
     &.msg{
       background-color: #2baf2b;
     }
+    &.hidden{
+      display: none;
+    }
+    &:hover .fa-times{
+      color:rgba(#000,0.6);
+    }
   }
-  .fa-bars, .fa-plus{
-    background: rgba(#000,0.2);
+  .fa-bars{
+    cursor: row-resize;
+    background: #656565;
     color:#FFF;
     padding: rem-calc(7 10);
     margin-right: rem-calc(5);
     border-right: 1px solid #F7F7F7;
   }
-  .fa-bars{
-    cursor: row-resize;
-  }
-  .fa-times{
+  .fa-times, .fa-plus{
     float:right;
-    color:rgba(#000,0.5);
+    color:rgba(#000,0.3);
     line-height: 1.9;
     margin-right: rem-calc(10);
-    &:hover{
-      color:rgba(#000,0.7);
-    }
   }
   &.inactive{
     li{
-      cursor: pointer;
+      padding-left: rem-calc(10);
     }
     li:not(:hover){
       -webkit-filter: grayscale(100%);
