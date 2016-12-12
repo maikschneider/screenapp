@@ -56,6 +56,21 @@ module.exports = {
     playlist: {
       model: 'playlist',
     },
+
+    getIcon: function() {
+      var htmlclass = "";
+      switch(this.appType) {
+        case 'weather':
+          htmlclass = 'sun-o';
+          break;
+        case 'msg':
+          htmlclass = 'comment';
+          break;
+        default:
+          htmlclass = this.appType;
+      }
+      return '<i class="fa fa-' + htmlclass + '"></i>';
+    },
   },
 
   geocode: function(location, cb) {

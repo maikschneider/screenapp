@@ -36,14 +36,45 @@
     </div>
   </div>
   <div class="row">
-    <div class="medium-9 medium-offset-3 columns">
+    <div class="small-3 columns">
+      <label for="middle-label" class="text-right middle">Items to add to this Playlist</label>
+    </div>
+    <div class="small-9 columns">
+      <div class="row">
+        <div class="small-12 medium-5 medium-order-3 columns">
+          <h3>Available PlaylistItems</h3>
+          <ul class="playlistitems inactive">
+            <% for(var i=0; i<items.length; i++){ %>
+              <li  class="<%= items[i].appType %>" data-id="<%= items[i].id %>"><i class="fa fa-plus" aria-hidden="true"></i> <%= items[i].name %></li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="medium-1 columns medium-order-2 align-middle text-center">
+          <p class="show-for-medium"><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i></p>
+          <p class="hide-for-medium"><i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+        </div>
+        <div class="small-12 medium-6 medium-order-1 columns">
+          <h3>Selected Items</h3>
+          <ul class="playlistitems">
+            <% for(var i=0; i<items.length; i++){ %>
+              <li class="<%= items[i].appType %>" data-id="<%= items[i].id %>"><i class="fa fa-bars" aria-hidden="true"></i> <%- items[i].getIcon() %>&nbsp; <%= items[i].name %> <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="columns">
+      <a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+    </div>
+    <div class="columns text-right">
       <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
     </div>
   </div>
 </form>
 
-<hr />
-<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
 
 <script type="text/javascript">
 
