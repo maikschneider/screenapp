@@ -88,7 +88,7 @@
               <td><%= items[i].id %></td>
               <td>
                 <a href='playlistitem/<%= items[i].id %>' data-modal>
-                  <%= items[i].name %>
+                  <%- items[i].getIcon() %>&nbsp; <%= items[i].name %>
                 </a>
               </td>
               <td>

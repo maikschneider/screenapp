@@ -169,6 +169,8 @@ section.twitter{
   background: -webkit-linear-gradient(to left, #457fca , #5691c8); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #457fca , #5691c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   @include transition(margin-top, 1s, linear);
+  max-height: 90vh;
+  overflow: hidden;
   .twitter__card{
     padding: rem-calc(20);
     background: #FFF;
@@ -177,5 +179,19 @@ section.twitter{
   }
   .twitter__tweet{
     height: 100vh;
+  }
+  .twitter__user{
+    float: left;
+    margin-right: rem-calc(15);
+  }
+  h3{
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+  h4{
+    color:#777;
+  }
+  p{
+    font-size: rem-calc(32);
   }
 }
