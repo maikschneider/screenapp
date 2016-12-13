@@ -16,11 +16,11 @@ class WeatherPlaylistItem: PlaylistItem {
     var backgroundImage: String
     
     init(id: Int, name: String, duration: Int, appType: String, data: [String: Any], location: String, unit: Bool, fontColor: String, backgroundImage: String) {
-        super.init(id: id, name: name, duration: duration, appType, data: data)
         self.location = location
         self.unit = unit
         self.fontColor = fontColor
         self.backgroundImage = backgroundImage
+        super.init(id: id, name: name, duration: duration, appType: appType, data: data)
     }
     
 }

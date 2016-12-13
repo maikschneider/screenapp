@@ -57,14 +57,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCC16iOSClient/ViewController.swift"
-            timestampString = "502039046.68264"
+            filePath = "SCC16iOSClient/RestClient.swift"
+            timestampString = "503318144.572834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "printJson(json:)"
-            landmarkType = "9">
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "parsePlaylists(json:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
