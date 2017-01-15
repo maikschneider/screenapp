@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="20px" viewBox="0 0 30 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>email</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-646.000000, -2051.000000)" fill="#1FCDCA">
+            <g id="contact" transform="translate(-10.000000, 1748.000000)">
+                <g id="form" transform="translate(656.000000, 222.000000)">
+                    <g id="email" transform="translate(0.000000, 70.000000)">
+                        <path d="M0.714285714,11 C0.325714286,11 0,11.3325 0,11.7291667 L0,29.9583333 C0,30.355 0.325714286,30.6875 0.714285714,30.6875 L29.2857143,30.6875 C29.6742857,30.6875 30,30.355 30,29.9583333 L30,11.7291667 C30,11.3325 29.6742857,11 29.2857143,11 L0.714285714,11 Z M0.9375,11.9375 L29.0625,11.9375 L29.0625,12.8308448 L15,24.125 L0.9375,12.8308448 L0.9375,11.9375 Z M0.9375,13.8125 L14.7801562,24.7071997 C14.9085937,24.8107605 15.0914062,24.8107605 15.2198438,24.7071997 L29.0625,13.8125 L29.0625,29.75 L0.9375,29.75 L0.9375,13.8125 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

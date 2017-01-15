@@ -4,12 +4,13 @@
     <title>Our Info Screen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/styles/homepage.css">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   </head>
 
   <body>
     <div data-sticky-container>
       <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%">
-        <div class="row">
+        <div class="row collapse">
           <div class="small-12 columns">
             <div class="top-bar-left">
               <ul class="dropdown menu" data-magellan>
@@ -17,7 +18,7 @@
                 <li><a href="#header"><i class="fa fa-home" aria-hidden="true"></i> Welcome</a></li>
                 <li><a href="#code"><i class="fa fa-code" aria-hidden="true"></i> Overview</a></li>
                 <li><a href="#services"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Services</a></li>
-                <li><a href="#api"><i class="fa fa-book" aria-hidden="true"></i> Services</a></li>
+                <li><a href="#api"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
                 <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
               </ul>
             </div>
@@ -32,51 +33,182 @@
       </div>
     </div>
 
-    <section id="header" data-magellan-target="header">
-      <div class="row">
-        <div class="small-12 columns">
-        <p style="width:2px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <section class="color" id="header" data-magellan-target="header">
+      <div class="row align-middle">
+        <div class="small-12 medium-6 columns">
+          <div class="header__title text-center">
+            <h2>Our Info Screen</h2>
+            <h4>Display data, news, social feeds and more</h4>
+            <h5>easy setup • customizable • free</h5>
+          </div>
+        </div>
+        <div class="small-12 medium-6 columns">
+          <img class="header__image" src="/images/homepage/preview.svg" />
+        </div>
+      </div>
+      <div class="header__actionbar">
+        <div class="row">
+          <div class="columns text-center">
+            <a href="#" class="button hollow">See more</a>
+            <a href="#" class="button">Try it out</a>
+          </div>
         </div>
       </div>
     </section>
-    <section id="code" data-magellan-target="code">
+    <section class="dark" id="code" data-magellan-target="code">
       <div class="row">
-        <div class="small-12 columns">
-        <p style="width:2px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="columns text-center">
+          <h2>What's in the box?</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns small-12 medium-expand">
+          <div class="code__item text-center">
+            <img src="/images/homepage/sails.svg" />
+            <hr />
+            <h3><strong>Node.js</strong> under the hood</h3>
+            <p>The sailsjs framework gives you full control: Full REST, any database, any frontend.</p>
+          </div>
+        </div>
+        <div class="columns small-12 medium-expand">
+          <div class="code__item text-center">
+            <img src="/images/homepage/webclient.svg" />
+            <hr />
+            <h3>Built-in <strong>Web Client</strong></h3>
+            <p>Use any web browser to access your info screen - no install, no configuration.</p>
+          </div>
+        </div>
+        <div class="columns small-12 medium-expand">
+          <div class="code__item text-center last">
+            <img src="/images/homepage/portable.svg" />
+            <hr />
+            <h3><strong>Portable</strong> as hell</h3>
+            <p>Run your info screen server in your own enviroment or use our on demand service.</p>
+          </div>
         </div>
       </div>
     </section>
     <section id="services" data-magellan-target="services">
       <div class="row">
-        <div class="small-12 columns">
-        <p style="width:2px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="columns medium-expand small-12">
+          <div class="row">
+            <div class="columns small-12">
+              <h3 class="text-center">Currently included services</h2>
+              <hr />
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns">
+              <div class="service__item outline color">
+                <img src="/images/homepage/twitter.svg" alt="">
+                <h6>Twitter</h6>
+                <p class="show-for-large">Display search results</p>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="service__item outline color">
+                <img src="/images/homepage/weather.svg" alt="">
+                <h6>openweather</h6>
+                <p class="show-for-large">One day forcast</p>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="service__item outline color">
+                <img src="/images/homepage/messages.svg" alt="">
+                <h6>Messages</h6>
+                <p class="show-for-large">Post text &amp; pictures</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns shrink show-for-large"><div style="width:50px;"></div></div>
+        <div class="columns medium-expand small-12">
+          <div class="row">
+            <div class="columns small-12">
+              <h3 class="text-center">Currently available clients</h3>
+              <hr />
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns">
+              <div class="service__item fill color">
+                <img src="/images/homepage/client.svg" alt="">
+                <h6>Web Client</h6>
+                <p class="show-for-large">built-in • standalone</p>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="service__item fill color">
+                <img src="/images/homepage/ios.svg" alt="">
+                <h6>iOS App</h6>
+                <p class="show-for-large">AppStore</p>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="service__item fill dark">
+                <img src="/images/homepage/android.svg" alt="">
+                <h6>Android App</h6>
+                <p class="show-for-large">coming soon!</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <section id="api" data-magellan-target="api">
+
+    <section class="color" id="api" data-magellan-target="api">
       <div class="row">
         <div class="small-12 columns">
-        <p style="width:2px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h2 class="text-center">Extend to your neeeds</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns medium-6 large-expand small-12">
+          <div class="api__item text-center">
+            <p class="api__text">Through our swagger specification, the swagger.io tools can help you bootstrap your own client app.</p>
+            <a href="#">
+              <div class="row">
+                <div class="columns text-center">
+                  <img class="normal" src="/images/homepage/swagger.png">
+                  <img class="hidden" src="/images/homepage/swagger-inverted.png">
+                  <p>Explore the API spec</p>
+                </div>
+                <div class="columns text-center shrink align-middle">
+                  <span>
+                    <img alt="" src="/images/homepage/search.svg">
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="columns shrink show-for-large"><div style="width: 20px;"></div></div>
+        <div class="columns medium-6 large-expand small-12">
+          <div class="api__item text-center">
+            <p class="api__text">By extending our base service, your can connect and display new data sources in minutes.</p>
+            <a href="#">
+              <div class="row">
+                <div class="columns text-center">
+                  <img class="normal" src="/images/homepage/github@2x.png">
+                  <img class="hidden" src="/images/homepage/github-inverted.png">
+                  <p>Check out the code</p>
+                </div>
+                <div class="columns text-center shrink align-middle">
+                  <span>
+                    <img alt="" src="/images/homepage/link.svg">
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark" id="contact" data-magellan-target="contact">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2 class="text-center">Questions or suggestions? Get in touch!</h2>
         </div>
       </div>
     </section>
