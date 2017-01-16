@@ -3690,7 +3690,7 @@ textarea {
   width: 100%;
   height: 2.4375rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 0;
   margin: 0 0 1rem;
   font-family: inherit;
   font-size: 1rem;
@@ -3706,7 +3706,7 @@ textarea {
     border: 1px solid #8a8a8a;
     background-color: #fefefe;
     outline: none;
-    box-shadow: 0 0 5px #cacaca;
+    box-shadow: 0;
     transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
 
 textarea {
@@ -3765,7 +3765,7 @@ label {
   color: #0C1E2D; }
   label.middle {
     margin: 0 0 1rem;
-    padding: 0.5625rem 0; }
+    padding: 0.5rem 0; }
 
 .help-text {
   margin-top: -0.5rem;
@@ -3842,7 +3842,7 @@ legend {
 select {
   height: 2.4375rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 0;
   margin: 0 0 1rem;
   font-size: 1rem;
   font-family: inherit;
@@ -5082,6 +5082,12 @@ section:nth-child(2n-1) {
     font-size: 0.9375rem; }
     .top-bar .menu > li > a.active, .top-bar .menu > li > a.button {
       color: #1FCDCA; }
+    @media screen and (min-width: 40em) {
+      .top-bar .menu > li > a {
+        padding: 0.625rem; } }
+    @media screen and (min-width: 48.4375em) {
+      .top-bar .menu > li > a {
+        padding: 0.6875rem 1.25rem; } }
 
 h2, h3 {
   font-family: 'Catamaran', sans-serif;
@@ -5121,11 +5127,17 @@ section {
     background-image: -webkit-linear-gradient(#0C1E2D, #071119);
     background-image: linear-gradient(#0C1E2D, #071119); }
 
-section#header .header__title h2 {
-  margin-bottom: 0; }
+section#header .header__title {
+  margin: 5rem 0 1.875rem; }
+  @media screen and (min-width: 40em) {
+    section#header .header__title {
+      margin: 0; } }
+  section#header .header__title h2 {
+    margin-bottom: 0; }
 
-section#header .header__image {
-  margin-top: 3.75rem; }
+@media screen and (min-width: 40em) {
+  section#header .header__image {
+    margin-top: 3.75rem; } }
 
 section#header .header__actionbar {
   padding-top: 1rem;
@@ -5216,6 +5228,11 @@ section#api {
     box-shadow: inset -70px 0 0 #0C1E2D, 0 4px 0 rgba(0, 0, 0, 0.3);
     padding: 0.625rem;
     max-width: 18.75rem; }
+    section#api .api__item a:not(.last) {
+      margin-bottom: 1.875rem; }
+      @media screen and (min-width: 40em) {
+        section#api .api__item a:not(.last) {
+          margin-bottom: 0; } }
     section#api .api__item a:hover {
       -webkit-transition: all 0.2s linear;
       -moz-transition: all 0.2s linear;
@@ -5239,3 +5256,32 @@ section#api {
       font-weight: 200; }
     section#api .api__item a span img {
       margin: 0 0.625rem; }
+
+section#contact {
+  padding-bottom: 3.125rem; }
+  section#contact p {
+    padding: 0 1.875rem;
+    margin-bottom: 3.125rem; }
+  section#contact hr {
+    max-width: 80%; }
+  section#contact label {
+    min-width: 8.125rem;
+    color: #1FCDCA;
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 0.625rem; }
+    section#contact label img {
+      margin-right: 0.9375rem; }
+  section#contact input, section#contact textarea {
+    box-shadow: 0 4px 0 rgba(255, 255, 255, 0.25);
+    margin-bottom: 1.5625rem; }
+  section#contact textarea {
+    min-height: 7.5rem; }
+  section#contact .button {
+    padding: 0.75rem 2.5rem;
+    box-shadow: none;
+    color: #1FCDCA;
+    border-color: #1FCDCA; }
+    section#contact .button:hover {
+      background-color: #1FCDCA;
+      color: #0C1E2D; }

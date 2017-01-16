@@ -68,6 +68,12 @@ section:nth-child(2n-1){
     &.active, &.button{
       color: $primary-color;
     }
+    @include breakpoint(medium) {
+      padding: rem-calc(10);
+    }
+    @include breakpoint(775px) {
+      padding: rem-calc(11 20);
+    }
   }
 }
 
@@ -114,12 +120,18 @@ section{
 
 section#header{
   .header__title{
+    margin: rem-calc(80 0 30);
+    @include breakpoint(medium) {
+      margin:0;
+    }
     h2{
       margin-bottom: 0;
     }
   }
   .header__image{
-    margin-top: rem-calc(60);
+    @include breakpoint(medium) {
+      margin-top: rem-calc(60);
+    }
   }
   .header__actionbar{
     padding-top: $global-margin;
@@ -235,6 +247,12 @@ section#api{
       box-shadow: inset -70px 0 0 $black, 0 4px 0 rgba(#000,0.30);
       padding: rem-calc(10);
       max-width: rem-calc(300);
+      &:not(.last){
+        margin-bottom: rem-calc(30);
+        @include breakpoint(medium) {
+          margin-bottom: 0;
+        }
+      }
       &:hover{
         p{
           color: #FFF;
@@ -263,6 +281,44 @@ section#api{
       span img{
         margin:rem-calc(0 10);
       }
+    }
+  }
+}
+
+section#contact{
+  padding-bottom: rem-calc(50);
+  p{
+    padding: rem-calc(0 30);
+    margin-bottom: rem-calc(50);
+  }
+  hr{
+    max-width: 80%;
+  }
+  label{
+    min-width: rem-calc(130);
+    color: $primary-color;
+    font-size: rem-calc(20);
+    font-weight: 300;
+    margin-bottom: rem-calc(10);
+    img{
+      margin-right: rem-calc(15);
+    }
+  }
+  input, textarea{
+    box-shadow: 0 4px 0 rgba(#FFF,0.25);
+    margin-bottom: rem-calc(25);
+  }
+  textarea{
+    min-height: rem-calc(120);
+  }
+  .button{
+    padding: rem-calc(12 40);
+    box-shadow: none;
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover{
+      background-color: $primary-color;
+      color: $black;
     }
   }
 }
