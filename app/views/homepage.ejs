@@ -223,18 +223,24 @@
           <p>We’d love to hear your feedback!<br />Contact us if you like to get involved or want to share your info montitor extensions.</p>
         </div>
         <div class="columns large-6 small-12 medium-expand">
-          <form>
+          <% if(typeof emailsend != 'undefined'){ %>
+            <div class="callout success">
+              <h3><i class="fa fa-check" aria-hidden="true"></i> Email send</h3>
+              <p>Thanks, your email was send. We will contact you soon!</p>
+            </div>
+          <% } else { %>
+          <form method="POST" action="/admin/contact">
             <div class="row">
               <div class="columns large-expand small-12 shrink"><label for="name"><img src="/images/homepage/name.svg" alt="name">Name:</label></div>
-              <div class="columns large-expand small-12"><input type="text" class="text" id="name" /></div>
+              <div class="columns large-expand small-12"><input type="text" class="text" name="name" id="name" /></div>
             </div>
             <div class="row">
               <div class="columns large-expand small-12 shrink"><label for="email"><img src="/images/homepage/email.svg" alt="email">Email:</label></div>
-              <div class="columns large-expand small-12"><input type="text" class="text" id="email" /></div>
+              <div class="columns large-expand small-12"><input type="text" class="text" name="email" id="email" /></div>
             </div>
             <div class="row">
               <div class="columns large-expand small-12 shrink"><label for="message"><img src="/images/homepage/message.svg" alt="message">Message:</label></div>
-              <div class="columns large-expand small-12"><textarea class="text" id="message"></textarea></div>
+              <div class="columns large-expand small-12"><textarea class="text" name="message" id="message"></textarea></div>
             </div>
             <div class="row">
               <div class="columns text-right">
@@ -242,6 +248,7 @@
               </div>
             </div>
           </form>
+          <% } %>
         </div>
       </div>
     </section>
@@ -251,7 +258,11 @@
     <script type="text/javascript">
       $(document)
         .foundation()
-        .ready(function(){});
+        .ready(function(){
+          <% if(typeof emailsend != 'undefined'){ %>
+            window.scrollTo(0,document.body.scrollHeight);
+          <% } %>
+        });
     </script>
   </body>
 </html>

@@ -3887,6 +3887,39 @@ select {
   .form-error.is-visible {
     display: block; }
 
+.callout {
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(12, 30, 45, 0.25);
+  border-radius: 0;
+  position: relative;
+  color: #0C1E2D;
+  background-color: white; }
+  .callout > :first-child {
+    margin-top: 0; }
+  .callout > :last-child {
+    margin-bottom: 0; }
+  .callout.primary {
+    background-color: #dbfaf9; }
+  .callout.secondary {
+    background-color: #ebebeb; }
+  .callout.success {
+    background-color: #e1faea; }
+  .callout.warning {
+    background-color: #fff3d9; }
+  .callout.alert {
+    background-color: #fce6e2; }
+  .callout.small {
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem; }
+  .callout.large {
+    padding-top: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem; }
+
 .close-button {
   position: absolute;
   color: #8a8a8a;
@@ -5285,3 +5318,5 @@ section#contact {
     section#contact .button:hover {
       background-color: #1FCDCA;
       color: #0C1E2D; }
+  section#contact .callout {
+    border-radius: 5px; }

@@ -20,7 +20,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 // @include foundation-badge;
 // @include foundation-breadcrumbs;
 // @include foundation-button-group;
-// @include foundation-callout;
+@include foundation-callout;
 @include foundation-close-button;
 @include foundation-menu;
 @include foundation-menu-icon;
@@ -320,5 +320,8 @@ section#contact{
       background-color: $primary-color;
       color: $black;
     }
+  }
+  .callout{
+    border-radius: 5px;
   }
 }
