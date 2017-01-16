@@ -47,6 +47,36 @@ module.exports = {
           message: data
       });
     });
+  },
+
+  contact: function(req, res) {
+    var name = req.param('name');
+    var email = req.param('email');
+    var message = req.param('message');
+
+    if(req.method=='POST' && name.length && email.length && message.length){
+
+      sails.hooks.email.send(
+        "contact",
+        {
+          recipientName: name,
+          recipientEmail: email,
+          recipientMessage: message,
+        },
+        {
+          to: "m.schneider@blueways.de",
+          from: "infomonitorapp@gmail.com",
+          subject: "Kontaktanfrage von InfoMonitor"
+        },
+        function(err) {
+          console.log(err || "Email send!");
+          if(!err) res.view('homepage', {layout: false, emailsend: true});
+        }
+      );
+    }
+    else {
+      res.view('homepage', {layout: false});
+    }
   }
 
 }

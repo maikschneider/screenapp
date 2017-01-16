@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>search</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Desktop-HD" transform="translate(-508.000000, -1618.000000)" stroke="#1FCDCA" stroke-width="1.5">
+            <g id="api-links" transform="translate(0.000000, 1366.000000)">
+                <g id="swagger" transform="translate(268.000000, 224.000000)">
+                    <g id="search" transform="translate(241.000000, 29.000000)">
+                        <path d="M23,11.5 C23,17.8503316 17.8526962,23 11.5,23 C5.14966843,23 0,17.8526962 0,11.5 C0,5.14966843 5.14966843,0 11.5023647,0 C17.8526962,0 23,5.14966843 23,11.5 Z" id="Stroke-1"></path>
+                        <path d="M18.1802485,20.9983491 L28.1727686,30.9927044 L28.1752283,30.9927044 C28.9531076,31.7707266 30.2143174,31.7707266 30.9928116,30.9927044 C31.7706908,30.2140673 31.7706908,28.9507808 30.9928116,28.1721436 L20.9978317,18.1802485 C20.2242569,19.2682494 19.2705093,20.2246323 18.1802485,20.9983491 Z" id="Stroke-2"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
