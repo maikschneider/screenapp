@@ -240,6 +240,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5s-52-UiK">
+                                <rect key="frame" x="16" y="111" width="343" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.82458728550000004" green="0.87294113640000004" blue="0.94629865879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -250,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HwD-6Z-BRu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3173.5999999999999" y="842.42878560719646"/>
+            <point key="canvasLocation" x="3173.5999999999999" y="878.41079460269873"/>
         </scene>
         <!--Msg View Controller-->
         <scene sceneID="CeB-uM-WKG">
