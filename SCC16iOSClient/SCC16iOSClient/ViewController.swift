@@ -13,6 +13,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var screenIdTextField: UITextField!
+    @IBOutlet weak var playButton: UIButton!
+    
     var playlists: [Playlist] = []
     var selectedPlaylist: Playlist?
     
@@ -65,6 +68,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             viewController.playlist = selectedPlaylist
         }
+        
+        else if segue.identifier == "PlayScreen" {
+            if let viewController = segue.destination as? WebViewController {
+                viewController.screenId = screenIdTextField.text
+            }
+        }
+    }
+    
+    
+    @IBAction func playScreen() {
+        guard screenIdTextField.text != "" else {
+            return
+        }
+        
+        performSegue(withIdentifier: "PlayScreen", sender: self)
     }
 
 }

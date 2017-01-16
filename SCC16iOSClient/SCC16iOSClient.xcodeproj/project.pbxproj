@@ -14,6 +14,7 @@
 		72513DFB1DD90254002925C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFA1DD90254002925C9 /* Assets.xcassets */; };
 		72513DFE1DD90254002925C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */; };
 		725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BE0AA1DE454EC00586926 /* RestClient.swift */; };
+		726222001E2D588D009A1AD2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726221FF1E2D588D009A1AD2 /* WebViewController.swift */; };
 		726F9D931E2C2764007E3788 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D921E2C2764007E3788 /* PlaylistTableViewCell.swift */; };
 		726F9D961E2C3056007E3788 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D951E2C3056007E3788 /* PlaylistViewController.swift */; };
 		726F9D981E2C31B0007E3788 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D971E2C31B0007E3788 /* WeatherViewController.swift */; };
@@ -39,6 +40,7 @@
 		72513DFD1DD90254002925C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72513DFF1DD90254002925C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725BE0AA1DE454EC00586926 /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		726221FF1E2D588D009A1AD2 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		726F9D921E2C2764007E3788 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		726F9D951E2C3056007E3788 /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		726F9D971E2C31B0007E3788 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				726F9D971E2C31B0007E3788 /* WeatherViewController.swift */,
 				726F9D991E2C31CA007E3788 /* TwitterViewController.swift */,
 				726F9D9B1E2C3239007E3788 /* MsgViewController.swift */,
+				726221FF1E2D588D009A1AD2 /* WebViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				726F9D961E2C3056007E3788 /* PlaylistViewController.swift in Sources */,
 				728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */,
 				724B3E8A1DF6D6940026F340 /* MessagePlaylistItem.swift in Sources */,
+				726222001E2D588D009A1AD2 /* WebViewController.swift in Sources */,
 				728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
