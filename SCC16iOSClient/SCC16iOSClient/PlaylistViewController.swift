@@ -24,10 +24,16 @@ class PlaylistViewController: UIViewController {
             return
         }
         
-        let socket = SocketIOClient(socketURL: URL(string: "http://localhost:1337/live/" + String(playlist!.id))!, config: [.log(true), .forcePolling(true)])
+        let url = URL(string: "http://localhost:1337/screen/live/" + String(playlist!.id))!
+        
+        let socket = SocketIOClient(socketURL: url, config: [.log(true), .forcePolling(false)])
         
         socket.on("connect") {data, ack in
             print("socket connected")
+        }
+        
+        socket.on("error") {data, ack in
+            print("error")
         }
         
         socket.on("itemUpdate") {data, ack in

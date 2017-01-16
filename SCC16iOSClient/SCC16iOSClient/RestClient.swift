@@ -31,7 +31,7 @@ class RestClient {
     }
     
     func parsePlaylists(json: RestEssentials.JSON) -> [Playlist] {
-        print(json)
+        //print(json)
         
         var playlists = [Playlist]()
         
@@ -75,9 +75,9 @@ class RestClient {
                 case "msg":
                     playlistItem = MessagePlaylistItem(
                         id: id!, name: name!, duration: duration!, appType: appType, data: [:],
-                        headline: item["headline"].string!,
-                        text: item["text"].string!,
-                        image: item["image"].string!
+                        headline: item["msgHeadline"].string!,
+                        text: item["msgText"].string!,
+                        image: item["msgImage"].string!
                     )
                     break
                     
@@ -87,8 +87,8 @@ class RestClient {
                         id: id!, name: name!, duration: duration!, appType: appType, data: [:],
                         location: item["weatherLocation"].string!,
                         unit: true,//item["weatherUnit"].bool
-                        fontColor: item["fontColor"].string!,
-                        backgroundImage: item["backgroundImage"].string!
+                        fontColor: item["weatherFontColor"].string!,
+                        backgroundImage: item["weatherBackgroundImage"].string!
                     )
                     break
                     
