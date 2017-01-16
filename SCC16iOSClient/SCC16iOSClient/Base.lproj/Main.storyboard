@@ -293,6 +293,7 @@
                     </view>
                     <connections>
                         <outlet property="headlineLabel" destination="x4y-NU-0aC" id="kiL-z9-Mom"/>
+                        <outlet property="msgView" destination="xug-Wu-awQ" id="KSt-8b-wUS"/>
                         <outlet property="nameLabel" destination="NI8-ZT-mdg" id="age-zH-FcE"/>
                         <outlet property="textLabel" destination="MkS-Om-XRJ" id="b32-JL-l8I"/>
                     </connections>
