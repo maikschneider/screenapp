@@ -8,13 +8,13 @@
 
 import UIKit
 import RestEssentials
-import SocketIO
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
     var playlists: [Playlist] = []
+    var selectedPlaylist: Playlist?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,26 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         restClient.get(url: "localhost:1337/playlist", callback: printJson)
-        
-        let socket = SocketIOClient(socketURL: URL(string: "http://localhost:8080")!, config: [.log(true), forcePolling(true)])
-        
-        socket.on("connect") {data, ack in
-            print("socket connected")
-        }
-        
-        socket.on("itemUpdate") {data, ack in
-
-        }
-        
-        socket.on("slideChange") {data, ack in
-            
-        }
-        
-        socket.on("tweetChange") {data, ack in
-            
-        }
-        
-        socket.connect()
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,11 +47,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlaylist = playlists[indexPath.row]
+        performSegue(withIdentifier: "PlayPlaylist", sender: self)
+    }
+    
     // add to playlist
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlayPlaylist" {
-            let viewController = segue.destination as? PlaylistViewController
-            viewController?.playlist =
+            guard let viewController = segue.destination as? PlaylistViewController else {
+                return
+            }
+            
+            guard selectedPlaylist != nil else {
+                return
+            }
+            
+            viewController.playlist = selectedPlaylist
         }
     }
 
