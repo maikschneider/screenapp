@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="onR-uR-ZN9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="396" width="375" height="271"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -41,7 +41,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0R-gl-nhF">
-                                                    <rect key="frame" x="58" y="11" width="309" height="21"/>
+                                                    <rect key="frame" x="58" y="11" width="308" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -56,18 +56,72 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stream a screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWY-cM-xpw">
+                                <rect key="frame" x="16" y="104" width="343" height="41"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BI8-vf-S3g">
+                                <rect key="frame" x="16" y="191" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <state key="normal" title="Stream"/>
+                                <connections>
+                                    <action selector="playScreen" destination="BYZ-38-t0r" eventType="touchUpInside" id="DDj-gK-6F4"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a screen id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="22O-Bc-kde">
+                                <rect key="frame" x="16" y="153" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="twZ-EZ-VpV"/>
                     <connections>
+                        <outlet property="playButton" destination="BI8-vf-S3g" id="f1q-bT-syf"/>
+                        <outlet property="screenIdTextField" destination="22O-Bc-kde" id="ZWM-na-Qf3"/>
                         <outlet property="tableView" destination="onR-uR-ZN9" id="3tL-PN-D2m"/>
                         <segue destination="rsO-IK-n36" kind="show" identifier="PlayPlaylist" id="WRy-1K-WnB"/>
+                        <segue destination="mWE-ww-xZF" kind="show" identifier="PlayScreen" id="OcQ-H2-UPa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="117.39130434782609"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Niz-3i-zMN">
+            <objects>
+                <viewController id="mWE-ww-xZF" customClass="WebViewController" customModule="SCC16iOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ek9-EV-KSj"/>
+                        <viewControllerLayoutGuide type="bottom" id="vfh-1M-qhy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xya-8y-PK0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDC-S5-RVY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="fDC-S5-RVY" id="VZv-bN-KsX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4er-Ni-9cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2117.5999999999999" y="-600.44977511244383"/>
         </scene>
         <!--Playlist View Controller-->
         <scene sceneID="g94-ph-Eb8">
@@ -137,6 +191,10 @@
         <scene sceneID="aYD-7d-ZA8">
             <objects>
                 <viewController id="bLt-3J-Jr0" customClass="TwitterViewController" customModule="SCC16iOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d8M-Mc-7Nn"/>
+                        <viewControllerLayoutGuide type="bottom" id="6dC-hu-SHi"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9GU-U4-Brt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,6 +273,10 @@
         <scene sceneID="ob9-Ig-PYh">
             <objects>
                 <viewController id="6db-XZ-SXI" customClass="WeatherViewController" customModule="SCC16iOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KkI-2N-4aW"/>
+                        <viewControllerLayoutGuide type="bottom" id="1JI-og-5lZ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NuX-ZM-Xnk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,6 +323,10 @@
         <scene sceneID="CeB-uM-WKG">
             <objects>
                 <viewController id="msO-Zm-Sve" customClass="MsgViewController" customModule="SCC16iOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dj2-Ew-Rj8"/>
+                        <viewControllerLayoutGuide type="bottom" id="8k9-Ep-Nlm"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eKD-kw-SGE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
