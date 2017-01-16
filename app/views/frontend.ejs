@@ -29,8 +29,13 @@
             </div>
             <div class="top-bar-right">
               <ul class="menu  vertical medium-horizontal">
-                <li><a href="/admin"><i class="fa fa-key hide-for-medium" aria-hidden="true"></i> Register</a></li>
-                <li><a class="button hollow" href="/admin">Login</a></li>
+                <% if(req.session.me){ %>
+                <li><a href="/logout"><i class="fa fa-key hide-for-medium" aria-hidden="true"></i> Logout</a></li>
+                <li><a class="button hollow" href="/admin">Admin</a></li>
+                <% } else {%>
+                <li><a href="/signup"><i class="fa fa-key hide-for-medium" aria-hidden="true"></i> Register</a></li>
+                <li><a class="button hollow" href="/login">Login</a></li>
+                <% } %>
               </ul>
             </div>
           </div>

@@ -70,12 +70,12 @@ module.exports = {
         },
         function(err) {
           console.log(err || "Email send!");
-          if(!err) res.view('homepage', {layout: false, emailsend: true});
+          if(!err) res.view('homepage/default', {layout: 'frontend', emailsend: true});
         }
       );
     }
     else {
-      res.view('homepage/default', {layout: 'frontend'});
+      return res.redirect('/');
     }
   }
 

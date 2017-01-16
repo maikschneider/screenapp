@@ -4,16 +4,23 @@
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
+var Passwords = require('machinepack-passwords');
+
 module.exports = {
 
   attributes: {
     email: {
       type: 'email',
-      required: true
+      required: true,
+      unique: true,
     },
     password: {
       type: 'string',
       required: true
+    },
+    name: {
+      type: 'string',
+      required: true,
     }
   },
 
@@ -30,14 +37,23 @@ module.exports = {
    */
 
   signup: function (inputs, cb) {
-    // Create a user
-    User.create({
-      name: inputs.name,
-      email: inputs.email,
-      // TODO: But encrypt the password first
-      password: inputs.password
+    Passwords.encryptPassword({
+      password: inputs.password,
     })
-    .exec(cb);
+    .exec({
+      error: function(err) {
+        cb();
+      },
+      success: function(result) {
+        // Create a user
+        User.create({
+          name: inputs.name,
+          email: inputs.email,
+          password: result
+        })
+        .exec(cb);
+      }
+    });
   },
 
 

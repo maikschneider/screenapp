@@ -41,7 +41,6 @@ module.exports.routes = {
   },
   'get /login': { view: 'user/login', locals: { layout: 'frontend' } },
   'get /signup': { view: 'user/signup', locals: { layout: 'frontend' } },
-  '/welcome': { view: 'user/welcome', locals: { layout: 'frontend' } },
 
   // Endpoints
   'post /login': 'UserController.login',
