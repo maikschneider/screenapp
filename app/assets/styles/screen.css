@@ -4509,6 +4509,7 @@ section.msg {
   background: linear-gradient(to left, #f85032, #e73827);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
   section.msg .msg__card {
+    margin: 1.25rem;
     padding: 1.25rem;
     background: #FFF;
     border-radius: 5px;
