@@ -35,54 +35,60 @@ class RestClient {
         
         var playlists = [Playlist]()
         
-        for playlist in json {
+        for playlist in json.array! {
             var screens = [Screen]()
             var items = [PlaylistItem]()
             
-            for screen in json["screens"] {
+            for screen in playlist["screens"].array! {
                 screens.append(
-                    Screen(name: screen["name"].string, listId: screen["list"].int, createdAt: screen["createdAt"].string, updatedAt: screen["updatedAt"].string, id: screen["id"].int)
+                    Screen(
+                        name: screen["name"].string!,
+                        listId: screen["list"].int!,
+                        createdAt: screen["createdAt"].string!,
+                        updatedAt: screen["updatedAt"].string!,
+                        id: screen["id"].int!
+                    )
                 )
             }
             
-            for item in json["items"] {
+            for item in playlist["items"].array! {
                 
-                let appType: String = item["appType"].string
+                let appType: String = item["appType"].string!
                 let name = item["name"].string
                 let duration = item["duration"].int
                 let id = item["id"].int
                 
-                var playlistItem: PlaylistItem
+                var playlistItem: PlaylistItem?
                 
                 switch appType {
                 // parse twitter playlist item
                 case "twitter":
                     playlistItem = TwitterPlaylistItem(
-                        id: id, name: name, duration: duration, appType: appType, data: [:],
-                        filter: item["twitterFilter"].string,
-                        tweetDuration: item["twitterTweetDuration"].int,
-                        showRetweets: item["twitterShowRetweets"].bool
+                        id: id!, name: name!, duration: duration!, appType: appType, data: [:],
+                        filter: item["twitterFilter"].string!,
+                        tweetDuration: item["twitterTweetDuration"].int!,
+                        showRetweets: item["twitterShowRetweets"].bool!
                     )
                     break
                     
                 // parse message playlist item
                 case "msg":
                     playlistItem = MessagePlaylistItem(
-                        id: id, name: name, duration: duration, appType: appType, data: [:],
-                        headline: item["headline"].string,
-                        text: item["text"].string,
-                        image: item["image"].string
+                        id: id!, name: name!, duration: duration!, appType: appType, data: [:],
+                        headline: item["headline"].string!,
+                        text: item["text"].string!,
+                        image: item["image"].string!
                     )
                     break
                     
                 // parse weather playlist item
                 case "weather":
                     playlistItem = WeatherPlaylistItem(
-                        id: id, name: name, duration: duration, appType: appType, data: [:],
-                        locationCode: item["weatherLocation"].string,
+                        id: id!, name: name!, duration: duration!, appType: appType, data: [:],
+                        location: item["weatherLocation"].string!,
                         unit: true,//item["weatherUnit"].bool
-                        fontColor: item["fontColor"].string,
-                        backgroundImage: item["backgroundImage"].string
+                        fontColor: item["fontColor"].string!,
+                        backgroundImage: item["backgroundImage"].string!
                     )
                     break
                     
@@ -90,13 +96,23 @@ class RestClient {
                     playlistItem = nil
                 }
                 
-                if playlistItem != nil {
-                    items.append(playlistItem)
-                }
+            if playlistItem != nil {
+                items.append(playlistItem!)
+            }
                 
             }
             
-            playlists.append(Playlist(name: json["name"].string, live: json["live"].bool, createdAt: json["createdAt"].string, updatedAt: json["updatedAt"].string, id: json["id"].int, screens: screens, items: items))
+            playlists.append(
+                Playlist(
+                    name: playlist["name"].string!,
+                    live: playlist["live"].bool!,
+                    createdAt: playlist["createdAt"].string!,
+                    updatedAt: playlist["updatedAt"].string!,
+                    id: playlist["id"].int!,
+                    screens: screens,
+                    items: items
+                )
+            )
         }
         
         return playlists

@@ -15,9 +15,9 @@ class MessagePlaylistItem: PlaylistItem {
     var image: String
     
     init(id: Int, name: String, duration: Int, appType: String, data: [String: Any], headline: String, text: String, image: String) {
-        super.init(id: id, name: name, duration: duration, appType: appType, data: date)
         self.headline = headline
         self.text = text
         self.image = image
+        super.init(id: id, name: name, duration: duration, appType: appType, data: data)
     }
 }

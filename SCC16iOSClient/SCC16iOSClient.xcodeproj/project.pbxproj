@@ -14,6 +14,11 @@
 		72513DFB1DD90254002925C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFA1DD90254002925C9 /* Assets.xcassets */; };
 		72513DFE1DD90254002925C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */; };
 		725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BE0AA1DE454EC00586926 /* RestClient.swift */; };
+		726F9D931E2C2764007E3788 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D921E2C2764007E3788 /* PlaylistTableViewCell.swift */; };
+		726F9D961E2C3056007E3788 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D951E2C3056007E3788 /* PlaylistViewController.swift */; };
+		726F9D981E2C31B0007E3788 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D971E2C31B0007E3788 /* WeatherViewController.swift */; };
+		726F9D9A1E2C31CA007E3788 /* TwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D991E2C31CA007E3788 /* TwitterViewController.swift */; };
+		726F9D9C1E2C3239007E3788 /* MsgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F9D9B1E2C3239007E3788 /* MsgViewController.swift */; };
 		728573F01DEC82ED00D23D6A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573EF1DEC82ED00D23D6A /* Screen.swift */; };
 		728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F11DEC82FD00D23D6A /* Playlist.swift */; };
 		728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728573F31DEC830C00D23D6A /* PlaylistItem.swift */; };
@@ -34,6 +39,11 @@
 		72513DFD1DD90254002925C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72513DFF1DD90254002925C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725BE0AA1DE454EC00586926 /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		726F9D921E2C2764007E3788 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
+		726F9D951E2C3056007E3788 /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
+		726F9D971E2C31B0007E3788 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		726F9D991E2C31CA007E3788 /* TwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterViewController.swift; sourceTree = "<group>"; };
+		726F9D9B1E2C3239007E3788 /* MsgViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgViewController.swift; sourceTree = "<group>"; };
 		728573EF1DEC82ED00D23D6A /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		728573F11DEC82FD00D23D6A /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		728573F31DEC830C00D23D6A /* PlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistItem.swift; sourceTree = "<group>"; };
@@ -75,9 +85,10 @@
 		72513DF21DD90254002925C9 /* SCC16iOSClient */ = {
 			isa = PBXGroup;
 			children = (
+				726F9D941E2C276A007E3788 /* UI */,
+				726F9D911E2C273D007E3788 /* Controller */,
 				728573EE1DEC82DD00D23D6A /* Model */,
 				72513DF31DD90254002925C9 /* AppDelegate.swift */,
-				72513DF51DD90254002925C9 /* ViewController.swift */,
 				72513DF71DD90254002925C9 /* Main.storyboard */,
 				72513DFA1DD90254002925C9 /* Assets.xcassets */,
 				72513DFC1DD90254002925C9 /* LaunchScreen.storyboard */,
@@ -85,6 +96,26 @@
 				725BE0AA1DE454EC00586926 /* RestClient.swift */,
 			);
 			path = SCC16iOSClient;
+			sourceTree = "<group>";
+		};
+		726F9D911E2C273D007E3788 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				72513DF51DD90254002925C9 /* ViewController.swift */,
+				726F9D951E2C3056007E3788 /* PlaylistViewController.swift */,
+				726F9D971E2C31B0007E3788 /* WeatherViewController.swift */,
+				726F9D991E2C31CA007E3788 /* TwitterViewController.swift */,
+				726F9D9B1E2C3239007E3788 /* MsgViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		726F9D941E2C276A007E3788 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				726F9D921E2C2764007E3788 /* PlaylistTableViewCell.swift */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		728573EE1DEC82DD00D23D6A /* Model */ = {
@@ -242,11 +273,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				728573F61DEC834200D23D6A /* TwitterPlaylistItem.swift in Sources */,
+				726F9D981E2C31B0007E3788 /* WeatherViewController.swift in Sources */,
 				72513DF61DD90254002925C9 /* ViewController.swift in Sources */,
 				725BE0AB1DE454EC00586926 /* RestClient.swift in Sources */,
 				72513DF41DD90254002925C9 /* AppDelegate.swift in Sources */,
 				728573F01DEC82ED00D23D6A /* Screen.swift in Sources */,
+				726F9D931E2C2764007E3788 /* PlaylistTableViewCell.swift in Sources */,
 				728573F81DEC83A100D23D6A /* WeatherPlaylistItem.swift in Sources */,
+				726F9D9C1E2C3239007E3788 /* MsgViewController.swift in Sources */,
+				726F9D9A1E2C31CA007E3788 /* TwitterViewController.swift in Sources */,
+				726F9D961E2C3056007E3788 /* PlaylistViewController.swift in Sources */,
 				728573F41DEC830C00D23D6A /* PlaylistItem.swift in Sources */,
 				724B3E8A1DF6D6940026F340 /* MessagePlaylistItem.swift in Sources */,
 				728573F21DEC82FD00D23D6A /* Playlist.swift in Sources */,

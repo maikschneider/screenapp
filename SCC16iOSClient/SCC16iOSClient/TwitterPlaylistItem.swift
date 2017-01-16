@@ -15,10 +15,10 @@ class TwitterPlaylistItem: PlaylistItem {
     var showRetweets: Bool
     
     init(id: Int, name: String, duration: Int, appType: String, data: [String: Any], filter: String, tweetDuration: Int, showRetweets: Bool) {
-        super.init(id: id, name: name, duration: duration, appType, data: data)
         self.filter = filter
         self.tweetDuration = tweetDuration
         self.showRetweets = showRetweets
+        super.init(id: id, name: name, duration: duration, appType: appType, data: data)
     }
     
 }

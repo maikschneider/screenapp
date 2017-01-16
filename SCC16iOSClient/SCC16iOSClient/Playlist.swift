@@ -19,15 +19,15 @@ class Playlist: NSObject {
     var screens: [Screen]
     var items: [PlaylistItem]
     
-    init(name: String, live: Bool, createdAt: String, updatedAt: String, id: Int) {
+    init(name: String, live: Bool, createdAt: String, updatedAt: String, id: Int, screens: [Screen], items: [PlaylistItem]) {
         self.name = name
         self.live = live
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.id = id
         
-        self.screens = [Screen]()
-        self.items = [PlaylistItem]()
+        self.screens = screens
+        self.items = items
     }
     
 }
