@@ -1,13 +1,40 @@
-<h1>Login</h1>
-<form action="/login" method="post">
+<section class="fullscreen" id="login">
 
-  <label for="email">Your email address?</label>
-  <input name="email" type="text"/>
-  <br/>
+  <div class="row align-center align-middle" style="height:100%">
+      <div class="small-12 medium-6 large-4">
+        <section class="dark" id="contact">
+          <h1>Login</h1>
+          <form action="/login" method="post">
+            <div class="row">
+              <div class="columns shrink small-12">
+                <label for="email"><i class="fa fa-envelope"></i> Email-Address</label>
+              </div>
+              <div class="columns small-12">
+                <input name="email" type="text"/>
+              </div>
+            </div>
 
-  <label for="password">Your safe word?</label>
-  <input name="password" type="password"/>
-  <br/>
+            <div class="row">
+              <div class="columns shrink small-12">
+                <label for="email"><i class="fa fa-key"></i> Password</label>
+              </div>
+              <div class="columns small-12">
+                <input name="password" type="password"/>
+              </div>
+            </div>
 
-  <input type="submit"/>
-</form>
+            <div class="row">
+              <div class="columns text-right">
+                <input class="button hollow" type="submit" value="login" />
+              </div>
+            </div>
+          </form>
+        </section>
+        <div class="row">
+          <div class="small-12 columns text-center"><a href="/signup" class="expanded large button"><i class="fa fa-plus"></i> Create new account</a></div>
+        </div>
+    </div>
+  </div>
+
+
+</section>
