@@ -25,7 +25,7 @@ class PlaylistViewController: UIViewController {
         }
         
         let url = URL(string: "http://127.0.0.1:1337")!
-        let path = "/screen/live/" + String(playlist!.screens[0].id)
+        let path = "/playlist/live/" + String(playlist!.id)
         
         let socket = SocketIOClient(socketURL: url, config: [.log(true), .forcePolling(false), .path(path)])
         
