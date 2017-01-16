@@ -12,17 +12,30 @@ if(tweets){
 
       <div class="twitter__tweet__inner column">
         <div class="row align-center">
-          <div class="small-10 columns">
+          <div class="small-10 large-8 columns">
 
             <div class="twitter__card">
               <div class="row">
-                <div class="small-4 columns">
-                <% var pic = tweets[i].user.profile_image_url;
-                pic = pic.replace('_normal', '_bigger'); %>
-                <img src="<%= pic %>" />
+                <div class="small-12 columns">
+                  <% var pic = tweets[i].user.profile_image_url;
+                  pic = pic.replace('_normal', '_bigger'); %>
+                  <img class="twitter__user" src="<%= pic %>" />
+                  <div class="twitter__content">
+                    <h3><%= tweets[i].user.name %></h3>
+                    <h4>@<%= tweets[i].user.screen_name %></h4>
+                  </div>
                 </div>
-                <div class="small-8 coloumns">
-                  <p><%= tweets[i].text %></p>
+              </div>
+              <div class="row">
+                <div class="small-12 columns">
+                  <p><%- tweets[i].text.replace(/#(\S*)/g,'<a href="http://twitter.com/hashtag/$1">#$1</a>').replace(/@(\S*)/g, '<a href="https://twitter.com/$1">@$1</a>') %></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="small-12 columns">
+                  <% if(tweets[i].entities && tweets[i].entities.media && tweets[i].entities.media[0].media_url_https) { %>
+                    <img src="<%= tweets[i].entities.media[0].media_url_https %>" />
+                  <% } %>
                 </div>
               </div>
             </div>

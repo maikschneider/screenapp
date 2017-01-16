@@ -48,6 +48,7 @@
         <tr>
           <td>ID</td>
           <td>Name</td>
+          <td>Action</td>
         </tr>
       </thead>
       <tbody>
@@ -57,6 +58,11 @@
               <td>
                 <a href='playlist/<%= lists[i].id %>' data-modal>
                   <%= lists[i].name %>
+                </a>
+              </td>
+              <td>
+                <a href='admin/playlist/<%= lists[i].id %>'>
+                  <i class="fa fa-pencil"></i>
                 </a>
               </td>
             </tr>
@@ -82,7 +88,7 @@
               <td><%= items[i].id %></td>
               <td>
                 <a href='playlistitem/<%= items[i].id %>' data-modal>
-                  <%= items[i].name %>
+                  <%- items[i].getIcon() %>&nbsp; <%= items[i].name %>
                 </a>
               </td>
               <td>

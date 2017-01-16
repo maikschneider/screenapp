@@ -1,12 +1,9 @@
-<h1><i class="fa fa-list"></i> Add new Playlist</h1>
+<% var title = playlist ? 'Edit Playlist' : 'Add new Playlist'; %>
+<h1><i class="fa fa-list"></i> <%= title %></h1>
 <hr />
 
-<%
-var screens = data[0];
-var items = data[1];
-%>
-
-<form action="/playlist" method="POST">
+<form action="/playlist<% if(playlist){ %>/<%= playlist %><% } %>" method="POST">
+  <input type="hidden" name="items" value="">
   <div class="row">
     <div class="small-3 columns">
       <label for="middle-label" class="text-right middle">Name</label>
@@ -32,19 +29,128 @@ var items = data[1];
       <label for="middle-label" class="text-right middle">Items to add to this Playlist</label>
     </div>
     <div class="small-9 columns">
-      <select name="items" multiple>
-        <% for(var i=0; i<items.length; i++){ %>
-          <option value="<%= items[i].id %>"><%= items[i].name %></option>
-        <% } %>
-      </select>
+      <div id="items">
+
+      </div>
+      <div class="row">
+        <div class="small-12 medium-5 medium-order-3 columns">
+          <h3>Available PlaylistItems</h3>
+          <ul class="playlistitems inactive">
+            <% for(var i=0; i<items.length; i++){ %>
+              <li  class="<%= items[i].appType %>" data-id="<%= items[i].id %>"><%- items[i].getIcon() %>&nbsp; <%= items[i].name %> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="medium-1 columns medium-order-2 align-middle text-center">
+          <p class="show-for-medium"><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i></p>
+          <p class="hide-for-medium"><i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+        </div>
+        <div class="small-12 medium-6 medium-order-1 columns">
+          <h3>Selected Items</h3>
+          <ul class="playlistitems" id="playlistitemstosort">
+            <% for(var i=0; i<items.length; i++){ %>
+              <li class="<%= items[i].appType %> hidden" data-id="<%= items[i].id %>"><i class="fa fa-bars" aria-hidden="true"></i> <%- items[i].getIcon() %>&nbsp; <%= items[i].name %> <i class="fa fa-times" aria-hidden="true"></i></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
+  <hr />
   <div class="row">
-    <div class="medium-9 medium-offset-3 columns">
+    <div class="columns">
+      <a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+    </div>
+    <div class="columns text-right">
       <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
     </div>
   </div>
 </form>
 
-<hr />
-<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+
+<script type="text/javascript">
+
+/**
+ * Onload function for all PlaylistItem forms
+ */
+  $.Playlist = function(){
+
+    $.Sortable();
+    $.BindItems();
+
+    <% if(playlist){ %>
+      $.PlaylistEdit();
+    <% } %>
+  };
+
+  $.Sortable = function(){
+
+    var el = document.getElementById('playlistitemstosort');
+    var sortable = new Sortable(el, {
+      handle: '.fa-bars',
+      onEnd: function () {
+        $.updateItemSelect();
+      },
+    });
+
+  },
+
+  $.updateItemSelect = function(){
+    $('form select[name="items"] option').removeAttr('selected');
+    $('form #playlistitemstosort li').each(function(i, e){
+      $('form select[name="items"] option[value="'+$(e).attr('data-id')+'"]').attr('selected','');
+    });
+  },
+
+  $.BindItems = function(){
+    // Bind Add Event
+    $('form .playlistitems.inactive li').on('click', function(){
+      $.AddItem($(this).attr('data-id'));
+    });
+    // Bind Remove Event
+    $('form #playlistitemstosort li').on('click', function(){
+      $.RemoveItem($(this).attr('data-id'));
+    });
+  };
+
+  $.AddItem = function(id){
+    console.log('add', id);
+    $('form .playlistitems.inactive li[data-id="'+id+'"]').addClass('hidden');
+    $('form #playlistitemstosort li[data-id="'+id+'"]').removeClass('hidden');
+    // $('form select[name="items"] option[value="'+id+'"]').attr('selected','selected');
+    $('form').prepend('<input type="hidden" name="items" data-id="'+id+'" value="'+id+'">');
+  };
+
+  $.RemoveItem = function(id){
+    console.log('remove', id);
+    $('form .playlistitems.inactive li[data-id="'+id+'"]').removeClass('hidden');
+    $('form #playlistitemstosort li[data-id="'+id+'"]').addClass('hidden');
+    // $('form select[name="items"] option[value="'+id+'"]').removeAttr('selected');
+    $('form input[data-id="'+id+'"]').remove();
+  };
+
+  /**
+   * Changes the create form to an update form
+   */
+  $.PlaylistEdit = function(){
+    io.socket.get('/playlist/<%= playlist %>', function(resData, jwres) {
+
+      // insert data into form inputs
+      $.each(resData, function(index, value) {
+        console.log(index + ': ', value);
+          $('form input[name="'+index+'"]:text').attr('value', value);
+          $('form textarea[name="'+index+'"]').html(value);
+          $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
+          $('form input[name="'+index+'"]:checkbox').prop('checked', value);
+          if(typeof(value) === 'object' && value !== null) {
+            $(value).each(function(i, e){
+              //$('form select[name="'+index+'"] option[value="'+e.id+'"]').attr('selected','');
+              if(index=='items') $.AddItem(e.id);
+            });
+          }
+      });
+
+    });
+  };
+
+</script>

@@ -34,28 +34,6 @@
     console.log('Started BroadcastService for the following Playlist: ', body);
   });
 
-  // io.socket.on('playlist', function (event) {
-  //   console.log('Playlist changed: ', event);
-  // });
-
-  // // Subscribe to changes on the current playlist
-  // io.socket.get('/playlist/<%= screen.list %>', function(resData, jwres) {
-  //   console.log('The Playlist: ', resData);
-  // });
-
-  // io.socket.on('playlistitem', function(data){
-  //   console.log('PlaylistItem changed:', data);
-  // });
-
-  // // Subscribe to all PlaylistItems on this playlist
-  // io.socket.get('/playlist/<%= screen.list %>/items', function(resData, jwres) {
-  //   console.log('The PlaylistItems: ', resData);
-  // });
-
-  // io.socket.on('playlistsocket<%= screen.list %>', function(data){
-  //   console.log('slideChange: ', data);
-  // });
-
   io.socket.on('itemUpdate', function (data){
     console.log('itemUpdate', data);
     $('section[data-id="'+data.item.id+'"]').replaceWith(data.html);

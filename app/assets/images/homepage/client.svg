@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="63px" height="58px" viewBox="0 0 63 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>client</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-789.000000, -1135.000000)" fill="#031423">
+            <g id="apps" transform="translate(135.000000, 1023.000000)">
+                <g id="clients" transform="translate(600.000000, 0.000000)">
+                    <g id="circles" transform="translate(0.000000, 84.000000)">
+                        <g id="webclient">
+                            <path d="M54,28 L116.5,28 L116.5,85.5 L54,85.5 L54,28 Z M56.5,30.5 L114,30.5 L114,38 L56.5,38 L56.5,30.5 Z M56.5,40.5 L114,40.5 L114,83 L56.5,83 L56.5,40.5 Z M59,33 L61.5,33 L61.5,35.5 L59,35.5 L59,33 Z M64,33 L66.5,33 L66.5,35.5 L64,35.5 L64,33 Z M69,33 L71.5,33 L71.5,35.5 L69,35.5 L69,33 Z M79.004,54.07 L80.77,55.836 L77.234,59.371 L80.77,62.906 L79.004,64.676 L73.699,59.371 L79.004,54.07 Z M91.504,54.07 L89.734,55.836 L93.27,59.371 L89.734,62.906 L91.504,64.676 L96.805,59.371 L91.504,54.07 Z M85.094,53 L87.559,53.434 L85.387,65.746 L82.926,65.309 L85.094,53 Z" id="client"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
