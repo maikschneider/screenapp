@@ -19,7 +19,25 @@ class PlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let socket = SocketIOClient(socketURL: URL(string: "http://localhost:1337/live/" + playlist.id)!, config: [.log(true), forcePolling(true)])
         
+        socket.on("connect") {data, ack in
+            print("socket connected")
+        }
+        
+        socket.on("itemUpdate") {data, ack in
+            print("item update")
+        }
+        
+        socket.on("slideChange") {data, ack in
+            print("slide change")
+        }
+        
+        socket.on("tweetChange") {data, ack in
+            print("tweet change")
+        }
+        
+        socket.connect()
     }
 
     override func didReceiveMemoryWarning() {

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C0F881CB4A5588D92D1AC252D34DFBB2'
+               BlueprintIdentifier = '1ED4AD42A189AFD18682D094B4B3BA7C'
                BlueprintName = 'RestEssentials'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'RestEssentials.framework'>
