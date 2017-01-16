@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SocketIO
 
 class PlaylistViewController: UIViewController {
 
@@ -19,7 +20,11 @@ class PlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let socket = SocketIOClient(socketURL: URL(string: "http://localhost:1337/live/" + playlist.id)!, config: [.log(true), forcePolling(true)])
+        guard playlist != nil else {
+            return
+        }
+        
+        let socket = SocketIOClient(socketURL: URL(string: "http://localhost:1337/live/" + String(playlist!.id))!, config: [.log(true), .forcePolling(true)])
         
         socket.on("connect") {data, ack in
             print("socket connected")

@@ -8,7 +8,6 @@
 
 import UIKit
 import RestEssentials
-import SocketIO
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -55,9 +54,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // add to playlist
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlayPlaylist" {
-            if let viewController = segue.destination as? PlaylistViewController && selectedPlaylist != nil {
-                viewController?.playlist = selectedPlaylist
+            guard let viewController = segue.destination as? PlaylistViewController else {
+                return
             }
+            
+            guard selectedPlaylist != nil else {
+                return
+            }
+            
+            viewController.playlist = selectedPlaylist
         }
     }
 
