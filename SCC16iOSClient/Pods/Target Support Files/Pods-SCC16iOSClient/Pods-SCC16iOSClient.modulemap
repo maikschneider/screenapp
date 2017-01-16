@@ -1,0 +1,6 @@
+framework module Pods_SCC16iOSClient {
+  umbrella header "Pods-SCC16iOSClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
