@@ -75,7 +75,7 @@ module.exports = {
       );
     }
     else {
-      res.view('homepage', {layout: false});
+      res.view('homepage/default', {layout: 'frontend'});
     }
   }
 

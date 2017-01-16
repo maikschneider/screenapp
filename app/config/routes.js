@@ -33,9 +33,9 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage',
+    view: 'homepage/default',
     locals:{
-      layout: false
+      layout: 'frontend'
     }
   }
 
