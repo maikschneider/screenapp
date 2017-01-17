@@ -13,12 +13,27 @@ class TwitterViewController: UIViewController {
     @IBOutlet weak var filterLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var tweetView: UIView!
+    @IBOutlet weak var authorImage: UIImageView!
+    @IBOutlet weak var authorNameLabel: UILabel!
+    @IBOutlet weak var authorUsernameLabel: UILabel!
+    @IBOutlet weak var textLabel: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tweetView.layer.cornerRadius = 5.0
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    func setup(filter: String, name: String) {
+        filterLabel.text = filter
+        nameLabel.text = name
+    }
+    
+    func setupTweet(authorName: String, authorUsername: String, text: String) {
+        authorNameLabel.text = authorName
+        authorUsernameLabel.text = authorUsername
+        textLabel.text = text
     }
 
 }

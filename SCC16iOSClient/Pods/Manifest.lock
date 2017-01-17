@@ -1,12 +1,15 @@
 PODS:
   - RestEssentials (3.0.0)
+  - Socket.IO-Client-Swift (8.2.0)
 
 DEPENDENCIES:
   - RestEssentials (~> 3.0)
+  - Socket.IO-Client-Swift (~> 8.2)
 
 SPEC CHECKSUMS:
   RestEssentials: 5f82f9e77a712efef38fb4b139bb7b5f93b25d18
+  Socket.IO-Client-Swift: 900cf511777045c80d1ce1f11f71261e87765dd1
 
-PODFILE CHECKSUM: 54fbd91258ca103bf930392e75a733716b93e067
+PODFILE CHECKSUM: f1fbbdb7e0206c157fe087d85a7e8c3ac49fdc82
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.rc.1

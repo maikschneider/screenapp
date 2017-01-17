@@ -27,6 +27,27 @@ module.exports = {
       return res.ok();
     });
 
+   },
+
+   /**
+    * See http://sailsjs.org/documentation/concepts/realtime
+    */
+   live: function(req, res) {
+
+     if (!req.isSocket) {return res.badRequest();}
+
+     var id = req.param('id',null);
+
+     Playlist.findOne(id).exec(function(err, playlist){
+
+         sails.sockets.join(req, 'playlistsocket'+playlist.id);
+
+         return res.ok({
+             playlist: playlist
+         });
+
+     });
+
    }
 
 };

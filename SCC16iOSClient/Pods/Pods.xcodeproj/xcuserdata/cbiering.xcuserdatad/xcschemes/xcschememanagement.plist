@@ -14,15 +14,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Socket.IO-Client-Swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>200D7CF79873EED55156A630A24F1D41</key>
+		<key>1ED4AD42A189AFD18682D094B4B3BA7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C0F881CB4A5588D92D1AC252D34DFBB2</key>
+		<key>3EEB3DB1E0A87A4B0A44FC7A0E582792</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>71B939A065F71242FF85978242C612AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

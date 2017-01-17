@@ -3308,13 +3308,13 @@ h1 {
   font-size: 2.5rem; }
 
 h2 {
-  font-size: 2.5rem; }
+  font-size: 2.25rem; }
 
 h3 {
-  font-size: 1.875rem; }
+  font-size: 1.6875rem; }
 
 h4 {
-  font-size: 1.125rem; }
+  font-size: 1rem; }
 
 h5 {
   font-size: 1.0625rem; }
@@ -3325,6 +3325,20 @@ h6 {
 @media screen and (min-width: 40em) {
   h1 {
     font-size: 3rem; }
+  h2 {
+    font-size: 2.25rem; }
+  h3 {
+    font-size: 1.5rem; }
+  h4 {
+    font-size: 1.125rem; }
+  h5 {
+    font-size: 1.0625rem; }
+  h6 {
+    font-size: 1rem; } }
+
+@media screen and (min-width: 64em) {
+  h1 {
+    font-size: 2.5rem; }
   h2 {
     font-size: 3rem; }
   h3 {
