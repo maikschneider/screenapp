@@ -7,8 +7,9 @@ echo "##############################################################"
 FLAVOR=$(openstack flavor list -f json | jq '.[0]["Name"]' | tr -d '"')
 echo "Flavor: ${FLAVOR}"
 
-IMAGE_ID=$(openstack image list -f json | jq '.[length-1]["ID"]' | tr -d '"')
-IMAGE_NAME=$(openstack image list -f json | jq '.[length-1]["Name"]' | tr -d '"')
+IMAGE_RAW=$(openstack image list -f json)
+IMAGE_ID=$(jq '.[length-1]["ID"]' <<< "$IMAGE_RAW")
+IMAGE_NAME=$(jq '.[length-1]["ID"]' <<< "$IMAGE_RAW")
 echo "Image: ${IMAGE_NAME}"
 
 SECURITY_GROUP=$(openstack security group list -f json | jq '.[0]["Name"]' | tr -d '"')
@@ -20,7 +21,7 @@ echo "Keypair: ${KEYPAIR}"
 FLOATING_IP=$(openstack floating ip list -f json | jq '[.[]|if .["Server"] == null then .["Floating IP Address"] else "" end|select(length > 0)]|.[0]' | tr -d '"')
 echo "Free IP: ${FLOATING_IP}"
 
-USER_DATA="openstack_bootstrap.file"
+USER_DATA="openstack_bootstrap.conf"
 echo "Cloud Init File: ${USER_DATA}"
 
 read -p "Sounds good? [y|N]" -n 1 -r
@@ -34,7 +35,7 @@ then
     	--image ${IMAGE_ID} \
     	--security-group ${SECURITY_GROUP} \
     	--key-name ${KEYPAIR} \
-    	--user-data ${USER_DATA} \
+    	--user-data=${USER_DATA} \
     	${servername}"
 	${COMMAND}
 
