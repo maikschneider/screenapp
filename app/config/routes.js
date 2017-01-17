@@ -34,7 +34,7 @@ module.exports.routes = {
 
   // HTML Views
   '/': {
-    view: 'homepage/default',
+    view: 'user/home',
     locals:{
       layout: 'frontend'
     }
