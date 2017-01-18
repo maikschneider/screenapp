@@ -18,7 +18,7 @@ module.exports = {
     },
     appType: {
       type: 'string',
-      enum: ['weather', 'twitter', 'msg']
+      enum: ['weather', 'twitter', 'msg', 'dvb']
     },
     data: {
       type: 'json',
@@ -51,6 +51,8 @@ module.exports = {
     msgHeadline: 'text',
     msgText: 'text',
     msgImage: 'text',
+    // DVB settings
+    dvbStop: 'text',
 
 
     playlist: {
@@ -65,6 +67,9 @@ module.exports = {
           break;
         case 'msg':
           htmlclass = 'comment';
+          break;
+        case 'dvb':
+          htmlclass = 'bus';
           break;
         default:
           htmlclass = this.appType;
@@ -93,6 +98,9 @@ module.exports = {
       case 'weather':
         WeatherService.runBeforeUpdate(values, next);
         break;
+      case 'dvb':
+        DvbService.runBeforeUpdate(values, next);
+        break;
       default:
         next();
     }
@@ -104,6 +112,8 @@ module.exports = {
         break;
       case 'weather':
         WeatherService.runBeforeCreate(values, next);
+      case 'dvb':
+        DvbService.runBeforeCreate(values, next);
         break;
       default:
         next();
@@ -116,6 +126,8 @@ module.exports = {
         break;
       case 'weather':
         WeatherService.publishUpdate(values, next);
+      case 'dvb':
+        DvbService.publishUpdate(values, next);
         break;
       default:
         next();

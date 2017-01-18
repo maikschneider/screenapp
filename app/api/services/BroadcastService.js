@@ -20,6 +20,8 @@ module.exports = {
           break;
         case 'weather':
           WeatherService.runAndSave(playlistitem.id);
+        case 'dvb':
+          DvbService.runAndSave(playlistitem.id);
           break;
         default:
           //@todo return something
