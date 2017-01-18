@@ -2,7 +2,7 @@
 var tweets = item.data.statuses;
 if(tweets){
     var height = tweets.length * 100;
-    var marginTop = activeTweet * -100;
+    var marginTop = typeof activeTweet == "undefined" ? 0 : activeTweet * -100;
 %>
 
 <section class="columns slide twitter" style="min-height: <%= height %>vh; margin-top: <%= marginTop %>vh" data-id="<%= item.id %>">
