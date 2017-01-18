@@ -202,7 +202,7 @@ module.exports = {
    */
   publishUpdate: function(playlistitem, callback) {
 
-    sails.hooks.views.render('screen/weather', {layout: false, item: playlistitem}, function(err,html){
+    sails.hooks.views.render('screen/'+this.playlistitem.appType, {layout: false, item: playlistitem}, function(err,html){
       if(err) sails.log.warn(err);
       sails.sockets.broadcast('playlistsocket'+playlistitem.playlist, 'itemUpdate', {'item': playlistitem, 'html': html});
       if(callback) callback();

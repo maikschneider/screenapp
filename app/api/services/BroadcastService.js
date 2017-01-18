@@ -12,20 +12,7 @@ module.exports = {
     },
 
     runService: function(playlistitem) {
-
-      switch(playlistitem.appType) {
-
-        case 'twitter':
-          TwitterService.runAndSave(playlistitem.id);
-          break;
-        case 'weather':
-          WeatherService.runAndSave(playlistitem.id);
-        case 'dvb':
-          DvbService.runAndSave(playlistitem.id);
-          break;
-        default:
-          //@todo return something
-      }
+      AppService.runUpdate(playlistitem.id);
     },
 
     startPlaylistCron: function() {

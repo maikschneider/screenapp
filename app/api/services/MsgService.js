@@ -1,7 +1,7 @@
 module.exports = {
 
-  run: function(playlistitem) {
-
+  getData: function(callback){
+    callback();
   }
 
 }
