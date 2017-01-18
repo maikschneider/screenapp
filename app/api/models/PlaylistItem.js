@@ -68,6 +68,9 @@ module.exports = {
         case 'msg':
           htmlclass = 'comment';
           break;
+        case 'dvb':
+          htmlclass = 'bus';
+          break;
         default:
           htmlclass = this.appType;
       }

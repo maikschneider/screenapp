@@ -123,7 +123,6 @@ module.exports = {
         if (err) {
           sails.log.error(err);
         }
-        sails.log.info(data);
         if(data) _this.data = data;
         callback();
     });
