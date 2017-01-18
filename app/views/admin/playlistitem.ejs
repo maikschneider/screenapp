@@ -30,6 +30,7 @@
         <li data-apptype="twitter" class="tabs-title is-active"><a href="#panel1" aria-selected="true"><i class="fa fa-twitter"></i> Twitter</a></li>
         <li data-apptype="weather" class="tabs-title"><a href="#panel2"><i class="fa fa-sun-o"></i> Weather</a></li>
         <li data-apptype="msg" class="tabs-title"><a href="#panel3"><i class="fa fa-comment"></i> Message</a></li>
+        <li data-apptype="dvb" class="tabs-title"><a href="#panel4"><i class="fa fa-bus"></i> DVB Stop</a></li>
       </ul>
 
       <div class="tabs-content" data-tabs-content="playlistitem-tabs">
@@ -124,6 +125,16 @@
             </div>
           </div>
         </div>
+        <div class="tabs-panel" id="panel4" data-apptype="dvb">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="middle-label" class="text-right middle">DVB Stop</label>
+            </div>
+            <div class="small-9 columns">
+              <input disabled type="text" id="middle-label" name="dvbStop">
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -151,7 +162,7 @@
 </form>
 
 <hr />
-<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+<a href="/admin" class="button alert"><i class="fa fa-times"></i> cancel</a>
 
 <script type="text/javascript">
 

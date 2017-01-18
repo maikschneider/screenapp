@@ -31,7 +31,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 // @include foundation-label;
 @include foundation-media-object;
 // @include foundation-off-canvas;
-@include foundation-orbit;
+//@include foundation-orbit;
 // @include foundation-pagination;
 // @include foundation-progress-bar;
 // @include foundation-progress-element;
@@ -194,5 +194,39 @@ section.twitter{
   }
   p{
     font-size: rem-calc(32);
+  }
+}
+
+section.dvb{
+  background-color: #fdc400;
+  & > .row{
+    min-height: 100%;
+  }
+  .dvb__header{
+    background-color: #000;
+    color:#FFF;
+    padding: rem-calc(0 20);
+    p{
+      margin-bottom: rem-calc(10);
+    }
+  }
+  .dvb__content{
+    background-color: #555;
+    color: #FFF;
+    padding:rem-calc(10 20);
+  }
+  .dvb__item{
+    padding:rem-calc(5 0);
+    &:not(:last-child){
+      border-bottom: 1px solid rgba(#FFF,0.3);
+    }
+    img{
+      float:left;
+      margin-right: rem-calc(10);
+    }
+    p{
+      margin-bottom: 0;
+      line-height: 2.2;
+    }
   }
 }
