@@ -7,50 +7,26 @@ module.exports = {
   cacheTimeInMin: 1,
   concreteService: null,
 
-  _setup(playlistitem, callback) {
-    sails.log.info('AppService:setup('+playlistitem.id+')');
-    this.playlistitem = playlistitem;
-    this._setupConcreteService();
-    callback();
-  },
-
-  _setupWithId(playlistitemId, callback) {
-    sails.log.info('AppService: _setupWithId()');
-    var _this = this;
-
-    PlaylistItem.findOne(playlistitemId).then(function(playlistitem){
-
-      _this._setup(playlistitem, callback);
-
-    }).catch(function(err){
-      sails.log.warn('AppService:setupWithId() No PlaylistItem with ID ' + playlistitemId + ' was found.');
-      sails.log.warn(err);
-    });
-  },
-
-  _setupConcreteService: function() {
-    sails.log.info('AppService: _setupConcreteService()');
-    var serviceName = s.capitalize(this.playlistitem.appType)+'Service';
-
-    if(_.isUndefined(global[serviceName])) {
-      sails.log.error('No Service "'+serviceName+'" found.');
-    }
-
-    this.concreteService = global[serviceName];
-    this.concreteService.playlistitem = this.playlistitem;
-  },
-
+  /**
+   * Updates PlaylistItem data and saves it
+   * @param  {integer} playlistitemId The id of the PlaylistItem to update
+   */
   runUpdate: function(playlistitemId) {
     sails.log.info('AppService: runUpdate('+playlistitemId+')');
     var _this = this;
 
-    _this._setupWithId(playlistitemId, function(){
+    _this._setupById(playlistitemId, function(){
       _this.initUpdate(function(){
         _this.saveData();
       });
     });
   },
 
+  /**
+   * Gets Item data to inject into creation lifecycle
+   * @param  {object}   values   Playlistitem object before it is created
+   * @param  {Function} callback the callback from the lifecycle hook
+   */
   runBeforeCreate: function(values, callback) {
     sails.log.info('AppService: runBeforeCreate()');
     var _this = this;
@@ -63,49 +39,76 @@ module.exports = {
     });
   },
 
-  // runBeforeUpdate: function(values, callback) {
-  //   sails.log.info('AppService: runBeforeUpdate('+values.id+')');
-  //   var _this = this;
-
-  //   // get old item from database
-  //   this.init(values.id, function(){
-  //     // if location changed or cachetime is over
-  //     if(values.weatherLocation != _this.playlistitem.weatherLocation || _this.needDataUpdate()){
-  //       // set to new location
-  //       _this.playlistitem.weatherLocation = values.weatherLocation;
-
-  //       _this.getWeatherData(function(){
-  //         values.data = _this.data;
-  //         callback();
-  //       });
-  //     } else {
-  //       callback();
-  //     }
-  //   });
-
-  // },
-
-  // /**
-  //  * AppService
-  //  * @param  {PlaylistItem} playlistitem (the item with appType weather)
-  //  * @return {boolean} true on success, false on failure
-  //  *
-  //  *  1. run       check Cache
-  //  *  2. update    WeatherData
-  //  *  3. get       WeatherData
-  //  *  4. save      WeatherData
-  //  *  5. broadcast WeatherData
-  //  */
-
   /**
-   * beforeUpdate Hook
+   * Gets Item data to inject into update lifecycle
+   * @param  {object}   values   Playlistitem object before it is saved
    * @param  {Function} callback
    */
-  beforeUpdate: function(callback){
-    sails.log.debug('AppService:beforeUpdate()');
+  runBeforeUpdate: function(values, callback) {
+    sails.log.info('AppService: runBeforeUpdate('+values.id+')');
+    var _this = this;
+
+    // @todo: use _setupById to get previous item version and compare changed values
+    _this._setup(values, function(){
+      _this.performUpdate(function(){
+        values.data = _this.data;
+        callback();
+      });
+    });
+  },
+
+  /**
+   * Gets PlaylistItem from Database before it continues with setup
+   * @param  {integer}   playlistitemId id of the PlaylistItem to update
+   * @param  {Function} callback
+   */
+  _setupById(playlistitemId, callback) {
+    sails.log.info('AppService: _setupById()');
+    var _this = this;
+
+    PlaylistItem.findOne(playlistitemId).then(function(playlistitem){
+
+      _this._setup(playlistitem, callback);
+
+    }).catch(function(err){
+      sails.log.warn('AppService:setupWithId() No PlaylistItem with ID ' + playlistitemId + ' was found.');
+      sails.log.warn(err);
+    });
+  },
+
+  /**
+   * Initilizes class attributes
+   * @param  {[type]}   playlistitem [description]
+   * @param  {Function} callback     [description]
+   * @return {[type]}                [description]
+   */
+  _setup(playlistitem, callback) {
+    sails.log.info('AppService:setup('+playlistitem.id+')');
+    this.playlistitem = playlistitem;
+    this._setupConcreteService();
     callback();
   },
 
+  /**
+   * Sets the concrete API Service (e.g. TwitterService) and its overrides
+   */
+  _setupConcreteService: function() {
+    sails.log.info('AppService: _setupConcreteService()');
+    var serviceName = s.capitalize(this.playlistitem.appType)+'Service';
+
+    if(_.isUndefined(global[serviceName])) {
+      sails.log.error('No Service "'+serviceName+'" found.');
+    }
+
+    this.concreteService = global[serviceName];
+    this.concreteService.playlistitem = this.playlistitem;
+    // @todo: make overrides
+  },
+
+  /**
+   * Checks wheter to update and invokes beforeUpdate hook
+   * @param  {Function} next callback
+   */
   initUpdate: function(next) {
     sails.log.info('AppService: initUpdate()');
     var _this = this;
@@ -118,6 +121,42 @@ module.exports = {
     }
   },
 
+  /**
+   * beforeUpdate Hook
+   * @param  {Function} callback
+   */
+  beforeUpdate: function(callback){
+    sails.log.debug('AppService:beforeUpdate()');
+    callback();
+  },
+
+  /**
+   * Checks for corrupt data and cache time
+   * @return {boolean} returns true if update is recommended
+   */
+  _needDataUpdate: function() {
+    sails.log.info('AppService:_needDataUpdate()');
+    // check for empty data
+    if(_.isUndefined(this.playlistitem.data)) return true;
+    if(this.playlistitem.data == []) return true;
+    if(this.playlistitem.data == {}) return true;
+    if(this.playlistitem.data == false) return true;
+
+    // check for outdated cache
+    var add_minutes =  function (dt, minutes) {
+        return new Date(dt.getTime() + minutes*60000);
+    }
+    var cacheDateUntil = add_minutes(this.playlistitem.updatedAt, this.cacheTimeInMin);
+    var nowDate = new Date();
+    if(nowDate.getTime() > cacheDateUntil.getTime()) return true;
+
+    return false;
+  },
+
+  /**
+   * Calls getData() from the concrete API Service, e.g. TwitterService:getData() and invokes the afterUpdate hook
+   * @param  {Function} next callback
+   */
   performUpdate: function(next){
     sails.log.info('AppService:performUpdate()');
     var _this = this;
@@ -138,26 +177,9 @@ module.exports = {
     callback();
   },
 
-
-  _needDataUpdate: function() {
-    sails.log.info('AppService:_needDataUpdate()');
-    // check for empty data
-    if(_.isUndefined(this.playlistitem.data)) return true;
-    if(this.playlistitem.data == []) return true;
-    if(this.playlistitem.data == {}) return true;
-    if(this.playlistitem.data == false) return true;
-
-    // check for outdated cache
-    var add_minutes =  function (dt, minutes) {
-        return new Date(dt.getTime() + minutes*60000);
-    }
-    var cacheDateUntil = add_minutes(this.playlistitem.updatedAt, this.cacheTimeInMin);
-    var nowDate = new Date();
-    if(nowDate.getTime() > cacheDateUntil.getTime()) return true;
-
-    return false;
-  },
-
+  /**
+   * Writes the data attribute of the current PlaylistItem to the Database and publishes an Update
+   */
   saveData: function() {
     sails.log.info('AppService:saveData()');
     var _this = this;
@@ -173,6 +195,11 @@ module.exports = {
     });
   },
 
+  /**
+   * Broadcasts the 'itemUpdate' socket event with the item and rendered html  partial
+   * @param  {object}   playlistitem the item to publish the update for
+   * @param  {Function} callback
+   */
   publishUpdate: function(playlistitem, callback) {
 
     sails.hooks.views.render('screen/weather', {layout: false, item: playlistitem}, function(err,html){
