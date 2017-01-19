@@ -101,8 +101,10 @@ module.exports = {
     }
 
     this.concreteService = global[serviceName];
+    for(property in this.concreteService) {
+      this[property] = this.concreteService[property];
+    }
     this.concreteService.playlistitem = this.playlistitem;
-    // @todo: make overrides
   },
 
   /**
@@ -160,12 +162,21 @@ module.exports = {
   performUpdate: function(next){
     sails.log.info('AppService:performUpdate()');
     var _this = this;
-    _this.concreteService.getData(function(){
+    _this.getData(function(){
       // obtain received data from concreteService
       _this.data = _this.concreteService.data;
       // invoke afterUpdate hook
       _this.afterUpdate(next);
     });
+  },
+
+  /**
+   * getData from API
+   * @param  {Function} callback
+   */
+  getData: function(callback){
+    sails.log.debug('AppService:getData()');
+    callback();
   },
 
   /**
