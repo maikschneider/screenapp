@@ -6,7 +6,7 @@ SCC 2016 Project by [Maik Schneider](@maikschneider) and [Christoph Biering](@ch
 
 ## Overview
 
-* [Software Stack](software-stack)
+* [Software Stack](#software-stack)
 * [Install](#install)
 * [Model](#model)
 * [Services](#services)
@@ -49,7 +49,7 @@ Services are defined in `app/api/services`. They can be called from everywhere i
 
 ### ApiService
 
-Service wrapper for all concrete api services: Passes update requests to particular service based on **PlaylistItem** or Playlistitem.id + **Playlistitem.appType**
+Service wrapper for all concrete api services: Passes update requests to particular service based on **PlaylistItem** or **Playlistitem.id + Playlistitem.appType**
 
 
 ### BroadcastService (beta)
