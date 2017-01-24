@@ -91,47 +91,18 @@ module.exports = {
     next();
   },
   beforeUpdate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.runBeforeUpdate(values, next);
-        break;
-      case 'weather':
-        WeatherService.runBeforeUpdate(values, next);
-        break;
-      case 'dvb':
-        DvbService.runBeforeUpdate(values, next);
-        break;
-      default:
-        next();
+    // only update api data if id available (when added to playlist oder other fields become changed)
+    if(_.isUndefined(values.id)){
+      next();
+    } else{
+      ApiService.runBeforeUpdate(values, next);
     }
   },
   beforeCreate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.runBeforeCreate(values, next);
-        break;
-      case 'weather':
-        WeatherService.runBeforeCreate(values, next);
-      case 'dvb':
-        DvbService.runBeforeCreate(values, next);
-        break;
-      default:
-        next();
-    }
+    ApiService.runBeforeCreate(values, next);
   },
   afterUpdate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.publishUpdate(values, next);
-        break;
-      case 'weather':
-        WeatherService.publishUpdate(values, next);
-      case 'dvb':
-        DvbService.publishUpdate(values, next);
-        break;
-      default:
-        next();
-    }
+    ApiService.publishUpdate(values, next);
   }
 
 };

@@ -1,7 +1,7 @@
-module.exports = {
+'use strict';
 
-  run: function(playlistitem) {
+const BaseAppService = require("./BaseAppService");
 
-  }
+module.exports = class MsgService extends BaseAppService {
 
 }
