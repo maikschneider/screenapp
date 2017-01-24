@@ -6,30 +6,28 @@ SCC 2016 Project by [Maik Schneider](@maikschneider) and [Christoph Biering](@ch
 
 ## Overview
 
-* Software Stack
-* Install
-* [Model](#Model)
+* [Software Stack](software-stack)
+* [Install](#install)
+* [Model](#model)
 * [Services](#services)
-  * [ApiService](#ApiService)
-  * [BroadcastService](#BroadcastService)
-  * [BaseAppService](#BaseAppService)
-    * [WeatherService](#WeatherService)
-    * [TwitterService](#TwitterService)
-    * [DvbService](#DvbService)
-    * [MsgService](#MsgService)
-  * [GeocodeService](#GeocodeService)
-* [API](#API)
-* [Usage](#Usage)
-* [Backend](#Backend)
+  * [ApiService](#apiservice)
+  * [BroadcastService](#broadcastservice)
+  * [BaseAppService](#baseappservice)
+    * [WeatherService](#weatherservice)
+    * [TwitterService](#twitterservice)
+    * [DvbService](#dvbservice)
+    * [MsgService](#msgservice)
+  * [GeocodeService](#geocodeservice)
+* [API](#api)
+* [Usage](#usage)
+* [Backend](#backend)
 * Webclients (Anzeige)
 
 ## Software Stack
 
 * [sails.js](http://sailsjs.org)
     * ORM [Waterline](https://github.com/balderdashy/waterline-docs)
-    * Adapters (MySQL, [NeDB](https://github.com/louischatriot/nedb)?)
 * [swagger.io](http://swagger.io/)
-* [reveal.js](http://lab.hakim.se/reveal-js/#/)
 * [bower](https://bower.io/)
     * [Foundation 6](http://foundation.zurb.com/)
 
@@ -51,6 +49,8 @@ Services are defined in `app/api/services`. They can be called from everywhere i
 
 ### ApiService
 
+Service wrapper for all concrete api services: Passes update requests to particular service based on **PlaylistItem** or Playlistitem.id + **Playlistitem.appType**
+
 
 ### BroadcastService (beta)
 
@@ -58,13 +58,19 @@ The perpose of this service is to controll the play state of all connected scree
 
 ### BaseAppService
 
+Abstract service workflow for loading PlaylistItems, receiving API data  and saving data to database. Offers **beforeUpdate** and **afterUpdate** hook to child classes.
+
 #### WeatherService
 
 Gets weather forecast from [openweathermap.org](http://openweathermap.org/). Caches the received data inside the PlaylistItem. Fires a socket event after updating a PlaylistItem.
 
 #### TwitterService
 
+Uses the [Twitter search API](https://dev.twitter.com/rest/public/search) to receive tweets. Implementation of [application-only](https://dev.twitter.com/oauth/application-only) oAuth2 authentification.
+
 #### DvbService
+
+Receives bus- and tramstop data from Dresdens public transportation system. Uses [dvbjs](https://github.com/kiliankoe/dvbjs).
 
 #### MsgService
 
