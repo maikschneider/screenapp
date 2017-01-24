@@ -1,3 +1,5 @@
+const ApiService = require("./ApiService");
+
 module.exports = {
 
     isStarted: false,
@@ -12,7 +14,7 @@ module.exports = {
     },
 
     runService: function(playlistitem) {
-      AppService.runUpdate(playlistitem.id);
+      ApiService.runUpdate(playlistitem.id, playlistitem.appType);
     },
 
     startPlaylistCron: function() {

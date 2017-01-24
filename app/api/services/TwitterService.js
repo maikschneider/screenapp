@@ -1,11 +1,17 @@
-module.exports = {
+'use strict';
 
-  consumer_key: 'pixRh7PZGXNdSeVsFAXAZ9Bag',
-  consumer_secret: 'RucPX4H4lrPiDGydAlyJWGFOH16GI3Bi0pgy2hnfUHE7JFe4l7',
-  bearer_token: undefined,
-  data: null,
+const BaseAppService = require("./BaseAppService");
 
-  obtainBearerToken: function(callback){
+module.exports = class TwitterService extends BaseAppService {
+
+  constructor(){
+    super();
+    this.consumer_key = 'pixRh7PZGXNdSeVsFAXAZ9Bag';
+    this.consumer_secret = 'RucPX4H4lrPiDGydAlyJWGFOH16GI3Bi0pgy2hnfUHE7JFe4l7';
+    this.bearer_token = undefined;
+  }
+
+  obtainBearerToken(callback){
     var _this = this;
     var bearer_token_credentials = encodeURI(this.consumer_key) + ':' + encodeURI(this.consumer_secret);
     var base64url = require('base64-url');
@@ -34,9 +40,9 @@ module.exports = {
         }
         callback();
     });
-  },
+  }
 
-  getData: function(callback) {
+  getData(callback) {
     var _this = this;
 
     if(_.isUndefined(this.bearer_token)) {
@@ -48,9 +54,9 @@ module.exports = {
       this.obtainTwitterData(callback);
     }
 
-  },
+  }
 
-  obtainTwitterData: function(callback) {
+  obtainTwitterData(callback) {
     var _this = this;
 
     var request = require('request');
@@ -73,6 +79,6 @@ module.exports = {
         }
         callback();
     });
-  },
+  }
 
 }

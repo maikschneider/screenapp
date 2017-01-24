@@ -4602,6 +4602,8 @@ section.twitter {
     color: #777; }
   section.twitter p {
     font-size: 2rem; }
+  section.twitter img {
+    max-height: 50vh; }
 
 section.dvb {
   background-color: #fdc400; }

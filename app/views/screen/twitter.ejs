@@ -1,6 +1,6 @@
 <%
-var tweets = item.data.statuses;
-if(tweets){
+if(item.data && item.data.statuses){
+    var tweets = item.data.statuses;
     var height = tweets.length * 100;
     var marginTop = typeof activeTweet == "undefined" ? 0 : activeTweet * -100;
 %>

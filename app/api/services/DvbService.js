@@ -1,10 +1,16 @@
-var dvb = require('dvbjs');
+'use strict';
 
-module.exports = {
+const dvb = require('dvbjs');
+const BaseAppService = require("./BaseAppService");
 
-  cacheTimeInMin: 1,
+module.exports = class DvbService extends BaseAppService {
 
-  getData: function(callback) {
+  constructor(){
+    super();
+    this.cacheTimeInMin = 0;
+  }
+
+  getData(callback) {
     var _this = this;
     var stopName = this.playlistitem.dvbStop;
     var timeOffset = 0;

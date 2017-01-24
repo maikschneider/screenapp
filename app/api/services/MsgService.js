@@ -1,7 +1,7 @@
-module.exports = {
+'use strict';
 
-  getData: function(callback){
-    callback();
-  }
+const BaseAppService = require("./BaseAppService");
+
+module.exports = class MsgService extends BaseAppService {
 
 }

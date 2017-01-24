@@ -95,14 +95,14 @@ module.exports = {
     if(_.isUndefined(values.id)){
       next();
     } else{
-      AppService.runBeforeUpdate(values, next);
+      ApiService.runBeforeUpdate(values, next);
     }
   },
   beforeCreate: function(values, next){
-    AppService.runBeforeCreate(values, next);
+    ApiService.runBeforeCreate(values, next);
   },
   afterUpdate: function(values, next){
-    AppService.publishUpdate(values, next);
+    ApiService.publishUpdate(values, next);
   }
 
 };

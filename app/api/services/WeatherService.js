@@ -1,9 +1,16 @@
-module.exports = {
+'use strict';
 
-  apiKey: '87c00245aa4be44f589fe378a50dc13c',
-  cacheTimeInMin: 2,
+const BaseAppService = require("./BaseAppService");
 
-  getData: function(callback) {
+module.exports = class WeatherService extends BaseAppService {
+
+  constructor(){
+    super();
+    this.apiKey = '87c00245aa4be44f589fe378a50dc13c';
+    this.cacheTimeInMin = 2;
+  }
+
+  getData(callback) {
     var _this = this;
     var request = require('request');
     var options  = {
@@ -22,6 +29,6 @@ module.exports = {
         }
         callback();
     });
-  },
+  }
 
 }
