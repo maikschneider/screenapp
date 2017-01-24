@@ -1,19 +1,26 @@
 # Screenapp
 
-SCC 2016 Project
+![overview](overview.png)
+
+SCC 2016 Project by [Maik Schneider](@maikschneider) and [Christoph Biering](@chryb).
 
 ## Overview
 
 * Software Stack
 * Install
-* Services
-  * BroadcastService
-  * WeatherService
-  * GeocodeService
-* Model
-* API
-* Usage
-* Backend
+* [Model](#Model)
+* [Services](#services)
+  * [ApiService](#ApiService)
+  * [BroadcastService](#BroadcastService)
+  * [BaseAppService](#BaseAppService)
+    * [WeatherService](#WeatherService)
+    * [TwitterService](#TwitterService)
+    * [DvbService](#DvbService)
+    * [MsgService](#MsgService)
+  * [GeocodeService](#GeocodeService)
+* [API](#API)
+* [Usage](#Usage)
+* [Backend](#Backend)
 * Webclients (Anzeige)
 
 ## Software Stack
@@ -32,17 +39,34 @@ SCC 2016 Project
 * to start the server, run `sails lift`
 * navigate into the **assets** directory and run `bower install`
 
+## Model
+
+![uml](model.png)
+
 ## Services
 
 Services are defined in `app/api/services`. They can be called from everywhere inside the node application.
 
-### BroadcastService (very alpha)
+![service](service.png)
+
+### ApiService
+
+
+### BroadcastService (beta)
 
 The perpose of this service is to controll the play state of all connected screens via socket. It should loop through the Playlists and synchronise the screens by firing up socket events.
 
-### WeatherService
+### BaseAppService
+
+#### WeatherService
 
 Gets weather forecast from [openweathermap.org](http://openweathermap.org/). Caches the received data inside the PlaylistItem. Fires a socket event after updating a PlaylistItem.
+
+#### TwitterService
+
+#### DvbService
+
+#### MsgService
 
 ### GeocodeService
 
@@ -61,10 +85,6 @@ Requests a list of places by a name. Example response for **halle saale**:
   "provider": "openstreetmap" 
 }
 ```    
-
-## Model
-
-![uml](plantuml.png)
 
 ## API
 

@@ -1,0 +1,44 @@
+@startuml
+
+
+class Screen {
+	- id
+	- name
+}
+
+Screen "*" -- "1" Playlist
+
+class Playlist {
+	- id
+	- name
+	- live
+}
+
+Playlist "1" o-- "*" PlaylistItem
+
+class PlaylistItem {
+	- id
+	- name
+	- duration
+	- appType : enum
+	- data : json
+	..
+	- weatherLocation
+	- weatherLocationCode
+	- weatherUnit
+	..
+	- twitterFilter
+	- twitterTweetDuration
+	..
+	- msgHeadline
+	- msgText
+	- msgImage
+	..
+	- dvbStop
+	--
+	- geocode(location, cb)
+}
+
+
+
+@enduml
