@@ -4,7 +4,7 @@ module.exports = {
 
     Screen.find().populate('list').exec(function(err, screens){
       Playlist.find().exec(function(err, lists){
-        PlaylistItem.find().exec(function(err, items){
+        PlaylistItem.find({user: req.session.me}).exec(function(err, items){
           res.view('admin/index', {'screens': screens, 'lists': lists, 'items': items});
         });
       });

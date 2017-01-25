@@ -56,6 +56,15 @@ module.exports = {
     playlist: {
       model: 'playlist',
     },
+    user: {
+      model: 'user'
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.user;
+      return obj;
+    },
 
     getIcon: function() {
       var htmlclass = "";

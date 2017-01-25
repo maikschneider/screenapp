@@ -31,7 +31,22 @@ module.exports.policies = {
    AdminController: {
     '*': 'isAuthenticated',
     'contact': true
-   }
+   },
+   PlaylistController: {
+    '*': 'isAuthenticated'
+   },
+   PlaylistItemController: {
+    '*': 'isAuthenticated',
+    'create': ['isAuthenticated', 'injectUser'],
+    'find': ['isAuthenticated', 'whereUser'],
+    'findOne': ['isAuthenticated', 'canWrite'],
+    'update': ['isAuthenticated', 'canWrite'],
+    'destroy': ['isAuthenticated', 'canWrite'],
+    // @TODO:
+    //'remove'
+    //'add'
+    //'populate'
+   },
 
   /***************************************************************************
   *                                                                          *
