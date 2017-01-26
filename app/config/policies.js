@@ -63,6 +63,8 @@ module.exports.policies = {
     'findOne': ['isAuthenticated', 'canWrite'],
     'update': ['isAuthenticated', 'canWrite'],
     'destroy': ['isAuthenticated', 'canWrite'],
+    'play': true,
+    'live': true
     // @TODO:
     //'remove'
     //'add'
