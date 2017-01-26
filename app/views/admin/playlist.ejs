@@ -144,7 +144,7 @@
           $('form input[name="'+index+'"]:checkbox').prop('checked', value);
           if(typeof(value) === 'object' && value !== null) {
             $(value).each(function(i, e){
-              //$('form select[name="'+index+'"] option[value="'+e.id+'"]').attr('selected','');
+              $('form select[name="'+index+'"] option[value="'+e.id+'"]').attr('selected','');
               if(index=='items') $.AddItem(e.id);
             });
           }

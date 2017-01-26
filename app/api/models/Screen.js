@@ -14,7 +14,16 @@ module.exports = {
 
     list: {
       model: 'playlist'
-    }
+    },
+    user: {
+      model: 'user'
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.user;
+      return obj;
+    },
   }
 };
 

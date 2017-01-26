@@ -77,7 +77,7 @@ section:nth-child(2n-1){
   }
 }
 
-h2,h3{
+h1,h2,h3{
   font-family: 'Catamaran', sans-serif;
   font-weight: 200;
   line-height: 1;
@@ -85,6 +85,9 @@ h2,h3{
     font-weight: inherit;
     color: $primary-color;
   }
+}
+h1{
+  margin: rem-calc(20 0 40);
 }
 h2{
   margin: rem-calc(60 0);
@@ -115,6 +118,9 @@ section{
   }
   &.dark{
     @include linear-gradient($black, darken($black,5%));
+  }
+  &.fullscreen{
+    height:calc(100vh - 55px);
   }
 }
 
@@ -307,6 +313,11 @@ section#contact{
   input, textarea{
     box-shadow: 0 4px 0 rgba(#FFF,0.25);
     margin-bottom: rem-calc(25);
+    &:focus, &:active{
+      border:0;
+      box-shadow: 0 4px 0 $primary-color;
+      @include transition(none);
+    }
   }
   textarea{
     min-height: rem-calc(120);
@@ -323,5 +334,15 @@ section#contact{
   }
   .callout{
     border-radius: 5px;
+  }
+}
+
+section#login{
+  section#contact{
+    padding: rem-calc(10 30);
+    box-shadow: 0 4px 0 rgba(#000,0.2);
+  }
+  .button.large{
+    font-weight: 300;
   }
 }
