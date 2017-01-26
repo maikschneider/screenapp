@@ -22,8 +22,7 @@ module.exports = {
 
   playlist: function(req, res) {
     var id = req.param('id', false);
-    var filter = id ? {list: id} : {};
-    Screen.find({user: req.session.me}).where(filter).exec(function(err, screens){
+    Screen.find({user: req.session.me}).exec(function(err, screens){
       PlaylistItem.find({user: req.session.me}).exec(function(err, items){
           res.view('admin/playlist', {'screens': screens, 'items': items, 'playlist': id});
       });
