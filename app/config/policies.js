@@ -33,7 +33,16 @@ module.exports.policies = {
     'contact': true
    },
    PlaylistController: {
-    '*': 'isAuthenticated'
+    '*': 'isAuthenticated',
+    'create': ['isAuthenticated', 'injectUser'],
+    'find': ['isAuthenticated', 'whereUser'],
+    'findOne': ['isAuthenticated', 'canWrite'],
+    'update': ['isAuthenticated', 'canWrite'],
+    'destroy': ['isAuthenticated', 'canWrite'],
+    // @TODO:
+    //'remove'
+    //'add'
+    //'populate'
    },
    PlaylistItemController: {
     '*': 'isAuthenticated',

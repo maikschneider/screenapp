@@ -5,10 +5,10 @@ module.exports = function(req, res, next) {
   var user = req.session.me;
   var Model = actionUtil.parseModel(req);
 
-  Model.findOne({user:user}).exec(function(err,foundModel){
+  Model.findOne(req.param('id')).exec(function(err,foundModel){
     if(err) throw err;
 
-    if(req.param('id')==foundModel.id)
+    if(foundModel.user==user)
       return next();
 
     // No access
