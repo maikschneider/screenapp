@@ -1,7 +1,7 @@
 @charset 'utf-8';
 
 @import 'bourbon';
-@import 'settings';
+@import 'settings-admin';
 @import 'foundation';
 @import 'motion-ui';
 $fa-font-path: '../bower_components/font-awesome/fonts';
@@ -52,6 +52,58 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 
 @include motion-ui-transitions;
 @include motion-ui-animations;
+
+.off-canvas{
+  img{
+    width: 50%;
+    margin: rem-calc(12 0 10);
+  }
+  .menu > li > a{
+    color:#FFF;
+    text-align: center;
+    font-weight: bold;
+    font-size: rem-calc(12);
+    padding:rem-calc(20 0);
+    i{
+      display: block;
+      font-size: rem-calc(32);
+      margin-bottom: rem-calc(10);
+    }
+    &:hover{
+      color:$primary-color;
+    }
+    &.active{
+      background-color: #FFF;
+      color: darken($primary-color,10%);
+    }
+  }
+  .logo{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 100px;
+    border:1px solid #FFF;
+    transform: scale(0.7);
+  }
+  .menu-text{
+    color:#FFF;
+    text-align: center;
+    padding:0;
+    font-weight: 400;
+    margin:rem-calc(0 0 20);
+    font-size: rem-calc(12);
+    display: block;
+  }
+  .welcome{
+    color:#FFF;
+  }
+  .button{
+    margin-bottom: 0;
+  }
+}
+.position-left.is-transition-push:after{
+  box-shadow: none;
+}
 
 
 a.danger{

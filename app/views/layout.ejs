@@ -10,12 +10,14 @@
   <body>
     <div class="off-canvas-wrapper">
       <div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
-        <div class="row" style="height:100%">
+        <div class="row collapse align-center" style="height:100%">
           <div class="small-12 columns text-center">
-            <img src="/images/logo.svg" alt="logo" />
+            <span class="logo">
+              <img src="/images/logo.svg" alt="logo" />
+              <span class="menu-text">Info Monitor</span>
+            </span>
             <ul class="menu vertical text-left">
-              <li class="menu-text">Screen App</li>
-              <li><a href="/admin"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+              <li><a class="<%= req.route.path == '/admin' ? 'active' : '' %>" href="/admin"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
               <li><a href="#"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
               <li><a href="#"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
               <li><a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
@@ -23,11 +25,12 @@
               <!-- <li><a href="#">Play</a></li> -->
             </ul>
           </div>
-          <div class="small-12 columns align-bottom">
-            <p class="text-center">Hi, <%= req.session.meName %></p>
-            <ul class="menu vertical align-bottom">
-              <li><a href="/logout" class="button hollow">Logout</a></li>
-            </ul>
+          <div class="small-10 columns align-bottom">
+            <div class="row collapse align-bottom" style="height:100%">
+              <div class="columns align-bottom">
+                <p class="text-center"><a href="/logout" class="button hollow">Logout</a></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
