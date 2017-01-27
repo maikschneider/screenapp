@@ -36,6 +36,7 @@ module.exports = {
         success: function() {
 
           req.session.me = createdUser.id;
+          req.session.meName = createdUser.name;
 
           if (req.wantsJSON) {
             return res.ok('Logged in successfully!');

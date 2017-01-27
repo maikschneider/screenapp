@@ -3,34 +3,51 @@
   <head>
     <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/admin.css">
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">Screen App</li>
-          <li><a href="/admin"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-          <li><a href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
-          <!-- <li><a href="#">Play</a></li> -->
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><a href="/logout" class="button hollow">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <main>
-      <div class="row">
-        <div class="small-12 columns">
-          <%- body %>
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
+        <div class="row" style="height:100%">
+          <div class="small-12 columns text-center">
+            <img src="/images/logo.svg" alt="logo" />
+            <ul class="menu vertical text-left">
+              <li class="menu-text">Screen App</li>
+              <li><a href="/admin"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+              <li><a href="#"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
+              <li><a href="#"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
+              <li><a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
+              <li><a href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
+              <!-- <li><a href="#">Play</a></li> -->
+            </ul>
+          </div>
+          <div class="small-12 columns align-bottom">
+            <p class="text-center">Hi, <%= req.session.meName %></p>
+            <ul class="menu vertical align-bottom">
+              <li><a href="/logout" class="button hollow">Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </main>
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="title-bar hide-for-large">
+          <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="offCanvas"></button>
+            <span class="title-bar-title">Info Montor</span>
+          </div>
+        </div>
+
+        <main>
+          <div class="row">
+            <div class="small-12 columns">
+              <%- body %>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/bower_components/foundation-sites/dist/js/foundation.min.js"></script>

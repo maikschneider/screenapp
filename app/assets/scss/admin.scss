@@ -30,7 +30,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include foundation-flex-video;
 //@include foundation-label;
 @include foundation-media-object;
-// @include foundation-off-canvas;
+@include foundation-off-canvas;
 @include foundation-orbit;
 // @include foundation-pagination;
 // @include foundation-progress-bar;
@@ -53,4 +53,83 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
-@import "admin";
+
+a.danger{
+  color: $alert-color;
+}
+a.success{
+  color: $success-color;
+}
+
+
+.weatherLocation-column{
+  position: relative;
+  #location-dropdown{
+    width: calc(100% - 31px);
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 300px;
+    overflow: scroll;
+    .menu li a{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+ul.playlistitems{
+  list-style: none;
+  margin: 0;
+  background: #F7F7F7;
+  border: 1px solid #ccc;
+  padding: rem-calc(20);
+  color: #FFF;
+  li{
+    margin-bottom: rem-calc(5);
+    cursor: pointer;
+    &.twitter{
+      background-color:#1da1f2;
+    }
+    &.weather{
+      background-color: #ffb900;
+    }
+    &.msg{
+      background-color: #2baf2b;
+    }
+    &.dvb{
+      background-color: #fdc400;
+    }
+    &.hidden{
+      display: none;
+    }
+    &:hover .fa-times{
+      color:rgba(#000,0.6);
+    }
+  }
+  .fa-bars{
+    cursor: row-resize;
+    background: #656565;
+    color:#FFF;
+    padding: rem-calc(7 10);
+    margin-right: rem-calc(5);
+    border-right: 1px solid #F7F7F7;
+  }
+  .fa-times, .fa-plus{
+    float:right;
+    color:rgba(#000,0.3);
+    line-height: 1.9;
+    margin-right: rem-calc(10);
+  }
+  &.inactive{
+    li{
+      padding-left: rem-calc(10);
+    }
+    li:not(:hover){
+      -webkit-filter: grayscale(100%);
+      -moz-filter: grayscale(100%);
+      -ms-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+  }
+}
