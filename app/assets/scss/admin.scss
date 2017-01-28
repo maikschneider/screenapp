@@ -44,7 +44,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include foundation-tabs;
 // @include foundation-thumbnail;
 @include foundation-title-bar;
-// @include foundation-tooltip;
+@include foundation-tooltip;
 @include foundation-top-bar;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
@@ -144,6 +144,20 @@ h2{
     }
   }
 }
+.button.secondary{
+  font-weight: 500;
+  background-color: #FFF;
+  border:1px solid #CCC;
+  height: 100%;
+  color: #666;
+  @include transition(all 0.3s linear);
+  &:hover{
+    @include transition(all 0.3s linear);
+    border-color: $black;
+    background-color: $black;
+    color:#FFF;
+  }
+}
 
 .screenitem{
   background-color: $screen;
@@ -191,32 +205,74 @@ h2{
     font-size: rem-calc(14);
     color: rgba(#FFF,0.8);
     margin:rem-calc(15);
+    margin-bottom: 0;
     strong{
       font-size: rem-calc(16);
-    }
-  }
-  .button{
-    margin:0;
-    font-weight: 500;
-  }
-  .button{
-    background-color: #FFF;
-    border:1px solid #CCC;
-    height: 100%;
-    color: #666;
-    &:hover{
-      border-color: $black;
-      background-color: $black;
-      color:#FFF;
     }
   }
   .button.first{
     border-right: 0;
   }
+  .button{
+    margin:0;
+  }
 }
+
+.playlistentry{
+  background-color: $list;
+  margin-bottom: rem-calc(20);
+  p{
+    color:rgba(#FFF,0.8);
+    margin:0;
+    padding:rem-calc(8 20);
+  }
+  .name{
+    font-weight: 600;
+  }
+  .detail{
+  }
+  .button{
+    margin-bottom: 0;
+    border:1px solid $medium-gray;
+    line-height: rem-calc(16);
+  }
+  span{
+    font-weight: inherit;
+  }
+  &.playlistentry--new{
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      display: inline-block;
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+      padding-left: rem-calc(5);
+    }
+    i{
+      font-size: rem-calc(24);
+      line-height: 0;
+      position: relative;
+      top:rem-calc(4);
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: 1px solid $black;
+      @include transition(all 0.3s linear);
+    }
+  }
+}
+
 .spacer{
   height: rem-calc(40);
 }
+
+
 
 a.danger{
   color: $alert-color;

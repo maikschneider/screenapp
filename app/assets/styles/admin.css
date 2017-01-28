@@ -5323,6 +5323,75 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   vertical-align: middle;
   font-weight: bold; }
 
+.has-tip {
+  position: relative;
+  display: inline-block;
+  border-bottom: dotted 1px #8a8a8a;
+  font-weight: bold;
+  cursor: help; }
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + 0.6495rem);
+  z-index: 1200;
+  max-width: 10rem;
+  padding: 0.75rem;
+  border-radius: 0;
+  background-color: #0C1E2D;
+  font-size: 80%;
+  color: #fefefe; }
+  .tooltip::before {
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 0.75rem;
+    content: '';
+    border-top-width: 0;
+    border-bottom-style: solid;
+    border-color: transparent transparent #0C1E2D;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%); }
+  .tooltip.top::before {
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 0.75rem;
+    content: '';
+    border-bottom-width: 0;
+    border-top-style: solid;
+    border-color: #0C1E2D transparent transparent;
+    top: 100%;
+    bottom: auto; }
+  .tooltip.left::before {
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 0.75rem;
+    content: '';
+    border-right-width: 0;
+    border-left-style: solid;
+    border-color: transparent transparent transparent #0C1E2D;
+    top: 50%;
+    bottom: auto;
+    left: 100%;
+    transform: translateY(-50%); }
+  .tooltip.right::before {
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 0.75rem;
+    content: '';
+    border-left-width: 0;
+    border-right-style: solid;
+    border-color: transparent #0C1E2D transparent transparent;
+    top: 50%;
+    right: 100%;
+    bottom: auto;
+    left: auto;
+    transform: translateY(-50%); }
+
 .top-bar {
   padding: 0.5rem; }
   .top-bar::before, .top-bar::after {
@@ -6086,6 +6155,23 @@ h2 {
   h2.color-doc {
     color: #925E1B; }
 
+.button.secondary {
+  font-weight: 500;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  height: 100%;
+  color: #666;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  transition: all 0.3s linear; }
+  .button.secondary:hover {
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    border-color: #0C1E2D;
+    background-color: #0C1E2D;
+    color: #FFF; }
+
 .screenitem {
   background-color: #428bbe;
   color: #FFF;
@@ -6126,23 +6212,55 @@ h2 {
   .screenitem p {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.8);
-    margin: 0.9375rem; }
+    margin: 0.9375rem;
+    margin-bottom: 0; }
     .screenitem p strong {
       font-size: 1rem; }
-  .screenitem .button {
-    margin: 0;
-    font-weight: 500; }
-  .screenitem .button {
-    background-color: #FFF;
-    border: 1px solid #CCC;
-    height: 100%;
-    color: #666; }
-    .screenitem .button:hover {
-      border-color: #0C1E2D;
-      background-color: #0C1E2D;
-      color: #FFF; }
   .screenitem .button.first {
     border-right: 0; }
+  .screenitem .button {
+    margin: 0; }
+
+.playlistentry {
+  background-color: #288543;
+  margin-bottom: 1.25rem; }
+  .playlistentry p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    padding: 0.5rem 1.25rem; }
+  .playlistentry .name {
+    font-weight: 600; }
+  .playlistentry .button {
+    margin-bottom: 0;
+    border: 1px solid #cacaca;
+    line-height: 1rem; }
+  .playlistentry span {
+    font-weight: inherit; }
+  .playlistentry.playlistentry--new {
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC; }
+    .playlistentry.playlistentry--new p {
+      display: inline-block;
+      color: #CCC;
+      margin: 0;
+      font-weight: 600;
+      padding-left: 0.3125rem; }
+    .playlistentry.playlistentry--new i {
+      font-size: 1.5rem;
+      line-height: 0;
+      position: relative;
+      top: 0.25rem; }
+    .playlistentry.playlistentry--new:hover {
+      background-color: #0C1E2D;
+      color: #FFF;
+      border: 1px solid #0C1E2D;
+      -webkit-transition: all 0.3s linear;
+      -moz-transition: all 0.3s linear;
+      transition: all 0.3s linear; }
 
 .spacer {
   height: 2.5rem; }

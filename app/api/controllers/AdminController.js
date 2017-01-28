@@ -3,7 +3,7 @@ module.exports = {
   index: function(req, res) {
 
     Screen.find({user: req.session.me}).populate('list').exec(function(err, screens){
-      Playlist.find({user: req.session.me}).exec(function(err, lists){
+      Playlist.find({user: req.session.me}).populate('items').populate('screens').exec(function(err, lists){
         PlaylistItem.find({user: req.session.me}).exec(function(err, items){
           res.view('admin/index', {'screens': screens, 'lists': lists, 'items': items});
         });
