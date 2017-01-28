@@ -3,45 +3,52 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <h2><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Play</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i<screens.length; i++){ %>
-            <tr>
-              <td><%= screens[i].id %></td>
-              <td>
-                <a href='screen/<%= screens[i].id %>' data-modal>
-                  <%= screens[i].name %>
-                </a>
-              </td>
-              <td>
+    <h2 class="color-screen"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
+
+    <div class="row">
+      <% for(var i=0; i<screens.length; i++){ %>
+      <div class="large-4 medium-6 small-12 columns">
+        <div class="screenitem">
+          <div class="row expanded align-bottom" style="height:100%;">
+            <div class="small-12 columns text-right">
+              <a href="#" class="trash"><i class='fa fa-trash'></i></a>
+            </div>
+            <div class="small-12 columns">
+              <p><strong><%= screens[i].name %></strong><% if(screens[i].list){ %><br />Playlist: <%= screens[i].list.name %><% } %></p>
+            </div>
+            <div class="small-12 columns">
+              <div class="row nested collapse">
                 <% if(screens[i].list){ %>
-                  <%  if(screens[i].list.live){ %>
-                    <a class="danger" href='screen/stop/<%= screens[i].id %>'>
-                      <i class='fa fa-stop-circle'></i>
-                    </a>
-                  <% } %>
-                  <a class="success" href='screen/play/<%= screens[i].id %>'>
-                    <i class='fa fa-play-circle'></i>
-                  </a>
+                <div class="columns">
+                  <a class="expanded button first secondary" href='screen/play/<%= screens[i].id %>'><i class='fa fa-eye'></i> Preview</a>
+                </div>
                 <% } %>
-              </td>
-            </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <a href="/admin/screen" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+                <div class="columns">
+                  <a class="expanded button secondary" href='screen/<%= screens[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="large-4 medium-6 small-12 columns">
+        <a href="#" class="screenitem screenitem--new">
+          <div class="row align-middle" style="height: 100%;">
+            <div class="columns">
+              <i class="fa fa-plus"></i>
+              <p>Add screen</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
   </div>
 
   <div class="small-12 columns">
-    <h2><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
+    <h2 class="color-list"><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
     <table>
       <thead>
         <tr>
@@ -72,7 +79,7 @@
   </div>
 
   <div class="small-12 columns">
-    <h2><i class="fa fa-play-circle" aria-hidden="true"></i> Items</h2>
+    <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Items</h2>
     <table>
       <thead>
         <tr>

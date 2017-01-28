@@ -50,7 +50,7 @@ $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #1FCDCA,
-  secondary: #777,
+  secondary: #FFF,
   success: #3adb76,
   warning: #ffae00,
   alert: #ec5840,
@@ -116,11 +116,11 @@ $header-sizes: (
     'h6': 16,
   ),
   medium: (
-    'h1': 48,
-    'h2': 40,
-    'h3': 31,
-    'h4': 25,
-    'h5': 20,
+    'h1': 38,
+    'h2': 24,
+    'h3': 21,
+    'h4': 15,
+    'h5': 10,
     'h6': 16,
   ),
 );
@@ -249,7 +249,7 @@ $button-sizes: (
 );
 $button-opacity-disabled: 0.25;
 $button-background-hover-lightness: -20%;
-$button-hollow-hover-lightness: -50%;
+$button-hollow-hover-lightness: +50%;
 
 // 12. Button Group
 // ----------------
@@ -481,7 +481,7 @@ $slider-radius: $global-radius;
 // ----------
 
 $switch-background: $medium-gray;
-$switch-background-active: $primary-color;
+$switch-background-active: $black;
 $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;

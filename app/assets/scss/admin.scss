@@ -39,7 +39,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include foundation-slider;
 @include foundation-sticky;
 @include foundation-reveal;
-// @include foundation-switch;
+@include foundation-switch;
 @include foundation-table;
 @include foundation-tabs;
 // @include foundation-thumbnail;
@@ -53,28 +53,50 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
+.row.nested{
+  margin: 0;
+}
+
+$screen: #428bbe;
+$list: #288543;
+$item: #B01F1F;
+$doc: #925E1B;
+
+$color-list:
+  "screen" $screen,
+  "list" $list,
+  "item" $item,
+  "doc" $doc;
+
 .off-canvas{
   img{
     width: 50%;
     margin: rem-calc(12 0 10);
   }
   .menu > li > a{
-    color:#FFF;
+    color:rgba(#FFF,0.8);
     text-align: center;
     font-weight: bold;
     font-size: rem-calc(12);
     padding:rem-calc(20 0);
+    @each $color in $color-list {
+      &.color-#{nth($color, 1)} i{
+        color:#{nth($color, 2)}
+      }
+    }
     i{
       display: block;
       font-size: rem-calc(32);
-      margin-bottom: rem-calc(10);
+      margin-bottom: rem-calc(8);
     }
-    &:hover{
-      color:$primary-color;
+    @each $color in $color-list {
+      &.color-#{nth($color, 1)}:hover{
+        color:#{nth($color, 2)}
+      }
     }
     &.active{
       background-color: #FFF;
-      color: darken($primary-color,10%);
+      color: $black;
     }
   }
   .logo{
@@ -105,6 +127,96 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
   box-shadow: none;
 }
 
+h1{
+  font-weight: 200;
+  color:#999;
+  margin: rem-calc(30 0);
+  & + hr{
+    margin: rem-calc(-20 0 30);
+  }
+}
+h2{
+  font-weight: 600;
+  margin-bottom: rem-calc(15);
+  @each $color in $color-list {
+    &.color-#{nth($color, 1)}{
+      color:#{nth($color, 2)}
+    }
+  }
+}
+
+.screenitem{
+  background-color: $screen;
+  color:#FFF;
+  height: 85%;
+  margin-bottom: 15%;
+  display: block;
+  &:after{
+    content:'';
+    display: block;
+    height: 20px;
+  }
+  &.screenitem--new{
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+    }
+    i{
+      font-size: rem-calc(24);
+      line-height: 0;
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: none;
+      @include transition(all 0.3s linear);
+    }
+  }
+  .trash{
+    font-size: rem-calc(20);
+    margin:rem-calc(15);
+    color:rgba(#FFF,0.5);
+    &:hover{
+      color:rgba(#FFF,0.8);
+    }
+  }
+  p{
+    font-size: rem-calc(14);
+    color: rgba(#FFF,0.8);
+    margin:rem-calc(15);
+    strong{
+      font-size: rem-calc(16);
+    }
+  }
+  .button{
+    margin:0;
+    font-weight: 500;
+  }
+  .button{
+    background-color: #FFF;
+    border:1px solid #CCC;
+    height: 100%;
+    color: #666;
+    &:hover{
+      border-color: $black;
+      background-color: $black;
+      color:#FFF;
+    }
+  }
+  .button.first{
+    border-right: 0;
+  }
+}
+.spacer{
+  height: rem-calc(40);
+}
 
 a.danger{
   color: $alert-color;
