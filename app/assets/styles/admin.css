@@ -6262,6 +6262,44 @@ h2 {
       -moz-transition: all 0.3s linear;
       transition: all 0.3s linear; }
 
+.playlistitementry {
+  background-color: #B01F1F;
+  padding-top: 98%;
+  position: relative;
+  overflow: hidden; }
+  .playlistitementry > .row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; }
+  .playlistitementry p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-weight: 600; }
+    .playlistitementry p i {
+      font-size: 3.75rem;
+      display: block; }
+  .playlistitementry .button.secondary {
+    margin-bottom: 0; }
+  .playlistitementry.playlistitementry--new {
+    display: block;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC; }
+    .playlistitementry.playlistitementry--new p {
+      color: #CCC;
+      margin: 0;
+      font-weight: 600; }
+    .playlistitementry.playlistitementry--new i {
+      font-size: 1.5rem; }
+    .playlistitementry.playlistitementry--new:hover {
+      background-color: #0C1E2D;
+      color: #FFF;
+      border: 1px solid #0C1E2D;
+      -webkit-transition: all 0.3s linear;
+      -moz-transition: all 0.3s linear;
+      transition: all 0.3s linear; }
+
 .spacer {
   height: 2.5rem; }
 

@@ -268,6 +268,51 @@ h2{
   }
 }
 
+.playlistitementry{
+  background-color: $item;
+  padding-top: 98%;
+  position: relative;
+  overflow: hidden;
+  & > .row{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+  }
+  p{
+    color:rgba(#FFF,0.8);
+    margin:0;
+    font-weight: 600;
+    i{
+      font-size: rem-calc(60);
+      display: block;
+    }
+  }
+  .button.secondary{
+    margin-bottom: 0;
+  }
+  &.playlistitementry--new{
+    display: block;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+    }
+    i{
+      font-size: rem-calc(24);
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: 1px solid $black;
+      @include transition(all 0.3s linear);
+    }
+  }
+}
+
 .spacer{
   height: rem-calc(40);
 }

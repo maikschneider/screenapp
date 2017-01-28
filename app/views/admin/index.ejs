@@ -9,14 +9,14 @@
       <% for(var i=0; i<screens.length; i++){ %>
       <div class="large-4 medium-6 small-12 columns">
         <div class="screenitem">
-          <div class="row expanded align-bottom" style="height:100%;">
+          <div class="row expanded" style="height:100%;">
             <div class="small-12 columns text-right">
               <a href="#" class="trash"><i class='fa fa-trash'></i></a>
             </div>
-            <div class="small-12 columns">
+            <div class="small-12 columns align-self-bottom">
               <p><strong><%= screens[i].name %></strong><% if(screens[i].list){ %><br />Playlist: <%= screens[i].list.name %><% } %></p>
             </div>
-            <div class="small-12 columns">
+            <div class="small-12 columns align-self-bottom">
               <div class="row nested collapse">
                 <% if(screens[i].list){ %>
                 <div class="columns">
@@ -101,36 +101,41 @@
 
 
   <div class="small-12 columns">
-    <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Items</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i<items.length; i++){ %>
-            <tr>
-              <td><%= items[i].id %></td>
-              <td>
-                <a href='playlistitem/<%= items[i].id %>' data-modal>
-                  <%- items[i].getIcon() %>&nbsp; <%= items[i].name %>
-                </a>
-              </td>
-              <td>
-                <a href='admin/playlistitem/<%= items[i].id %>'>
-                  <i class="fa fa-pencil"></i>
-                </a>
-              </td>
-            </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <a href="/admin/playlistitem" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
-  </div>
+    <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</h2>
 
+    <div class="row">
+      <% for(var i=0; i<items.length; i++){ %>
+      <div class="small-6 medium-4 large-2 columns">
+        <div class="playlistitementry">
+          <div class="row collapse nested" style="height:100%;">
+            <div class="small-12 columns align-self-bottom text-center">
+              <p class="name">
+              <%- items[i].getIcon() %>
+              &nbsp; <%= items[i].name %></p>
+            </div>
+            <div class="small-12 align-self-bottom columns">
+              <a class="expanded button secondary" href='admin/playlistitem/<%= items[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="small-6 medium-4 large-2 columns">
+        <a href="/admin/playlistitem" class="playlistitementry playlistitementry--new">
+          <div class="row collapse nested" style="height:100%;">
+            <div class="small-12 columns align-self-middle text-center">
+              <p class="name">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Add app</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+  </div>
 </div>
 
 <div class="reveal" id="modal" data-reveal>
