@@ -21,7 +21,8 @@ SCC 2016 Project by [Maik Schneider](@maikschneider) and [Christoph Biering](@ch
 * [API](#api)
 * [Usage](#usage)
 * [Backend](#backend)
-* Webclients (Anzeige)
+* [Deployment](#deployment)
+* [Webclients](#webclients)
 
 ## Software Stack
 
@@ -199,8 +200,19 @@ Response:
 
 ![backend](backend.png)
 
-## Webclients (Anzeige)
+## Deployment
 
-* [reveal.js](http://lab.hakim.se/reveal-js/#/)
+To use the deployment script **openstack_deploy.sh** openstack needs to be configured in your lokal environment. In our case, we the given data for cloud&heat: ```source tud_scc4-openrc.sh```
+
+The scripts reads the available configurations and floating ips in json format. Therefore the command line program [jq](https://stedolan.github.io/jq/) has to be installed.
+
+## Webclients
+
 * iOS App 
+  * XCode project located in SCC16iOSClient
+  * just import in XCode and build
+  * still uses local install at 127.0.0.1:1337
+* built-in webclient
+  * can be reached through admin backend (**preview** button)
+  * can easily be outsourced, since only dependancy is the onload HTML markup. (@TODO) 
 
