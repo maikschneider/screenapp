@@ -1,3 +1,5 @@
+'use strict';
+
 const BaseAppService = require("./BaseAppService");
 const MsgService = require("./MsgService");
 const TwitterService = require("./TwitterService");
