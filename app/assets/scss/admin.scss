@@ -106,14 +106,16 @@ $color-list:
       font-size: rem-calc(32);
       margin-bottom: rem-calc(8);
     }
-    @each $color in $color-list {
-      &.color-#{nth($color, 1)}:hover{
-        color:#{nth($color, 2)}
-      }
+    &:hover{
+      background-color: lighten($black,5%);
+      @include transition(background-color 0.2s ease-out);
     }
     &.active{
       background-color: #FFF;
       color: $black;
+      i{
+        color: $black;
+      }
     }
   }
   .logo{

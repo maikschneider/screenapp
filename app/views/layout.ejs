@@ -18,10 +18,10 @@
             </span>
             <ul class="menu vertical text-left">
               <li><a class="<%= req.route.path == '/admin' ? 'active' : '' %>" href="/admin"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
-              <li><a class="color-screen" href="#"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
-              <li><a class="color-list" href="#"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
-              <li><a class="color-item" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
-              <li><a class="color-doc" href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
+              <li><a class="color-screen <%= req.route.path.indexOf('screens') > 0 ? 'active' : '' %>" href="/admin/screens"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
+              <li><a class="color-list <%= req.route.path.indexOf('playlists') > 0 ? 'active' : '' %>" href="/admin/playlists"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
+              <li><a class="color-item <%= req.route.path.indexOf('playlistitems') > 0 ? 'active' : '' %>" href="/admin/playlistitems"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
+              <li><a class="" href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
               <!-- <li><a href="#">Play</a></li> -->
             </ul>
           </div>

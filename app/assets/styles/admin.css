@@ -6192,25 +6192,16 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
     display: block;
     font-size: 2rem;
     margin-bottom: 0.5rem; }
-  .off-canvas .menu > li > a.color-screen:hover {
-    color: #428bbe; }
-  .off-canvas .menu > li > a.color-list:hover {
-    color: #288543; }
-  .off-canvas .menu > li > a.color-item:hover {
-    color: #B01F1F; }
-  .off-canvas .menu > li > a.color-doc:hover {
-    color: #925E1B; }
-  .off-canvas .menu > li > a.color-twitter:hover {
-    color: #1da1f2; }
-  .off-canvas .menu > li > a.color-weather:hover {
-    color: #ffb900; }
-  .off-canvas .menu > li > a.color-msg:hover {
-    color: #2baf2b; }
-  .off-canvas .menu > li > a.color-dvb:hover {
-    color: #fdc400; }
+  .off-canvas .menu > li > a:hover {
+    background-color: #112b41;
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out; }
   .off-canvas .menu > li > a.active {
     background-color: #FFF;
     color: #0C1E2D; }
+    .off-canvas .menu > li > a.active i {
+      color: #0C1E2D; }
 
 .off-canvas .logo {
   display: inline-block;

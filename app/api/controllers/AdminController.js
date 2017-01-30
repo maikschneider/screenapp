@@ -12,12 +12,24 @@ module.exports = {
 
   },
 
+  screens: function(req, res) {
+    Screen.find({user: req.session.me}).populate('list').exec(function(err, screens){
+      res.view('admin/screens', {'screens': screens});
+    });
+  },
+
   screen: function(req, res) {
     var id = req.param('id', false);
     Playlist.find({user: req.session.me}).exec(function(err, lists){
       res.view('admin/screen', {'lists':lists, 'screen': id});
     });
 
+  },
+
+  playlists: function(req, res) {
+    Playlist.find({user: req.session.me}).populate('items').populate('screens').exec(function(err, lists){
+      res.view('admin/playlists', {'lists': lists});
+    });
   },
 
   playlist: function(req, res) {
@@ -28,6 +40,12 @@ module.exports = {
       });
     });
 
+  },
+
+  playlistitems: function(req, res) {
+    PlaylistItem.find({user: req.session.me}).exec(function(err, items){
+      res.view('admin/playlistitems', {'items': items});
+    });
   },
 
   playlistitem: function(req, res) {
