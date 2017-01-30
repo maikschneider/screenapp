@@ -37,19 +37,19 @@
 
   <div class="row">
     <div class="medium-3 small-12 columns">
-      <label for="service" class="text-left medium-text-right middle">App</label>
+      <label for="service" class="text-left medium-text-right middle color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> App</label>
     </div>
     <div class="medium-9 small-12 columns">
 
       <ul class="tabs" data-tabs id="playlistitem-tabs">
-        <li data-apptype="twitter" class="tabs-title is-active"><a href="#panel1" aria-selected="true"><i class="fa fa-twitter"></i> Twitter</a></li>
-        <li data-apptype="weather" class="tabs-title"><a href="#panel2"><i class="fa fa-sun-o"></i> Weather</a></li>
-        <li data-apptype="msg" class="tabs-title"><a href="#panel3"><i class="fa fa-comment"></i> Message</a></li>
-        <li data-apptype="dvb" class="tabs-title"><a href="#panel4"><i class="fa fa-bus"></i> DVB Stop</a></li>
+        <li data-apptype="twitter" class="tabs-title is-active"><a href="#panel1" class="bg-twitter" aria-selected="true"><i class="fa fa-twitter"></i> Twitter</a></li>
+        <li data-apptype="weather" class="tabs-title"><a href="#panel2" class="bg-weather"><i class="fa fa-sun-o"></i> Weather</a></li>
+        <li data-apptype="msg" class="tabs-title"><a href="#panel3" class="bg-msg"><i class="fa fa-comment"></i> Message</a></li>
+        <li data-apptype="dvb" class="tabs-title"><a href="#panel4" class="bg-dvb"><i class="fa fa-bus"></i> DVB Stop</a></li>
       </ul>
 
       <div class="tabs-content" data-tabs-content="playlistitem-tabs">
-        <div class="tabs-panel is-active" id="panel1" data-apptype="twitter">
+        <div class="tabs-panel is-active bg-twitter" id="panel1" data-apptype="twitter">
           <div class="row">
             <div class="medium-3 small-12 columns">
               <label for="middle-label" class="text-left medium-text-right middle">Twitter Filter</label>
@@ -78,7 +78,7 @@
           </div>
 
         </div>
-        <div class="tabs-panel" id="panel2" data-apptype="weather">
+        <div class="tabs-panel bg-weather" id="panel2" data-apptype="weather">
           <div class="row">
             <div class="medium-3 small-12 columns">
               <label for="middle-label" class="text-left medium-text-right middle">Location</label>
@@ -118,7 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="tabs-panel" id="panel3" data-apptype="msg">
+        <div class="tabs-panel bg-msg" id="panel3" data-apptype="msg">
           <div class="row">
             <div class="medium-3 small-12 columns">
               <label for="middle-label" class="text-left medium-text-right middle">Headline</label>
@@ -147,7 +147,7 @@
             </div>
           </div>
         </div>
-        <div class="tabs-panel" id="panel4" data-apptype="dvb">
+        <div class="tabs-panel bg-dvb" id="panel4" data-apptype="dvb">
           <div class="row">
             <div class="medium-3 small-12 columns">
               <label for="middle-label" class="text-left medium-text-right middle">DVB Stop</label>
@@ -165,7 +165,7 @@
   <br />
   <div class="row">
     <div class="medium-3 small-12 columns">
-      <label for="middle-label" class="text-left medium-text-right middle">Add to these Playlists</label>
+      <label for="middle-label" class="text-left medium-text-right middle color-list"><i class="fa fa-list" aria-hidden="true"></i> Add to these Playlists</label>
     </div>
     <div class="medium-9 small-12 columns">
       <select name="playlist" multiple>

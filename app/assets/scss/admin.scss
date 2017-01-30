@@ -61,12 +61,29 @@ $screen: #428bbe;
 $list: #288543;
 $item: #B01F1F;
 $doc: #925E1B;
+$twitter: #1da1f2;
+$weather: #ffb900;
+$msg: #2baf2b;
+$dvb: #fdc400;
 
 $color-list:
   "screen" $screen,
   "list" $list,
   "item" $item,
-  "doc" $doc;
+  "doc" $doc,
+  "twitter" $twitter,
+  "weather" $weather,
+  "msg" $msg,
+  "dvb" $dvb;
+
+@each $color in $color-list {
+  .color-#{nth($color, 1)}{
+    color:#{nth($color, 2)}
+  }
+  .bg-#{nth($color, 1)}, .tabs-title > a.bg-#{nth($color, 1)}:focus, .tabs-title > a.bg-#{nth($color, 1)}[aria-selected="true"]{
+    background-color:#{nth($color, 2)}
+  }
+}
 
 .off-canvas{
   img{
@@ -159,6 +176,11 @@ h2{
   }
 }
 
+//-----------------------------------
+//
+//   Dashboard View
+//
+//-----------------------------------
 .screenitem{
   background-color: $screen;
   color:#FFF;
@@ -318,7 +340,38 @@ h2{
   height: rem-calc(40);
 }
 
-
+//-----------------------------------
+//
+//   Dashboard View
+//
+//-----------------------------------
+#playlistitem-tabs{
+  border:0;
+  & + .tabs-content{
+    border:0;
+    border-radius: rem-calc(10);
+    overflow: hidden;
+    label{
+      color:#FFF;
+    }
+    .row:last-child label, .row:last-child input{
+      margin-bottom: 0;
+    }
+  }
+  .tabs-title > a{
+    font-weight: 600;
+    border-radius: rem-calc(10 10 0 0)
+  }
+  .tabs-title > a[aria-selected="true"]{
+    color:#FFF;
+  }
+  .tabs-title:first-child > a[aria-selected="true"]{
+    box-shadow: 0 10px 0 $twitter;
+  }
+  .tabs-title:not(.is-active) > a{
+    background-color: #FFF;
+  }
+}
 
 a.danger{
   color: $alert-color;
