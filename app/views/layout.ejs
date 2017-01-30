@@ -75,6 +75,60 @@
           }
         });
 
+      $.bindFormSubmit = function(){
+        $('form').on('submit', function(e){
+          e.preventDefault();
+          // disable submit button
+          $('form input[type="submit]').prop('disabled', true);
+          // remove all error / success messages
+          $('.callout[role="alert"]').hide();
+          $('label.is-invalid-label').removeClass('is-invalid-label');
+          $('.is-invalid-input').removeClass('is-invalid-input');
+          $('span.is-visible').removeClass('is-visible');
+          $.submitData($(this).serializeObject());
+        });
+      };
+
+      $.submitData = function(data){
+        io.socket.post($('form').attr('action'), data, function(resData, jwres){
+          if(jwres.statusCode==200 || jwres.statusCode==201)
+            $.handleFormSuccess(resData);
+          if(jwres.statusCode==400)
+            $.handleFormError(resData);
+
+          $('form input[type="submit]').prop('disabled', false);
+        });
+      };
+
+      $.bindDeleteButton = function(){
+        $('#deleteButton').on('click', function(e){
+          e.preventDefault();
+          io.socket.delete($('form').attr('action'), function(){
+            window.location.href = '/admin';
+          });
+        });
+      };
+
+      $.handleFormSuccess = function(resData){
+        // success message
+        $('.success.callout[role="alert"]').show();
+        // change form action to edit
+        $('form').attr('action', $('form').attr('data-action-url') + resData.id);
+        // show delete button
+        $('a[data-open="deleteModal"]').removeAttr('style');
+        // override fields with saved data from successful response
+        $.insertFormData(resData);
+      };
+
+      $.handleFormError = function(resData){
+        $('.alert.callout[role="alert"]').show();
+        for(key in resData.invalidAttributes){
+          $('label[for="'+key+'"]').addClass('is-invalid-label');
+          $('#'+key).addClass('is-invalid-input')
+          $('span#'+key+'-error').html(resData.invalidAttributes[key][0].message).addClass('is-visible');
+        }
+      };
+
       $.fn.serializeObject = function()
       {
           var o = {};

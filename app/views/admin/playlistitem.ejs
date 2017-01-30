@@ -175,20 +175,23 @@
       </select>
     </div>
   </div>
-  <div class="row">
-    <div class="medium-offset-3 shrink columns">
-      <input type="hidden" name="appType" value="twitter" id="appType" />
-      <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
-    </div>
-    <div class="columns">
-        <a data-open="deleteModal" class="button alert hollow" <% if(!item){ %>style="display:none;"<% } %>><i class="fa fa-trash"></i> delete</a>
-    </div>
+
+<hr />
+<div class="row">
+  <div class="columns">
+    <a href="/admin" class="button"><i class="fa fa-times"></i> cancel</a>
   </div>
+  <div class="columns text-right">
+      <a data-open="deleteModal" class="button alert hollow" <% if(!item){ %>style="display:none;"<% } %>><i class="fa fa-trash"></i> delete</a>
+  </div>
+  <div class="columns shrink text-right">
+    <input type="hidden" name="appType" value="twitter" id="appType" />
+    <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
+  </div>
+</div>
 
 </form>
 
-<hr />
-<a href="/admin" class="button alert"><i class="fa fa-times"></i> cancel</a>
 
 <div class="reveal alert callout" id="deleteModal" data-reveal>
   <h2>Delete this App?</h2>
@@ -222,61 +225,6 @@
     <% if(item){ %>
       $.PlaylistItemEdit();
     <% } %>
-  };
-
-  $.bindFormSubmit = function(){
-    $('form').on('submit', function(e){
-      e.preventDefault();
-      // disable submit button
-      $('form input[type="submit]').prop('disabled', true);
-      // remove all error / success messages
-      $('.callout[role="alert"]').hide();
-      $('label.is-invalid-label').removeClass('is-invalid-label');
-      $('.is-invalid-input').removeClass('is-invalid-input');
-      $('span.is-visible').removeClass('is-visible');
-      $.submitData($(this).serializeObject());
-    });
-  };
-
-  $.submitData = function(data){
-    io.socket.post($('form').attr('action'), data, function(resData, jwres){
-      if(jwres.statusCode==200 || jwres.statusCode==201)
-        $.handleFormSuccess(resData);
-      if(jwres.statusCode==400)
-        $.handleFormError(resData);
-
-      $('form input[type="submit]').prop('disabled', false);
-    });
-  };
-
-  $.bindDeleteButton = function(){
-    $('#deleteButton').on('click', function(e){
-      e.preventDefault();
-      io.socket.delete($('form').attr('action'), function(){
-        window.location.href = '/admin';
-      });
-    });
-  };
-
-  $.handleFormSuccess = function(resData){
-    console.log(resData);
-    // success message
-    $('.success.callout[role="alert"]').show();
-    // change form action to edit
-    $('form').attr('action', $('form').attr('data-action-url') + resData.id);
-    // show delete button
-    $('a[data-open="deleteModal"]').removeAttr('style');
-    // override fields with saved data from successful response
-    $.insertFormData(resData);
-  };
-
-  $.handleFormError = function(resData){
-    $('.alert.callout[role="alert"]').show();
-    for(key in resData.invalidAttributes){
-      $('label[for="'+key+'"]').addClass('is-invalid-label');
-      $('#'+key).addClass('is-invalid-input')
-      $('span#'+key+'-error').html(resData.invalidAttributes[key][0].message).addClass('is-visible');
-    }
   };
 
   /**

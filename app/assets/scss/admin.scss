@@ -349,8 +349,6 @@ h2{
   border:0;
   & + .tabs-content{
     border:0;
-    border-radius: rem-calc(10);
-    overflow: hidden;
     label{
       color:#FFF;
     }
@@ -360,13 +358,9 @@ h2{
   }
   .tabs-title > a{
     font-weight: 600;
-    border-radius: rem-calc(10 10 0 0)
   }
   .tabs-title > a[aria-selected="true"]{
     color:#FFF;
-  }
-  .tabs-title:first-child > a[aria-selected="true"]{
-    box-shadow: 0 10px 0 $twitter;
   }
   .tabs-title:not(.is-active) > a{
     background-color: #FFF;

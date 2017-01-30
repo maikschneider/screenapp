@@ -6417,20 +6417,15 @@ h2 {
 #playlistitem-tabs {
   border: 0; }
   #playlistitem-tabs + .tabs-content {
-    border: 0;
-    border-radius: 0.625rem;
-    overflow: hidden; }
+    border: 0; }
     #playlistitem-tabs + .tabs-content label {
       color: #FFF; }
     #playlistitem-tabs + .tabs-content .row:last-child label, #playlistitem-tabs + .tabs-content .row:last-child input {
       margin-bottom: 0; }
   #playlistitem-tabs .tabs-title > a {
-    font-weight: 600;
-    border-radius: 0.625rem 0.625rem 0 0; }
+    font-weight: 600; }
   #playlistitem-tabs .tabs-title > a[aria-selected="true"] {
     color: #FFF; }
-  #playlistitem-tabs .tabs-title:first-child > a[aria-selected="true"] {
-    box-shadow: 0 10px 0 #1da1f2; }
   #playlistitem-tabs .tabs-title:not(.is-active) > a {
     background-color: #FFF; }
 
