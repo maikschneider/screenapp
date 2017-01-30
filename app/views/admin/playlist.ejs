@@ -2,34 +2,50 @@
 <h1><i class="fa fa-list"></i> <%= title %></h1>
 <hr />
 
-<form action="/playlist<% if(playlist){ %>/<%= playlist %><% } %>" method="POST">
+<form action="/playlist<% if(playlist){ %>/<%= playlist %><% } %>" method="POST" data-action-url="/playlist/">
+
+  <div data-abide-error role="alert" class="alert callout" style="display: none;" data-closable>
+    <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There are some errors in your form</p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div data-abide-error role="alert" class="success callout" style="display: none;" data-closable>
+    <p><i class="fa fa-check-circle" aria-hidden="true"></i> Successfully saved! </p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <input type="hidden" name="items" value="">
   <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="text-right middle">Name</label>
+    <div class="medium-3 small-12 columns">
+      <label for="name" class="medium-text-right middle">Name</label>
     </div>
-    <div class="small-9 columns">
-      <input type="text" id="middle-label" name="name" placeholder="Playlist name" required>
+    <div class="medium-9 small-12 columns">
+      <input type="text" id="name" name="name" placeholder="Playlist name" required aria-describedby="name-error">
+      <span class="form-error" id="name-error"></span>
     </div>
   </div>
   <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="text-right middle">Screens to display this Playlist</label>
+    <div class="medium-3 small-12 columns">
+      <label for="screens" class="medium-text-right middle color-screen"><i class="fa fa-desktop"></i> Screens to display this Playlist</label>
     </div>
-    <div class="small-9 columns">
-      <select name="screens" multiple>
+    <div class="medium-9 small-12 columns">
+      <select name="screens" id)"screens" multiple aria-describedby="screens-error">
         <% for(var i=0; i<screens.length; i++){ %>
           <option value="<%= screens[i].id %>"><%= screens[i].name %></option>
         <% } %>
       </select>
+      <span class="form-error" id="screens-error"></span>
     </div>
   </div>
   <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="text-right middle">Items to add to this Playlist</label>
+    <div class="medium-3 small-12 columns">
+      <label for="items" class="color-item medium-text-right middle"><i class="fa fa-play-circle"></i> Items to add to this Playlist</label>
     </div>
-    <div class="small-9 columns">
-      <div id="items">
+    <div class="medium-9 small-12 columns">
+      <div id="items" aria-describedby="items-error">
 
       </div>
       <div class="row">
@@ -41,7 +57,7 @@
             <% } %>
           </ul>
         </div>
-        <div class="medium-1 columns medium-order-2 align-middle text-center">
+        <div class="medium-1 columns medium-order-2 align-self-middle text-center">
           <p class="show-for-medium"><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i><br /><i class="fa fa-caret-left" aria-hidden="true"></i></p>
           <p class="hide-for-medium"><i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-caret-down" aria-hidden="true"></i></p>
         </div>
@@ -55,17 +71,37 @@
         </div>
       </div>
     </div>
+    <span class="form-error" id="items-error"></span>
   </div>
   <hr />
   <div class="row">
     <div class="columns">
-      <a href="/admin" class="button alert"><i class="fa fa-times"></i> cancel</a>
+      <a href="/admin" class="button"><i class="fa fa-times"></i> cancel</a>
     </div>
     <div class="columns text-right">
+        <a data-open="deleteModal" class="button alert hollow" <% if(!playlist){ %>style="display:none;"<% } %>><i class="fa fa-trash"></i> delete</a>
+    </div>
+    <div class="columns shrink text-right">
       <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
     </div>
   </div>
 </form>
+
+<div class="reveal alert callout" id="deleteModal" data-reveal>
+  <h2>Delete this Playlist?</h2>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This action cannot be undone!</p>
+  <div class="row">
+    <div class="columns shrink">
+      <a class="button primary hollow" data-close aria-label="Close modal"><i class="fa fa-close" aria-hidden="true"></i> No, keep it</a>
+    </div>
+    <div class="columns">
+      <a href="#" class="button alert" id="deleteButton"><i class="fa fa-trash" aria-hidden="true"></i> Yes, delete playlist</a>
+    </div>
+  </div>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 
 <script type="text/javascript">
@@ -77,6 +113,8 @@
 
     $.Sortable();
     $.BindItems();
+    $.bindFormSubmit();
+    $.bindDeleteButton();
 
     <% if(playlist){ %>
       $.PlaylistEdit();
@@ -134,22 +172,24 @@
    */
   $.PlaylistEdit = function(){
     io.socket.get('/playlist/<%= playlist %>', function(resData, jwres) {
+      $.insertFormData(resData);
+    });
+  };
 
-      // insert data into form inputs
-      $.each(resData, function(index, value) {
-        console.log(index + ': ', value);
-          $('form input[name="'+index+'"]:text').attr('value', value);
-          $('form textarea[name="'+index+'"]').html(value);
-          $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
-          $('form input[name="'+index+'"]:checkbox').prop('checked', value);
-          if(typeof(value) === 'object' && value !== null) {
-            $(value).each(function(i, e){
-              $('form select[name="'+index+'"] option[value="'+e.id+'"]').attr('selected','');
-              if(index=='items') $.AddItem(e.id);
-            });
-          }
-      });
-
+  $.insertFormData = function(resData) {
+    // insert data into form inputs
+    $.each(resData, function(index, value) {
+      console.log(index + ': ', value);
+        $('form input[name="'+index+'"]:text').attr('value', value);
+        $('form textarea[name="'+index+'"]').html(value);
+        $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
+        $('form input[name="'+index+'"]:checkbox').prop('checked', value);
+        if(typeof(value) === 'object' && value !== null) {
+          $(value).each(function(i, e){
+            $('form select[name="'+index+'"] option[value="'+e.id+'"]').attr('selected','');
+            if(index=='items') $.AddItem(e.id);
+          });
+        }
     });
   };
 

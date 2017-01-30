@@ -19,6 +19,7 @@
         </div>
       </div>
       <div class="dvb__content">
+      <% if(item.data){ %>
       <% for(var i=0; i<item.data.length; i++){
           var stop = item.data[i];
         %>
@@ -36,6 +37,7 @@
             </div>
           </div>
         </div>
+      <% } %>
       <% } %>
     </div>
   </div>
