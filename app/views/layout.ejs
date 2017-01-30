@@ -1,37 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title><%=typeof title == 'undefined' ? 'Admin Monitor' : title%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/admin.css">
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">Screen App</li>
-          <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-          <li><a href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
-          <!-- <li><a href="#">Play</a></li> -->
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <!-- <ul class="menu">
-          <li><input type="search" placeholder="Search"></li>
-          <li><button type="button" class="button">Search</button></li>
-        </ul> -->
-      </div>
-    </div>
-
-    <main>
-      <div class="row">
-        <div class="small-12 columns">
-          <%- body %>
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
+        <div class="row collapse align-center" style="height:100%">
+          <div class="small-12 columns text-center">
+            <span class="logo">
+              <img src="/images/logo.svg" alt="logo" />
+              <span class="menu-text">Info Monitor</span>
+            </span>
+            <ul class="menu vertical text-left">
+              <li><a class="<%= req.route.path == '/admin' ? 'active' : '' %>" href="/admin"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+              <li><a class="color-screen <%= req.route.path.indexOf('screens') > 0 ? 'active' : '' %>" href="/admin/screens"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
+              <li><a class="color-list <%= req.route.path.indexOf('playlists') > 0 ? 'active' : '' %>" href="/admin/playlists"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
+              <li><a class="color-item <%= req.route.path.indexOf('playlistitems') > 0 ? 'active' : '' %>" href="/admin/playlistitems"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
+              <li><a class="<%= req.route.path.indexOf('swagger') > 0 ? 'active' : '' %>" href="/admin/swagger"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
+              <!-- <li><a href="#">Play</a></li> -->
+            </ul>
+          </div>
+          <div class="small-10 columns align-bottom">
+            <div class="row collapse align-bottom" style="height:100%">
+              <div class="columns align-bottom">
+                <p class="text-center"><a href="/logout" class="button alert hollow">Logout</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </main>
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="title-bar hide-for-large">
+          <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="offCanvas"></button>
+            <span class="title-bar-title">Info Montor</span>
+          </div>
+        </div>
+
+        <main>
+          <div class="row">
+            <div class="small-12 columns">
+              <%- body %>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/bower_components/foundation-sites/dist/js/foundation.min.js"></script>
@@ -45,6 +64,11 @@
           Foundation.Keyboard.register('Dropdown', {});
 
           try{
+            $.Screen();
+          } catch(err){
+
+          }
+          try{
             $.Playlist();
           } catch(err){
 
@@ -55,6 +79,77 @@
 
           }
         });
+
+      $.bindFormSubmit = function(){
+        $('form').on('submit', function(e){
+          e.preventDefault();
+          // disable submit button
+          $('form input[type="submit]').prop('disabled', true);
+          // remove all error / success messages
+          $('.callout[role="alert"]').hide();
+          $('label.is-invalid-label').removeClass('is-invalid-label');
+          $('.is-invalid-input').removeClass('is-invalid-input');
+          $('span.is-visible').removeClass('is-visible');
+          $.submitData($(this).serializeObject());
+        });
+      };
+
+      $.submitData = function(data){
+        io.socket.post($('form').attr('action'), data, function(resData, jwres){
+          if(jwres.statusCode==200 || jwres.statusCode==201)
+            $.handleFormSuccess(resData);
+          if(jwres.statusCode==400)
+            $.handleFormError(resData);
+
+          $('form input[type="submit]').prop('disabled', false);
+        });
+      };
+
+      $.bindDeleteButton = function(){
+        $('#deleteButton').on('click', function(e){
+          e.preventDefault();
+          io.socket.delete($('form').attr('action'), function(){
+            window.location.href = '/admin';
+          });
+        });
+      };
+
+      $.handleFormSuccess = function(resData){
+        // success message
+        $('.success.callout[role="alert"]').show();
+        // change form action to edit
+        $('form').attr('action', $('form').attr('data-action-url') + resData.id);
+        // show delete button
+        $('a[data-open="deleteModal"]').removeAttr('style');
+        // override fields with saved data from successful response
+        $.insertFormData(resData);
+      };
+
+      $.handleFormError = function(resData){
+        $('.alert.callout[role="alert"]').show();
+        for(key in resData.invalidAttributes){
+          $('label[for="'+key+'"]').addClass('is-invalid-label');
+          $('#'+key).addClass('is-invalid-input')
+          $('span#'+key+'-error').html(resData.invalidAttributes[key][0].message).addClass('is-visible');
+        }
+      };
+
+      $.fn.serializeObject = function()
+      {
+          var o = {};
+          var a = this.serializeArray();
+          $.each(a, function() {
+              if (o[this.name] !== undefined) {
+                  if (!o[this.name].push) {
+                      o[this.name] = [o[this.name]];
+                  }
+                  o[this.name].push(this.value || '');
+              } else {
+                  o[this.name] = this.value || '';
+              }
+          });
+          return o;
+      };
 
     </script>
   </body>

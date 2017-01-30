@@ -24,7 +24,27 @@ module.exports = {
     items: {
       collection: 'playlistitem',
       via: 'playlist'
-    }
+    },
+    user: {
+      model: 'user'
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.user;
+      return obj;
+    },
+
+    getDuration: function(){
+      var duration = 0;
+      _.each(this.items, function(item){
+        duration += item.duration;
+      });
+      var min = Math.floor(duration/60);
+      var sec = duration % 60;
+      duration = (min==0 && sec==0) ? 0 : min+':'+sec;
+      return duration;
+    },
   }
 };
 

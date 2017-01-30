@@ -1,129 +1,180 @@
-<h1>AdminController.index</h1>
-
+<h1>Dashboard</h1>
 <hr />
 
 <div class="row">
-  <div class="medium-4 columns">
-    <h2><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Play</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i<screens.length; i++){ %>
-            <tr>
-              <td><%= screens[i].id %></td>
-              <td>
-                <a href='screen/<%= screens[i].id %>' data-modal>
-                  <%= screens[i].name %>
-                </a>
-              </td>
-              <td>
+  <div class="small-12 columns">
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-screen"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/screens" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <% for(var i=0; i<screens.length; i++){ %>
+      <div class="large-4 medium-6 small-12 columns">
+        <div class="screenitem">
+          <div class="row expanded" style="height:100%;">
+            <div class="small-12 columns text-right">
+              <% if(screens[i].list) { %>
+              <div class="switch small">
+                <input class="switch-input" id="screenswitch<%= screens[i].id %>" type="checkbox" name="live" <% if(screens[i].list.live){ %>checked="checked"<% } %> />
+                <label class="switch-paddle" for="screenswitch<%= screens[i].id %>" data-toggle-play="<%= screens[i].id %>">
+                  <span class="show-for-sr">Do you like me?</span>
+                  <span class="switch-inactive" aria-hidden="true">Off</span>
+                  <span class="switch-active" aria-hidden="true">On</span>
+                </label>
+              </div>
+              <% } %>
+            </div>
+            <div class="small-12 columns align-self-bottom">
+              <p><strong><%= screens[i].name %></strong><% if(screens[i].list){ %><br />Playlist: <%= screens[i].list.name %><% } %></p>
+            </div>
+            <div class="small-12 columns align-self-bottom">
+              <div class="row nested collapse">
                 <% if(screens[i].list){ %>
-                  <%  if(screens[i].list.live){ %>
-                    <a class="danger" href='screen/stop/<%= screens[i].id %>'>
-                      <i class='fa fa-stop-circle'></i>
-                    </a>
-                  <% } %>
-                  <a class="success" href='screen/play/<%= screens[i].id %>'>
-                    <i class='fa fa-play-circle'></i>
-                  </a>
+                <div class="columns">
+                  <a class="expanded button first secondary" href='screen/play/<%= screens[i].id %>'><i class='fa fa-eye'></i> Preview</a>
+                </div>
                 <% } %>
-              </td>
-            </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <a href="/admin/screen" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+                <div class="columns">
+                  <a class="expanded button secondary" href='/admin/screen/<%= screens[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="large-4 medium-6 small-12 columns">
+        <a href="/admin/screen" class="screenitem screenitem--new">
+          <div class="row align-middle" style="height: 100%;">
+            <div class="columns">
+              <i class="fa fa-plus"></i>
+              <p>Add screen</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
   </div>
 
-  <div class="medium-4 columns">
-    <h2><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i<lists.length; i++){ %>
-            <tr>
-              <td><%= lists[i].id %></td>
-              <td>
-                <a href='playlist/<%= lists[i].id %>' data-modal>
-                  <%= lists[i].name %>
-                </a>
-              </td>
-              <td>
-                <a href='admin/playlist/<%= lists[i].id %>'>
-                  <i class="fa fa-pencil"></i>
-                </a>
-              </td>
-            </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <a href="/admin/playlist" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
+  <div class="small-12 columns">
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-list"><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/playlists" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <% for(var i=0; i<lists.length; i++){ %>
+      <div class="small-12 columns">
+        <div class="playlistentry">
+          <div class="row collapse nested">
+            <div class="columns small-12 medium-expand">
+              <p class="name">
+                <%= lists[i].name %>
+              </p>
+            </div>
+            <div class="columns shrink">
+              <p class="detail time">
+                <span data-tooltip aria-haspopup="true" class="has-tip top" data-disable-hover="false" tabindex="1" title="Duration of this playlist until repeat"><i class="fa fa-hourglass-start" aria-hidden="true"></i> <%= lists[i].getDuration() %>min</span>
+              </p>
+            </div>
+            <div class="columns shrink">
+              <p class="detail screen">
+                <span data-tooltip aria-haspopup="true" class="has-tip top" data-disable-hover="false" tabindex="2" title="2 Screens display this playlist"><i class="fa fa-desktop" aria-hidden="true"></i> <%= lists[i].screens.length %></span>
+              </p>
+            </div>
+            <div class="columns shrink">
+              <p class="detail item ">
+                <span data-tooltip aria-haspopup="true" class="has-tip top" data-disable-hover="false" tabindex="3" title="<%= lists[i].items.length %> Apps on this playlist"><i class="fa fa-play-circle" aria-hidden="true"></i> <%= lists[i].items.length %></span>
+              </p>
+            </div>
+            <div class="columns shrink">
+              <a class="expanded button secondary" href='/admin/playlist/<%= lists[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="small-12 columns">
+        <a href="/admin/playlist" class="playlistentry playlistentry--new">
+          <div class="row align-middle" style="height: 100%;">
+            <div class="columns">
+              <i class="fa fa-plus"></i>
+              <p>Add playlist</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
   </div>
 
-  <div class="medium-4 columns">
-    <h2><i class="fa fa-play-circle" aria-hidden="true"></i> Items</h2>
-    <table>
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i<items.length; i++){ %>
-            <tr>
-              <td><%= items[i].id %></td>
-              <td>
-                <a href='playlistitem/<%= items[i].id %>' data-modal>
-                  <%- items[i].getIcon() %>&nbsp; <%= items[i].name %>
-                </a>
-              </td>
-              <td>
-                <a href='admin/playlistitem/<%= items[i].id %>'>
-                  <i class="fa fa-pencil"></i>
-                </a>
-              </td>
-            </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <a href="/admin/playlistitem" class="button expanded"><i class="fa fa-plus"></i> Add new</a>
-  </div>
 
+
+  <div class="small-12 columns">
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/playlistitems" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <% for(var i=0; i<items.length; i++){ %>
+      <div class="small-6 medium-4 large-2 columns">
+        <div class="playlistitementry">
+          <div class="row collapse nested" style="height:100%;">
+            <div class="small-12 columns align-self-bottom text-center">
+              <p class="name">
+              <%- items[i].getIcon() %>
+              &nbsp; <%= items[i].name %></p>
+            </div>
+            <div class="small-12 align-self-bottom columns">
+              <a class="expanded button secondary" href='/admin/playlistitem/<%= items[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="small-6 medium-4 large-2 columns">
+        <a href="/admin/playlistitem" class="playlistitementry playlistitementry--new">
+          <div class="row collapse nested" style="height:100%;">
+            <div class="small-12 columns align-self-middle text-center">
+              <p class="name">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Add app</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+  </div>
 </div>
 
-<div class="reveal" id="modal" data-reveal>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<script type="text/javascript">
+  $('label[data-toggle-play]').on('click', function(e){
 
-<script>
+    var input = $('input#screenswitch'+$(this).attr('data-toggle-play'));
+    var route = $(input).is(':checked') ? 'stop' : 'play';
 
-$.adminIndex = function() {
-
-  $modal = $('#modal');
-
-  $('a[data-modal').on('click', function(e){
-    e.preventDefault();
-    $.ajax('/'+$(this).attr('href'))
-      .done(function(resp){
-        $modal.html(JSON.stringify(resp)).foundation('open');
+    io.socket.post('/screen/'+route+'/'+$(this).attr('data-toggle-play'), function(data, rawdata){
     });
   });
-
-};
 </script>

@@ -1,8 +1,8 @@
 <%
-var tweets = item.data.statuses;
-if(tweets){
+if(item.data && item.data.statuses){
+    var tweets = item.data.statuses;
     var height = tweets.length * 100;
-    var marginTop = activeTweet * -100;
+    var marginTop = typeof activeTweet == "undefined" ? 0 : activeTweet * -100;
 %>
 
 <section class="columns slide twitter" style="min-height: <%= height %>vh; margin-top: <%= marginTop %>vh" data-id="<%= item.id %>">
@@ -12,7 +12,7 @@ if(tweets){
 
       <div class="twitter__tweet__inner column">
         <div class="row align-center">
-          <div class="small-10 large-8 columns">
+          <div class="small-12 medium-10 large-8 columns">
 
             <div class="twitter__card">
               <div class="row">

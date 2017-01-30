@@ -1,43 +1,133 @@
 @startuml
 
-class Screen {
-	- id
-	- name
+package sails.api.model <<Database>>{
+
+	class Screen {
+		- id
+		- name
+	}
+
+	Screen "*" -- "1" Playlist
+
+	class Playlist {
+		- id
+		- name
+		- live
+	}
+
+	Playlist "1" o-- "*" PlaylistItem
+
+	PlaylistItem --> sails.api.service.ApiService : Lifecycle callbacks
+
+	class PlaylistItem {
+		- id
+		- name
+		- duration
+		- appType : enum
+		- data : json
+		..
+		- weatherLocation
+		- weatherLocationCode
+		- weatherUnit
+		- weatherFontColor
+		- weatherBackgroundImage
+		..
+		- twitterFilter
+		- twitterTweetDuration
+		- twitterShowRetweets
+		..
+		- msgHeadline
+		- msgText
+		- msgImage
+		..
+		- dvbStop
+		--
+		- geocode(location, cb)
+
+	}
+
 }
 
-Screen "*" -- "1" Playlist
+package sails.api.controller <<Cloud>>{
+	
+	ScreenController --> sails.api.service.BroadcastService : start
 
-class Playlist {
-	- id
-	- name
-	- live
-}
-
-Playlist "1" o-- "*" PlaylistItem
-
-class PlaylistItem {
-	- id
-	- name
-	- duration
-	- appType : enum
-	- data : json
-	..
-	- weatherLocation
-	- weatherLocationCode
-	- weatherUnit
-	- weatherFontColor
-	- weatherBackgroundImage
-	..
-	- twitterFilter
-	- twitterTweetDuration
-	- twitterShowRetweets
-	..
-	- msgHeadline
-	- msgText
-	- msgImage
-	--
-	geocode(location, cb)
+	class ScreenController {
+		--
+	}
 
 }
 
+package sails.api.service <<Node>>{
+
+	class BroadcastService {
+		- onAir : json
+		--
+		- initPlaylist()
+		- triggerSlideChange()
+		- afterSlideChange()
+	}
+
+	BroadcastService --> BroadcastService : tick()
+	BroadcastService --> ApiService : invoke
+
+	class ApiService {
+		--
+	}
+
+	ApiService --> BaseAppService : invoke
+
+	class BaseAppService {
+		- data
+		- cacheTimeInMin : integer
+		--
+		- runUpdate()
+		- runBeforeCreate()
+		- runBeforeUpdate()
+		- _setupById()
+		- _setup()
+		- initUpdate()
+		- beforeUpdate()
+		- _needDataUpdate()
+		- performUpdate()
+		- getData()
+		- afterUpdate()
+		- saveData()
+		- publishUpdate()
+	}
+
+	BaseAppService <|-- TwitterAppService
+
+	class TwitterAppService {
+		- consumer_key
+		- consumer_secret
+		- bearer_token
+		--
+		- getData()
+		- obtainBearerToken()
+		- obtainTwitterData()
+	}
+
+	BaseAppService <|-- DvbService
+
+	class DvbService {
+		--
+		- getData()
+	}
+
+	BaseAppService <|-- MsgService
+
+	class MsgService {
+		--
+	}
+
+	BaseAppService <|-- WeatherService
+
+	class WeatherService {
+		- apiKey
+		--
+		- getData()
+	}
+
+}
 @enduml

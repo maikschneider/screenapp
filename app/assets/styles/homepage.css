@@ -5136,13 +5136,16 @@ section:nth-child(2n-1) {
       .top-bar .menu > li > a {
         padding: 0.6875rem 1.25rem; } }
 
-h2, h3 {
+h1, h2, h3 {
   font-family: 'Catamaran', sans-serif;
   font-weight: 200;
   line-height: 1; }
-  h2 strong, h3 strong {
+  h1 strong, h2 strong, h3 strong {
     font-weight: inherit;
     color: #1FCDCA; }
+
+h1 {
+  margin: 1.25rem 0 2.5rem; }
 
 h2 {
   margin: 3.75rem 0; }
@@ -5173,6 +5176,8 @@ section {
     background-color: #0C1E2D;
     background-image: -webkit-linear-gradient(#0C1E2D, #071119);
     background-image: linear-gradient(#0C1E2D, #071119); }
+  section.fullscreen {
+    height: calc(100vh - 55px); }
 
 section#header .header__title {
   margin: 5rem 0 1.875rem; }
@@ -5322,6 +5327,12 @@ section#contact {
   section#contact input, section#contact textarea {
     box-shadow: 0 4px 0 rgba(255, 255, 255, 0.25);
     margin-bottom: 1.5625rem; }
+    section#contact input:focus, section#contact input:active, section#contact textarea:focus, section#contact textarea:active {
+      border: 0;
+      box-shadow: 0 4px 0 #1FCDCA;
+      -webkit-transition: none;
+      -moz-transition: none;
+      transition: none; }
   section#contact textarea {
     min-height: 7.5rem; }
   section#contact .button {
@@ -5334,3 +5345,10 @@ section#contact {
       color: #0C1E2D; }
   section#contact .callout {
     border-radius: 5px; }
+
+section#login section#contact {
+  padding: 0.625rem 1.875rem;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2); }
+
+section#login .button.large {
+  font-weight: 300; }

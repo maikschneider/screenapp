@@ -26,7 +26,50 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+   '*': true,
+
+   AdminController: {
+    '*': 'isAuthenticated',
+    'contact': true
+   },
+   PlaylistController: {
+    '*': 'isAuthenticated',
+    'create': ['isAuthenticated', 'injectUser'],
+    'find': ['isAuthenticated', 'whereUser'],
+    'findOne': ['isAuthenticated', 'canWrite'],
+    'update': ['isAuthenticated', 'canWrite'],
+    'destroy': ['isAuthenticated', 'canWrite'],
+    // @TODO:
+    //'remove'
+    //'add'
+    //'populate'
+   },
+   PlaylistItemController: {
+    '*': 'isAuthenticated',
+    'create': ['isAuthenticated', 'injectUser'],
+    'find': ['isAuthenticated', 'whereUser'],
+    'findOne': ['isAuthenticated', 'canWrite'],
+    'update': ['isAuthenticated', 'canWrite'],
+    'destroy': ['isAuthenticated', 'canWrite'],
+    // @TODO:
+    //'remove'
+    //'add'
+    //'populate'
+   },
+   ScreenController: {
+    '*': 'isAuthenticated',
+    'create': ['isAuthenticated', 'injectUser'],
+    'find': ['isAuthenticated', 'whereUser'],
+    'findOne': ['isAuthenticated', 'canWrite'],
+    'update': ['isAuthenticated', 'canWrite'],
+    'destroy': ['isAuthenticated', 'canWrite'],
+    'play': true,
+    'live': true
+    // @TODO:
+    //'remove'
+    //'add'
+    //'populate'
+   },
 
   /***************************************************************************
   *                                                                          *

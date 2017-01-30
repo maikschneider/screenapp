@@ -1,0 +1,458 @@
+@charset 'utf-8';
+
+@import 'bourbon';
+@import 'settings-admin';
+@import 'foundation';
+@import 'motion-ui';
+$fa-font-path: '../bower_components/font-awesome/fonts';
+@import 'font-awesome';
+
+
+@include foundation-global-styles;
+//@include foundation-grid;
+@include foundation-flex-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+// @include foundation-range-input;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+@include foundation-callout;
+@include foundation-close-button;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-flex-video;
+//@include foundation-label;
+@include foundation-media-object;
+@include foundation-off-canvas;
+@include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-progress-element;
+// @include foundation-meter-element;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+// @include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes;
+
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+.row.nested{
+  margin: 0;
+}
+
+$screen: #428bbe;
+$list: #288543;
+$item: #B01F1F;
+$doc: #925E1B;
+$twitter: #1da1f2;
+$weather: #ffb900;
+$msg: #2baf2b;
+$dvb: #fdc400;
+
+$color-list:
+  "screen" $screen,
+  "list" $list,
+  "item" $item,
+  "doc" $doc,
+  "twitter" $twitter,
+  "weather" $weather,
+  "msg" $msg,
+  "dvb" $dvb;
+
+@each $color in $color-list {
+  .color-#{nth($color, 1)}{
+    color:#{nth($color, 2)}
+  }
+  .bg-#{nth($color, 1)}, .tabs-title > a.bg-#{nth($color, 1)}:focus, .tabs-title > a.bg-#{nth($color, 1)}[aria-selected="true"]{
+    background-color:#{nth($color, 2)}
+  }
+}
+
+.off-canvas{
+  img{
+    width: 50%;
+    margin: rem-calc(12 0 10);
+  }
+  .menu > li > a{
+    color:rgba(#FFF,0.8);
+    text-align: center;
+    font-weight: bold;
+    font-size: rem-calc(12);
+    padding:rem-calc(20 0);
+    @each $color in $color-list {
+      &.color-#{nth($color, 1)} i{
+        color:#{nth($color, 2)}
+      }
+    }
+    i{
+      display: block;
+      font-size: rem-calc(32);
+      margin-bottom: rem-calc(8);
+    }
+    &:hover{
+      background-color: lighten($black,5%);
+      @include transition(background-color 0.2s ease-out);
+    }
+    &.active{
+      background-color: #FFF;
+      color: $black;
+      i{
+        color: $black;
+      }
+    }
+  }
+  .logo{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 100px;
+    border:1px solid #FFF;
+    transform: scale(0.7);
+  }
+  .menu-text{
+    color:#FFF;
+    text-align: center;
+    padding:0;
+    font-weight: 400;
+    margin:rem-calc(0 0 20);
+    font-size: rem-calc(12);
+    display: block;
+  }
+  .welcome{
+    color:#FFF;
+  }
+  .button{
+    margin-bottom: 0;
+  }
+}
+.position-left.is-transition-push:after{
+  box-shadow: none;
+}
+
+h1{
+  font-weight: 200;
+  color:#999;
+  margin: rem-calc(30 0);
+  & + hr{
+    margin: rem-calc(-20 0 30);
+  }
+}
+h2{
+  font-weight: 600;
+  margin-bottom: rem-calc(15);
+  @each $color in $color-list {
+    &.color-#{nth($color, 1)}{
+      color:#{nth($color, 2)}
+    }
+  }
+}
+.button.secondary{
+  font-weight: 500;
+  background-color: #FFF;
+  border:1px solid #CCC;
+  height: 100%;
+  color: #666;
+  @include transition(all 0.3s linear);
+  &:hover{
+    @include transition(all 0.3s linear);
+    border-color: $black;
+    background-color: $black;
+    color:#FFF;
+  }
+}
+
+//-----------------------------------
+//
+//   Dashboard View
+//
+//-----------------------------------
+.more a{
+  color: $medium-gray;
+  font-weight: 600;
+  font-size: rem-calc(13);
+  &:hover{
+    color: $dark-gray;
+  }
+}
+.screenitem{
+  background-color: $screen;
+  color:#FFF;
+  height: 85%;
+  margin-bottom: 15%;
+  display: block;
+  &:after{
+    content:'';
+    display: block;
+    height: 20px;
+  }
+  &.screenitem--new{
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+    }
+    i{
+      font-size: rem-calc(24);
+      line-height: 0;
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: none;
+      @include transition(all 0.3s linear);
+    }
+  }
+  .trash{
+    font-size: rem-calc(20);
+    margin:rem-calc(15);
+    color:rgba(#FFF,0.5);
+    &:hover{
+      color:rgba(#FFF,0.8);
+    }
+  }
+  p{
+    font-size: rem-calc(14);
+    color: rgba(#FFF,0.8);
+    margin:rem-calc(15);
+    margin-bottom: 0;
+    strong{
+      font-size: rem-calc(16);
+    }
+  }
+  .button.first{
+    border-right: 0;
+  }
+  .button{
+    margin:0;
+  }
+}
+
+.playlistentry{
+  background-color: $list;
+  margin-bottom: rem-calc(20);
+  p{
+    color:rgba(#FFF,0.8);
+    margin:0;
+    padding:rem-calc(8 20);
+  }
+  .name{
+    font-weight: 600;
+  }
+  .detail{
+  }
+  .button{
+    margin-bottom: 0;
+    border:1px solid $medium-gray;
+    line-height: rem-calc(16);
+  }
+  span{
+    font-weight: inherit;
+  }
+  &.playlistentry--new{
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      display: inline-block;
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+      padding-left: rem-calc(5);
+    }
+    i{
+      font-size: rem-calc(24);
+      line-height: 0;
+      position: relative;
+      top:rem-calc(4);
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: 1px solid $black;
+      @include transition(all 0.3s linear);
+    }
+  }
+}
+
+.playlistitementry{
+  background-color: $item;
+  padding-top: 98%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: rem-calc(30);
+  & > .row{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+  }
+  p{
+    color:rgba(#FFF,0.8);
+    margin:0;
+    font-weight: 600;
+    i{
+      font-size: rem-calc(60);
+      display: block;
+    }
+  }
+  .button.secondary{
+    margin-bottom: 0;
+  }
+  &.playlistitementry--new{
+    display: block;
+    background-color: transparent;
+    border: 1px dashed #CCC;
+    color: #CCC;
+    p{
+      color:#CCC;
+      margin: 0;
+      font-weight: 600;
+    }
+    i{
+      font-size: rem-calc(24);
+    }
+    &:hover{
+      background-color: $black;
+      color:#FFF;
+      border: 1px solid $black;
+      @include transition(all 0.3s linear);
+    }
+  }
+}
+
+.spacer{
+  height: rem-calc(40);
+}
+
+//-----------------------------------
+//
+//   Dashboard View
+//
+//-----------------------------------
+#playlistitem-tabs{
+  border:0;
+  & + .tabs-content{
+    border:0;
+    label{
+      color:#FFF;
+    }
+    .row:last-child label, .row:last-child input{
+      margin-bottom: 0;
+    }
+  }
+  .tabs-title > a{
+    font-weight: 600;
+  }
+  .tabs-title > a[aria-selected="true"]{
+    color:#FFF;
+  }
+  .tabs-title:not(.is-active) > a{
+    background-color: #FFF;
+  }
+}
+
+a.danger{
+  color: $alert-color;
+}
+a.success{
+  color: $success-color;
+}
+
+
+.weatherLocation-column{
+  position: relative;
+  #location-dropdown{
+    width: calc(100% - 31px);
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 300px;
+    overflow: scroll;
+    .menu li a{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+ul.playlistitems{
+  list-style: none;
+  margin: 0;
+  background: #F7F7F7;
+  border: 1px solid #ccc;
+  padding: rem-calc(20);
+  color: #FFF;
+  li{
+    margin-bottom: rem-calc(5);
+    cursor: pointer;
+    &.twitter{
+      background-color:#1da1f2;
+    }
+    &.weather{
+      background-color: #ffb900;
+    }
+    &.msg{
+      background-color: #2baf2b;
+    }
+    &.dvb{
+      background-color: #fdc400;
+    }
+    &.hidden{
+      display: none;
+    }
+    &:hover .fa-times{
+      color:rgba(#000,0.6);
+    }
+  }
+  .fa-bars{
+    cursor: row-resize;
+    background: #656565;
+    color:#FFF;
+    padding: rem-calc(7 10);
+    margin-right: rem-calc(5);
+    border-right: 1px solid #F7F7F7;
+  }
+  .fa-times, .fa-plus{
+    float:right;
+    color:rgba(#000,0.3);
+    line-height: 1.9;
+    margin-right: rem-calc(10);
+  }
+  &.inactive{
+    li{
+      padding-left: rem-calc(10);
+    }
+    li:not(:hover){
+      -webkit-filter: grayscale(100%);
+      -moz-filter: grayscale(100%);
+      -ms-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+  }
+}

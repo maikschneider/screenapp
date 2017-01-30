@@ -18,7 +18,7 @@ module.exports = {
     },
     appType: {
       type: 'string',
-      enum: ['weather', 'twitter', 'msg']
+      enum: ['weather', 'twitter', 'msg', 'dvb']
     },
     data: {
       type: 'json',
@@ -51,10 +51,21 @@ module.exports = {
     msgHeadline: 'text',
     msgText: 'text',
     msgImage: 'text',
+    // DVB settings
+    dvbStop: 'text',
 
 
     playlist: {
       model: 'playlist',
+    },
+    user: {
+      model: 'user'
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.user;
+      return obj;
     },
 
     getIcon: function() {
@@ -65,6 +76,9 @@ module.exports = {
           break;
         case 'msg':
           htmlclass = 'comment';
+          break;
+        case 'dvb':
+          htmlclass = 'bus';
           break;
         default:
           htmlclass = this.appType;
@@ -86,40 +100,18 @@ module.exports = {
     next();
   },
   beforeUpdate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.runBeforeUpdate(values, next);
-        break;
-      case 'weather':
-        WeatherService.runBeforeUpdate(values, next);
-        break;
-      default:
-        next();
+    // only update api data if id available (when added to playlist oder other fields become changed)
+    if(_.isUndefined(values.id)){
+      next();
+    } else{
+      ApiService.runBeforeUpdate(values, next);
     }
   },
   beforeCreate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.runBeforeCreate(values, next);
-        break;
-      case 'weather':
-        WeatherService.runBeforeCreate(values, next);
-        break;
-      default:
-        next();
-    }
+    ApiService.runBeforeCreate(values, next);
   },
   afterUpdate: function(values, next){
-    switch(values.appType) {
-      case 'twitter':
-        TwitterService.publishUpdate(values, next);
-        break;
-      case 'weather':
-        WeatherService.publishUpdate(values, next);
-        break;
-      default:
-        next();
-    }
+    ApiService.publishUpdate(values, next);
   }
 
 };

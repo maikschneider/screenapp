@@ -2,9 +2,9 @@ module.exports = {
 
   index: function(req, res) {
 
-    Screen.find().populate('list').exec(function(err, screens){
-      Playlist.find().exec(function(err, lists){
-        PlaylistItem.find().exec(function(err, items){
+    Screen.find({user: req.session.me, limit:2, sort: 'updatedAt DESC'}).populate('list').exec(function(err, screens){
+      Playlist.find({user: req.session.me, limit:3, sort: 'updatedAt DESC'}).populate('items').populate('screens').exec(function(err, lists){
+        PlaylistItem.find({user: req.session.me, limit:5, sort: 'updatedAt DESC'}).exec(function(err, items){
           res.view('admin/index', {'screens': screens, 'lists': lists, 'items': items});
         });
       });
@@ -12,31 +12,52 @@ module.exports = {
 
   },
 
-  screen: function(req, res) {
+  screens: function(req, res) {
+    Screen.find({user: req.session.me}).populate('list').exec(function(err, screens){
+      res.view('admin/screens', {'screens': screens});
+    });
+  },
 
-    Playlist.find().exec(function(err, lists){
-      res.view('admin/screen', {'lists':lists});
+  screen: function(req, res) {
+    var id = req.param('id', false);
+    Playlist.find({user: req.session.me}).exec(function(err, lists){
+      res.view('admin/screen', {'lists':lists, 'screen': id});
     });
 
   },
 
+  playlists: function(req, res) {
+    Playlist.find({user: req.session.me}).populate('items').populate('screens').exec(function(err, lists){
+      res.view('admin/playlists', {'lists': lists});
+    });
+  },
+
   playlist: function(req, res) {
     var id = req.param('id', false);
-    var filter = id ? {list: id} : {};
-    Screen.find().where(filter).exec(function(err, screens){
-      PlaylistItem.find().exec(function(err, items){
+    Screen.find({user: req.session.me}).exec(function(err, screens){
+      PlaylistItem.find({user: req.session.me}).exec(function(err, items){
           res.view('admin/playlist', {'screens': screens, 'items': items, 'playlist': id});
       });
     });
 
   },
 
+  playlistitems: function(req, res) {
+    PlaylistItem.find({user: req.session.me}).exec(function(err, items){
+      res.view('admin/playlistitems', {'items': items});
+    });
+  },
+
   playlistitem: function(req, res) {
     var id = req.param('id', false);
-    Playlist.find().exec(function(err, lists){
+    Playlist.find({user: req.session.me}).exec(function(err, lists){
         res.view('admin/playlistitem', {'lists': lists, 'item': id});
     });
 
+  },
+
+  swagger: function(req, res) {
+    res.view('admin/swagger');
   },
 
   geocode: function(req, res) {
@@ -70,12 +91,12 @@ module.exports = {
         },
         function(err) {
           console.log(err || "Email send!");
-          if(!err) res.view('homepage', {layout: false, emailsend: true});
+          if(!err) res.view('homepage/default', {layout: 'frontend', emailsend: true});
         }
       );
     }
     else {
-      res.view('homepage', {layout: false});
+      return res.redirect('/');
     }
   }
 

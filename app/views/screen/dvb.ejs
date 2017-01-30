@@ -1,0 +1,46 @@
+<section class="columns slide dvb" data-id="<%= item.id %>">
+
+  <div class="row align-center align-middle">
+    <div class="small-12 medium-10 large-8 columns">
+      <div class="dvb__header">
+        <div class="row">
+          <div class="small-12 columns">
+            <h1><%= item.dvbStop %></h1>
+          </div>
+          <div class="columns small-2">
+            <p>Line</p>
+          </div>
+          <div class="columns small-8">
+            <p>Destination</p>
+          </div>
+          <div class="columns small-2">
+            <p><span class="show-for-medium">Arrival </span>time</p>
+          </div>
+        </div>
+      </div>
+      <div class="dvb__content">
+      <% if(item.data){ %>
+      <% for(var i=0; i<item.data.length; i++){
+          var stop = item.data[i];
+        %>
+        <div class="dvb__item">
+          <div class="row">
+            <div class="columns medium-2">
+              <img src="<%= stop.mode.icon_url %>" alt="<%= stop.mode.title %>" />
+              <p><strong><%= stop.line %></strong></p>
+            </div>
+            <div class="columns medium-8">
+              <p><%= stop.direction %></p>
+            </div>
+            <div class="columns medium-2 text-right medium-text-left shrink">
+              <p><strong><%= stop.arrivalTimeRelative %></strong></p>
+            </div>
+          </div>
+        </div>
+      <% } %>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+</section>

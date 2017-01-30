@@ -18,7 +18,10 @@ module.exports = {
 
         Playlist.findOne(playlist[0].id).populate('items').then(function(p){
           BroadcastService.initPlaylist(p);
-          res.view('screen/play', {
+          if (req.wantsJSON) {
+            return res.send(200);
+          }
+          return res.view('screen/play', {
             layout: false,
             'screen': screen,
             'playlist': p,
@@ -39,13 +42,19 @@ module.exports = {
 
     var id = req.param('id',null);
 
-    Screen.findOne(id).then(function(screen){
+    Screen.findOne({id: id, user: req.session.me}).then(function(screen){
       Playlist.update(screen.list, {live:false}).exec(function(err, playlist){
         BroadcastService.stopPlaylist(playlist[0]);
-        res.redirect('/');
+        if (req.wantsJSON) {
+          return res.send(200);
+        }
+        return res.redirect('/');
       });
     }).catch(function(err){
-      // @todo implement error message
+      if (req.wantsJSON) {
+        return res.send(404);
+      }
+      return res.notFound();
     });
 
   },

@@ -31,7 +31,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 // @include foundation-label;
 @include foundation-media-object;
 // @include foundation-off-canvas;
-@include foundation-orbit;
+//@include foundation-orbit;
 // @include foundation-pagination;
 // @include foundation-progress-bar;
 // @include foundation-progress-element;
@@ -87,6 +87,9 @@ section.weather{
   background: -webkit-linear-gradient(to left, #E0EAFC , #CFDEF3); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #E0EAFC , #CFDEF3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: 5vh 0;
+  @include breakpoint(medium) {
+
+  }
   .weather__card{
     padding: rem-calc(20);
     background: #FFF;
@@ -96,26 +99,27 @@ section.weather{
   h1{
     font-weight: 300;
     letter-spacing: 1px;
+    font-size: rem-calc(16);
   }
   hr{
     border-color: rgba(#000,0.1);
   }
   .weather__now__icon{
-    font-size: rem-calc(75);
+    font-size: rem-calc(35);
   }
   p.temp{
     font-weight: 200;
     color: #888;
     margin: 0;
     line-height: 1;
-    font-size: rem-calc(28);
+    font-size: rem-calc(18);
   }
   p.desc{
     margin: 0;
     line-height: 1;
     font-weight: 600;
     color:#999;
-    font-size: rem-calc(18);
+    font-size: rem-calc(12);
   }
   .weather__now{
     display: flex;
@@ -124,14 +128,14 @@ section.weather{
     align-items: center;
     margin-bottom: rem-calc(30);
     .weather__now__icon{
-      font-size: rem-calc(120);
+      font-size: rem-calc(60);
       margin-right: rem-calc(20);
     }
     p.temp{
-      font-size: rem-calc(80);
+      font-size: rem-calc(40);
     }
     p.desc{
-      font-size: rem-calc(30);
+      font-size: rem-calc(15);
     }
   }
   .weather__later{
@@ -149,6 +153,31 @@ section.weather{
       margin: rem-calc(20 0);
     }
   }
+  @include breakpoint(medium) {
+    h1{
+      font-size: rem-calc(48);
+    }
+    .weather__now__icon{
+      font-size: rem-calc(75);
+    }
+    p.temp{
+      font-size: rem-calc(28);
+    }
+    p.desc{
+      font-size: rem-calc(18);
+    }
+    .weather__now{
+      .weather__now__icon{
+        font-size: rem-calc(120);
+      }
+      p.temp{
+        font-size: rem-calc(80);
+      }
+      p.desc{
+        font-size: rem-calc(30);
+      }
+    }
+  }
 
 }
 
@@ -157,11 +186,16 @@ section.msg{
   background: -webkit-linear-gradient(to left, #f85032 , #e73827); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #f85032 , #e73827); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   .msg__card{
-    margin: rem-calc(20);
+    margin: rem-calc(10 0);
     padding: rem-calc(20);
     background: #FFF;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(#000,0.2);
+    overflow-y: scroll;
+    max-height: calc(100vh - 30px);
+  }
+  img{
+    max-height: 30vh;
   }
 }
 
@@ -184,6 +218,7 @@ section.twitter{
   .twitter__user{
     float: left;
     margin-right: rem-calc(15);
+
   }
   h3{
     margin-bottom: 0;
@@ -193,6 +228,51 @@ section.twitter{
     color:#777;
   }
   p{
-    font-size: rem-calc(32);
+    font-size: rem-calc(14);
+  }
+  img{
+    max-height: 40vh;
+  }
+  @include breakpoint(medium) {
+    p{
+      font-size: rem-calc(32);
+    }
+    img{
+      max-height: 50vh;
+    }
+  }
+}
+
+section.dvb{
+  background-color: #fdc400;
+  & > .row{
+    min-height: 100%;
+  }
+  .dvb__header{
+    background-color: #000;
+    color:#FFF;
+    padding: rem-calc(0 20);
+    p{
+      margin-bottom: rem-calc(10);
+    }
+  }
+  .dvb__content{
+    background-color: #555;
+    color: #FFF;
+    padding:rem-calc(10 20);
+  }
+  .dvb__item{
+    padding:rem-calc(5 0);
+    &:not(:last-child){
+      border-bottom: 1px solid rgba(#FFF,0.3);
+    }
+    img{
+      float:left;
+      margin-right: rem-calc(10);
+    }
+    p{
+      margin-bottom: 0;
+      line-height: 2.2;
+    }
   }
 }

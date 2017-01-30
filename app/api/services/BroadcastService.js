@@ -1,3 +1,5 @@
+const ApiService = require("./ApiService");
+
 module.exports = {
 
     isStarted: false,
@@ -12,18 +14,7 @@ module.exports = {
     },
 
     runService: function(playlistitem) {
-
-      switch(playlistitem.appType) {
-
-        case 'twitter':
-          TwitterService.runAndSave(playlistitem.id);
-          break;
-        case 'weather':
-          WeatherService.runAndSave(playlistitem.id);
-          break;
-        default:
-          //@todo return something
-      }
+      ApiService.runUpdate(playlistitem.id, playlistitem.appType);
     },
 
     startPlaylistCron: function() {

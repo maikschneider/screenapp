@@ -1,12 +1,15 @@
 <section class="columns slide msg" data-id="<%= item.id %>">
 
-  <div class="row align-center">
-    <div class="small-10 columns">
+  <div class="row align-center" style="height:100%">
+    <div class="small-12 medium-10 columns align-self-middle">
 
       <div class="msg__card">
         <% if(item.msgHeadline){ %>
           <h1><%= item.msgHeadline %></h1>
           <p><%= item.msgText %></p>
+          <% if(item.msgImage) { %>
+            <img src="<%= item.msgImage %>" alt="image" />
+          <% } %>
         <% } else { %>
           <div class="callout alert">
             <h5><i class="fa fa-frown-o"></i> No Message data</h5>

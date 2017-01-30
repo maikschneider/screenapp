@@ -1,28 +1,34 @@
 # Screenapp
 
-SCC 2016 Project
+![overview](overview.png)
+
+SCC 2016 Project by [Maik Schneider](@maikschneider) and [Christoph Biering](@chryb).
 
 ## Overview
 
-* Software Stack
-* Install
-* Services
-  * BroadcastService
-  * WeatherService
-  * GeocodeService
-* Model
-* API
-* Usage
-* Backend
-* Webclients (Anzeige)
+* [Software Stack](#software-stack)
+* [Install](#install)
+* [Model](#model)
+* [Services](#services)
+  * [ApiService](#apiservice)
+  * [BroadcastService](#broadcastservice)
+  * [BaseAppService](#baseappservice)
+    * [WeatherService](#weatherservice)
+    * [TwitterService](#twitterservice)
+    * [DvbService](#dvbservice)
+    * [MsgService](#msgservice)
+  * [GeocodeService](#geocodeservice)
+* [API](#api)
+* [Usage](#usage)
+* [Backend](#backend)
+* [Deployment](#deployment)
+* [Webclients](#webclients)
 
 ## Software Stack
 
 * [sails.js](http://sailsjs.org)
     * ORM [Waterline](https://github.com/balderdashy/waterline-docs)
-    * Adapters (MySQL, [NeDB](https://github.com/louischatriot/nedb)?)
 * [swagger.io](http://swagger.io/)
-* [reveal.js](http://lab.hakim.se/reveal-js/#/)
 * [bower](https://bower.io/)
     * [Foundation 6](http://foundation.zurb.com/)
 
@@ -32,17 +38,42 @@ SCC 2016 Project
 * to start the server, run `sails lift`
 * navigate into the **assets** directory and run `bower install`
 
+## Model
+
+![uml](model.png)
+
 ## Services
 
 Services are defined in `app/api/services`. They can be called from everywhere inside the node application.
 
-### BroadcastService (very alpha)
+![service](service.png)
+
+### ApiService
+
+Service wrapper for all concrete api services: Passes update requests to particular service based on **PlaylistItem** or **Playlistitem.id + Playlistitem.appType**
+
+
+### BroadcastService (beta)
 
 The perpose of this service is to controll the play state of all connected screens via socket. It should loop through the Playlists and synchronise the screens by firing up socket events.
 
-### WeatherService
+### BaseAppService
+
+Abstract service workflow for loading PlaylistItems, receiving API data  and saving data to database. Offers **beforeUpdate** and **afterUpdate** hook to child classes.
+
+#### WeatherService
 
 Gets weather forecast from [openweathermap.org](http://openweathermap.org/). Caches the received data inside the PlaylistItem. Fires a socket event after updating a PlaylistItem.
+
+#### TwitterService
+
+Uses the [Twitter search API](https://dev.twitter.com/rest/public/search) to receive tweets. Implementation of [application-only](https://dev.twitter.com/oauth/application-only) oAuth2 authentification.
+
+#### DvbService
+
+Receives bus- and tramstop data from Dresdens public transportation system. Uses [dvbjs](https://github.com/kiliankoe/dvbjs).
+
+#### MsgService
 
 ### GeocodeService
 
@@ -61,10 +92,6 @@ Requests a list of places by a name. Example response for **halle saale**:
   "provider": "openstreetmap" 
 }
 ```    
-
-## Model
-
-![uml](plantuml.png)
 
 ## API
 
@@ -173,8 +200,19 @@ Response:
 
 ![backend](backend.png)
 
-## Webclients (Anzeige)
+## Deployment
 
-* [reveal.js](http://lab.hakim.se/reveal-js/#/)
+To use the deployment script **openstack_deploy.sh** openstack needs to be configured in your lokal environment. In our case, we the given data for cloud&heat: ```source tud_scc4-openrc.sh```
+
+The scripts reads the available configurations and floating ips in json format. Therefore the command line program [jq](https://stedolan.github.io/jq/) has to be installed.
+
+## Webclients
+
 * iOS App 
+  * XCode project located in SCC16iOSClient
+  * just import in XCode and build
+  * still uses local install at 127.0.0.1:1337
+* built-in webclient
+  * can be reached through admin backend (**preview** button)
+  * can easily be outsourced, since only dependancy is the onload HTML markup. (@TODO) 
 
