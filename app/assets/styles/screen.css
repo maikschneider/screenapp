@@ -4516,23 +4516,24 @@ section.weather {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
   section.weather h1 {
     font-weight: 300;
-    letter-spacing: 1px; }
+    letter-spacing: 1px;
+    font-size: 1rem; }
   section.weather hr {
     border-color: rgba(0, 0, 0, 0.1); }
   section.weather .weather__now__icon {
-    font-size: 4.6875rem; }
+    font-size: 2.1875rem; }
   section.weather p.temp {
     font-weight: 200;
     color: #888;
     margin: 0;
     line-height: 1;
-    font-size: 1.75rem; }
+    font-size: 1.125rem; }
   section.weather p.desc {
     margin: 0;
     line-height: 1;
     font-weight: 600;
     color: #999;
-    font-size: 1.125rem; }
+    font-size: 0.75rem; }
   section.weather .weather__now {
     display: flex;
     flex-direction: row;
@@ -4540,12 +4541,12 @@ section.weather {
     align-items: center;
     margin-bottom: 1.875rem; }
     section.weather .weather__now .weather__now__icon {
-      font-size: 7.5rem;
+      font-size: 3.75rem;
       margin-right: 1.25rem; }
     section.weather .weather__now p.temp {
-      font-size: 5rem; }
+      font-size: 2.5rem; }
     section.weather .weather__now p.desc {
-      font-size: 1.875rem; }
+      font-size: 0.9375rem; }
   section.weather .weather__later {
     position: relative; }
     section.weather .weather__later:not(.weather__later--4):after {
@@ -4558,6 +4559,21 @@ section.weather {
       top: 10%; }
     section.weather .weather__later p.desc {
       margin: 1.25rem 0; }
+  @media print, screen and (min-width: 40em) {
+    section.weather h1 {
+      font-size: 3rem; }
+    section.weather .weather__now__icon {
+      font-size: 4.6875rem; }
+    section.weather p.temp {
+      font-size: 1.75rem; }
+    section.weather p.desc {
+      font-size: 1.125rem; }
+    section.weather .weather__now .weather__now__icon {
+      font-size: 7.5rem; }
+    section.weather .weather__now p.temp {
+      font-size: 5rem; }
+    section.weather .weather__now p.desc {
+      font-size: 1.875rem; } }
 
 section.msg {
   background: #f85032;
@@ -4567,11 +4583,15 @@ section.msg {
   background: linear-gradient(to left, #f85032, #e73827);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
   section.msg .msg__card {
-    margin: 1.25rem;
+    margin: 0.625rem 0;
     padding: 1.25rem;
     background: #FFF;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    max-height: calc(100vh - 30px); }
+  section.msg img {
+    max-height: 30vh; }
 
 section.twitter {
   background: #457fca;
@@ -4601,9 +4621,14 @@ section.twitter {
   section.twitter h4 {
     color: #777; }
   section.twitter p {
-    font-size: 2rem; }
+    font-size: 0.875rem; }
   section.twitter img {
-    max-height: 50vh; }
+    max-height: 40vh; }
+  @media print, screen and (min-width: 40em) {
+    section.twitter p {
+      font-size: 2rem; }
+    section.twitter img {
+      max-height: 50vh; } }
 
 section.dvb {
   background-color: #fdc400; }

@@ -14,7 +14,7 @@
             <p>Destination</p>
           </div>
           <div class="columns small-2">
-            <p>Arrival time</p>
+            <p><span class="show-for-medium">Arrival </span>time</p>
           </div>
         </div>
       </div>
@@ -25,14 +25,14 @@
         %>
         <div class="dvb__item">
           <div class="row">
-            <div class="columns small-2">
+            <div class="columns medium-2">
               <img src="<%= stop.mode.icon_url %>" alt="<%= stop.mode.title %>" />
               <p><strong><%= stop.line %></strong></p>
             </div>
-            <div class="columns small-8">
+            <div class="columns medium-8">
               <p><%= stop.direction %></p>
             </div>
-            <div class="columns small-2">
+            <div class="columns medium-2 text-right medium-text-left shrink">
               <p><strong><%= stop.arrivalTimeRelative %></strong></p>
             </div>
           </div>
