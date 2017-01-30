@@ -3,7 +3,14 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <h2 class="color-screen"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-screen"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/screens" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
 
     <div class="row">
       <% for(var i=0; i<screens.length; i++){ %>
@@ -33,7 +40,7 @@
                 </div>
                 <% } %>
                 <div class="columns">
-                  <a class="expanded button secondary" href='admin/screen/<%= screens[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+                  <a class="expanded button secondary" href='/admin/screen/<%= screens[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
                 </div>
               </div>
             </div>
@@ -57,7 +64,14 @@
   </div>
 
   <div class="small-12 columns">
-    <h2 class="color-list"><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-list"><i class="fa fa-list" aria-hidden="true"></i> Playlists</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/playlists" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
 
     <div class="row">
       <% for(var i=0; i<lists.length; i++){ %>
@@ -85,7 +99,7 @@
               </p>
             </div>
             <div class="columns shrink">
-              <a class="expanded button secondary" href='admin/playlist/<%= lists[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+              <a class="expanded button secondary" href='/admin/playlist/<%= lists[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
             </div>
           </div>
         </div>
@@ -110,7 +124,14 @@
 
 
   <div class="small-12 columns">
-    <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</h2>
+    <div class="row">
+      <div class="columns">
+        <h2 class="color-item"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</h2>
+      </div>
+      <div class="columns text-right">
+        <p class="more"><a href="/admin/playlistitems" title="See all screens">show all <i class="fa fa-angle-right" aria-hidden="true"></i></a></p>
+      </div>
+    </div>
 
     <div class="row">
       <% for(var i=0; i<items.length; i++){ %>
@@ -123,7 +144,7 @@
               &nbsp; <%= items[i].name %></p>
             </div>
             <div class="small-12 align-self-bottom columns">
-              <a class="expanded button secondary" href='admin/playlistitem/<%= items[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
+              <a class="expanded button secondary" href='/admin/playlistitem/<%= items[i].id %>'><i class='fa fa-pencil'></i> Edit</a>
             </div>
           </div>
         </div>

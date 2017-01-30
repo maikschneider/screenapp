@@ -82,7 +82,7 @@ module.exports = {
         return res.ok('Signup successful!');
       }
 
-      return res.redirect('/welcome');
+      return res.redirect('/admin');
     });
   }
 };

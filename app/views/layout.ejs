@@ -21,7 +21,7 @@
               <li><a class="color-screen <%= req.route.path.indexOf('screens') > 0 ? 'active' : '' %>" href="/admin/screens"><i class="fa fa-desktop" aria-hidden="true"></i> Screens</a></li>
               <li><a class="color-list <%= req.route.path.indexOf('playlists') > 0 ? 'active' : '' %>" href="/admin/playlists"><i class="fa fa-list" aria-hidden="true"></i> Playlists</a></li>
               <li><a class="color-item <%= req.route.path.indexOf('playlistitems') > 0 ? 'active' : '' %>" href="/admin/playlistitems"><i class="fa fa-play-circle" aria-hidden="true"></i> Apps</a></li>
-              <li><a class="" href="/docs"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
+              <li><a class="<%= req.route.path.indexOf('swagger') > 0 ? 'active' : '' %>" href="/admin/swagger"><i class="fa fa-book" aria-hidden="true"></i> API</a></li>
               <!-- <li><a href="#">Play</a></li> -->
             </ul>
           </div>

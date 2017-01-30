@@ -6273,6 +6273,13 @@ h2 {
     background-color: #0C1E2D;
     color: #FFF; }
 
+.more a {
+  color: #cacaca;
+  font-weight: 600;
+  font-size: 0.8125rem; }
+  .more a:hover {
+    color: #8a8a8a; }
+
 .screenitem {
   background-color: #428bbe;
   color: #FFF;

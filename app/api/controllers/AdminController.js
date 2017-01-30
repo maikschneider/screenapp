@@ -2,9 +2,9 @@ module.exports = {
 
   index: function(req, res) {
 
-    Screen.find({user: req.session.me}).populate('list').exec(function(err, screens){
-      Playlist.find({user: req.session.me}).populate('items').populate('screens').exec(function(err, lists){
-        PlaylistItem.find({user: req.session.me}).exec(function(err, items){
+    Screen.find({user: req.session.me, limit:2, sort: 'updatedAt DESC'}).populate('list').exec(function(err, screens){
+      Playlist.find({user: req.session.me, limit:3, sort: 'updatedAt DESC'}).populate('items').populate('screens').exec(function(err, lists){
+        PlaylistItem.find({user: req.session.me, limit:5, sort: 'updatedAt DESC'}).exec(function(err, items){
           res.view('admin/index', {'screens': screens, 'lists': lists, 'items': items});
         });
       });
@@ -54,6 +54,10 @@ module.exports = {
         res.view('admin/playlistitem', {'lists': lists, 'item': id});
     });
 
+  },
+
+  swagger: function(req, res) {
+    res.view('admin/swagger');
   },
 
   geocode: function(req, res) {
