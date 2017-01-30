@@ -137,26 +137,3 @@
 
   </div>
 </div>
-
-<div class="reveal" id="modal" data-reveal>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<script>
-
-$.adminIndex = function() {
-
-  $modal = $('#modal');
-
-  $('a[data-modal').on('click', function(e){
-    e.preventDefault();
-    $.ajax('/'+$(this).attr('href'))
-      .done(function(resp){
-        $modal.html(JSON.stringify(resp)).foundation('open');
-    });
-  });
-
-};
-</script>

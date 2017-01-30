@@ -4087,6 +4087,44 @@ select {
   transform: rotate(180deg);
   transform-origin: 50% 50%; }
 
+.callout {
+  position: relative;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(12, 30, 45, 0.25);
+  border-radius: 0;
+  background-color: white;
+  color: #0C1E2D; }
+  .callout > :first-child {
+    margin-top: 0; }
+  .callout > :last-child {
+    margin-bottom: 0; }
+  .callout.primary {
+    background-color: #dbfaf9;
+    color: #0C1E2D; }
+  .callout.secondary {
+    background-color: white;
+    color: #0C1E2D; }
+  .callout.success {
+    background-color: #e1faea;
+    color: #0C1E2D; }
+  .callout.warning {
+    background-color: #fff3d9;
+    color: #0C1E2D; }
+  .callout.alert {
+    background-color: #fce6e2;
+    color: #0C1E2D; }
+  .callout.small {
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem; }
+  .callout.large {
+    padding-top: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem; }
+
 .close-button {
   position: absolute;
   color: #8a8a8a;
@@ -6266,7 +6304,8 @@ h2 {
   background-color: #B01F1F;
   padding-top: 98%;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  margin-bottom: 1.875rem; }
   .playlistitementry > .row {
     position: absolute;
     top: 0;

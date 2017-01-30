@@ -20,7 +20,7 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 // @include foundation-badge;
 // @include foundation-breadcrumbs;
 // @include foundation-button-group;
-// @include foundation-callout;
+@include foundation-callout;
 @include foundation-close-button;
 @include foundation-menu;
 @include foundation-menu-icon;
@@ -273,6 +273,7 @@ h2{
   padding-top: 98%;
   position: relative;
   overflow: hidden;
+  margin-bottom: rem-calc(30);
   & > .row{
     position: absolute;
     top:0;
