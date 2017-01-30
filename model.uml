@@ -1,6 +1,5 @@
 @startuml
 
-
 class Screen {
 	- id
 	- name
@@ -14,7 +13,7 @@ class Playlist {
 	- live
 }
 
-Playlist "1" o-- "*" PlaylistItem
+Playlist "1" -- "*" PlaylistItem
 
 class PlaylistItem {
 	- id
@@ -39,6 +38,14 @@ class PlaylistItem {
 	- geocode(location, cb)
 }
 
+class User {
+	- id
+	- name
+	- email
+}
 
+User "1" -- "*" Playlist
+User "1" -- "*" Screen
+User "1" -- "*" PlaylistItem
 
 @enduml
