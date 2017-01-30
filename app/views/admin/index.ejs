@@ -11,7 +11,16 @@
         <div class="screenitem">
           <div class="row expanded" style="height:100%;">
             <div class="small-12 columns text-right">
-              <a href="#" class="trash"><i class='fa fa-trash'></i></a>
+              <% if(screens[i].list) { %>
+              <div class="switch small">
+                <input class="switch-input" id="screenswitch<%= screens[i].id %>" type="checkbox" name="live" <% if(screens[i].list.live){ %>checked="checked"<% } %> />
+                <label class="switch-paddle" for="screenswitch<%= screens[i].id %>" data-toggle-play="<%= screens[i].id %>">
+                  <span class="show-for-sr">Do you like me?</span>
+                  <span class="switch-inactive" aria-hidden="true">Off</span>
+                  <span class="switch-active" aria-hidden="true">On</span>
+                </label>
+              </div>
+              <% } %>
             </div>
             <div class="small-12 columns align-self-bottom">
               <p><strong><%= screens[i].name %></strong><% if(screens[i].list){ %><br />Playlist: <%= screens[i].list.name %><% } %></p>
@@ -137,3 +146,14 @@
 
   </div>
 </div>
+
+<script type="text/javascript">
+  $('label[data-toggle-play]').on('click', function(e){
+
+    var input = $('input#screenswitch'+$(this).attr('data-toggle-play'));
+    var route = $(input).is(':checked') ? 'stop' : 'play';
+
+    io.socket.post('/screen/'+route+'/'+$(this).attr('data-toggle-play'), function(data, rawdata){
+    });
+  });
+</script>

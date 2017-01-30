@@ -480,8 +480,8 @@ $slider-radius: $global-radius;
 // 30. Switch
 // ----------
 
-$switch-background: $medium-gray;
-$switch-background-active: $black;
+$switch-background: darken($dark-gray, 10%);
+$switch-background-active: darken(#428bbe, 20%);
 $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;
