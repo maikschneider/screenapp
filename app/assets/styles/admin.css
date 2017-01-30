@@ -3718,38 +3718,38 @@ kbd {
     .button.hollow, .button.hollow:hover, .button.hollow:focus {
       background-color: transparent; }
     .button.hollow:hover, .button.hollow:focus {
-      border-color: #4c94cf;
-      color: #4c94cf; }
+      border-color: #060f17;
+      color: #060f17; }
     .button.hollow.primary {
       border: 1px solid #0C1E2D;
       color: #0C1E2D; }
       .button.hollow.primary:hover, .button.hollow.primary:focus {
-        border-color: #4c94cf;
-        color: #4c94cf; }
+        border-color: #060f17;
+        color: #060f17; }
     .button.hollow.secondary {
       border: 1px solid #FFF;
       color: #FFF; }
       .button.hollow.secondary:hover, .button.hollow.secondary:focus {
-        border-color: white;
-        color: white; }
+        border-color: gray;
+        color: gray; }
     .button.hollow.success {
       border: 1px solid #3adb76;
       color: #3adb76; }
       .button.hollow.success:hover, .button.hollow.success:focus {
-        border-color: #9dedbb;
-        color: #9dedbb; }
+        border-color: #157539;
+        color: #157539; }
     .button.hollow.warning {
       border: 1px solid #ffae00;
       color: #ffae00; }
       .button.hollow.warning:hover, .button.hollow.warning:focus {
-        border-color: #ffd780;
-        color: #ffd780; }
+        border-color: #805700;
+        color: #805700; }
     .button.hollow.alert {
       border: 1px solid #ec5840;
       color: #ec5840; }
       .button.hollow.alert:hover, .button.hollow.alert:focus {
-        border-color: #f6aca0;
-        color: #f6aca0; }
+        border-color: #881f0e;
+        color: #881f0e; }
   .button.disabled, .button[disabled] {
     opacity: 0.25;
     cursor: not-allowed; }

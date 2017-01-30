@@ -13,9 +13,9 @@ module.exports = {
   },
 
   screen: function(req, res) {
-
+    var id = req.param('id', false);
     Playlist.find({user: req.session.me}).exec(function(err, lists){
-      res.view('admin/screen', {'lists':lists});
+      res.view('admin/screen', {'lists':lists, 'screen': id});
     });
 
   },

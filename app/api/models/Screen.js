@@ -9,7 +9,8 @@ module.exports = {
 
   attributes: {
     name: {
-      type: 'text'
+      type: 'text',
+      required: true,
     },
 
     list: {

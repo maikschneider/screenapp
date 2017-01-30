@@ -28,7 +28,7 @@
           <div class="small-10 columns align-bottom">
             <div class="row collapse align-bottom" style="height:100%">
               <div class="columns align-bottom">
-                <p class="text-center"><a href="/logout" class="button hollow">Logout</a></p>
+                <p class="text-center"><a href="/logout" class="button alert hollow">Logout</a></p>
               </div>
             </div>
           </div>
@@ -63,6 +63,11 @@
           // fix space bar bug in weather dropdown
           Foundation.Keyboard.register('Dropdown', {});
 
+          try{
+            $.Screen();
+          } catch(err){
+
+          }
           try{
             $.Playlist();
           } catch(err){

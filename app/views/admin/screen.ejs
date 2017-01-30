@@ -1,18 +1,33 @@
-<h1><i class="fa fa-desktop"></i> Add new Screen</h1>
+<h1><i class="fa fa-desktop"></i> <% if(screen){ %>Edit<% } else { %>Add new<% } %> Screen</h1>
 <hr />
 
-<form action="/screen" method="POST">
+<form action="/screen<% if(screen){ %>/<%= screen %><% } %>" method="POST" data-action-url="/screen/">
+
+  <div data-abide-error role="alert" class="alert callout" style="display: none;" data-closable>
+    <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There are some errors in your form</p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div data-abide-error role="alert" class="success callout" style="display: none;" data-closable>
+    <p><i class="fa fa-check-circle" aria-hidden="true"></i> Successfully saved! </p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="text-right middle">Name</label>
+    <div class="medium-3 small-12 columns">
+      <label for="name" class="medium-text-right middle">Name</label>
     </div>
     <div class="small-9 columns">
-      <input type="text" id="middle-label" name="name" placeholder="Monitor name" required>
+      <input type="text" id="name" name="name" placeholder="Monitor name" required aria-describedby="name-error" />
+      <span class="form-error" id="name-error"></span>
     </div>
   </div>
   <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="text-right middle">Playlist to display</label>
+    <div class="medium-3 small-12 columns">
+      <label for="middle-label" class="medium-text-right middle color-list"><i class="fa fa-list"></i> Playlist to display</label>
     </div>
     <div class="small-9 columns">
       <select name="list">
@@ -23,12 +38,77 @@
       </select>
     </div>
   </div>
+
+  <hr />
+
   <div class="row">
-    <div class="medium-9 medium-offset-3 columns">
+    <div class="columns">
+      <a href="/admin" class="button"><i class="fa fa-times"></i> cancel</a>
+    </div>
+    <div class="columns text-right">
+        <a data-open="deleteModal" class="button alert hollow" <% if(!screen){ %>style="display:none;"<% } %>><i class="fa fa-trash"></i> delete</a>
+    </div>
+    <div class="columns shrink text-right">
       <button type="submit" class="button success"><i class="fa fa-save"></i> save</button>
     </div>
   </div>
+
 </form>
 
-<hr />
-<a href="/" class="button alert"><i class="fa fa-times"></i> cancel</a>
+
+<div class="reveal alert callout" id="deleteModal" data-reveal>
+  <h2>Delete this screen?</h2>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This action cannot be undone!</p>
+  <div class="row">
+    <div class="columns shrink">
+      <a class="button primary hollow" data-close aria-label="Close modal"><i class="fa fa-close" aria-hidden="true"></i> No, keep it</a>
+    </div>
+    <div class="columns">
+      <a href="#" class="button alert" id="deleteButton"><i class="fa fa-trash" aria-hidden="true"></i> Yes, delete app</a>
+    </div>
+  </div>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<script type="text/javascript">
+  /**
+   * Onload function for all PlaylistItem forms
+   */
+    $.Screen = function(){
+      $.bindFormSubmit();
+      $.bindDeleteButton();
+
+      <% if(screen){ %>
+        $.ScreenEdit();
+      <% } %>
+    };
+
+    /**
+     * Changes the create form to an update form
+     */
+    $.ScreenEdit = function(){
+      io.socket.get('/screen/<%= screen %>', function(resData, jwres) {
+        $.insertFormData(resData);
+      });
+    };
+
+    /**
+     * inserts screen data into the form (at onload for edit or after submit)
+     * @param  {[type]} resData [description]
+     * @return {[type]}         [description]
+     */
+    $.insertFormData = function(resData){
+      // insert data into form inputs
+      $.each(resData, function(index, value) {
+          $('form input[name="'+index+'"]:text').attr('value', value);
+          $('form textarea[name="'+index+'"]').html(value);
+          $('form input[name="'+index+'"][value="'+value+'"]:radio').prop('checked', true);
+          $('form input[name="'+index+'"]:checkbox').prop('checked', value);
+          if(typeof(value) === 'object' && value !== null)
+            $('form select[name="'+index+'"] option[value="'+value.id+'"]').attr('selected','');
+      });
+    };
+
+</script>

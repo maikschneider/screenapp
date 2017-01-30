@@ -1,4 +1,4 @@
-<h1><i class="fa fa-play-circle"></i> Add new PlaylistItem</h1>
+<h1><i class="fa fa-play-circle"></i> <% if(!item){ %>Add new<% } else { %>Edit<% } %> PlaylistItem</h1>
 <hr />
 
 <form action="/playlistitem<% if(item){ %>/<%= item %><% } %>" method="POST" data-action-url="/playlistitem/">
