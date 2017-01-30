@@ -1,3 +1,5 @@
+'use strict';
+
 var s = require("underscore.string");
 
 module.exports = class BaseAppService {
