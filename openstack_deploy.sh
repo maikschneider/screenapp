@@ -58,5 +58,5 @@ then
 	done
 
 	echo "DONE!"
-	echo "http://${FLOATING_IP}/"
+	echo "In about 5-10min you can see the application: http://${FLOATING_IP}/"
 fi
