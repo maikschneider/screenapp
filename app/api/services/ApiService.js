@@ -32,22 +32,22 @@ module.exports = {
   },
 
   runUpdate: function(playlistitemId, playlistAppType) {
-    service = this.getService(playlistAppType);
+    var service = this.getService(playlistAppType);
     service.runUpdate(playlistitemId);
   },
 
   runBeforeUpdate: function(values, callback){
-    service = this.getService(values.appType);
+    var service = this.getService(values.appType);
     service.runBeforeUpdate(values, callback);
   },
 
   runBeforeCreate: function(values, callback){
-    service = this.getService(values.appType);
+    var service = this.getService(values.appType);
     service.runBeforeCreate(values, callback);
   },
 
   publishUpdate: function(values, callback){
-    service = this.getService(values.appType);
+    var service = this.getService(values.appType);
     service.publishUpdate(values, callback);
   }
 

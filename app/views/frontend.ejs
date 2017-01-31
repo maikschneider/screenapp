@@ -20,7 +20,7 @@
           <div class="small-12 columns">
             <div class="top-bar-left">
               <ul class="dropdown menu vertical medium-horizontal" data-magellan>
-                <% var hrefprefix = req.route.path == '/' ? '' : '/'; %>
+                <% var hrefprefix = req.path == '/' ? '' : '/'; %>
                 <li><a href="<%= hrefprefix %>#header"><i class="fa fa-home" aria-hidden="true"></i> Welcome</a></li>
                 <li><a href="<%= hrefprefix %>#code"><i class="fa fa-code" aria-hidden="true"></i> Overview</a></li>
                 <li><a href="<%= hrefprefix %>#services"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Services</a></li>
