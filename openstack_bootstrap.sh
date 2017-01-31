@@ -10,6 +10,6 @@ cd screenapp/app/assets
 bower install
 cd ..
 npm install
+sudo chmod -R 777 assets
+screen -S sails
 sudo sails lift --prod
-
-exit 0
