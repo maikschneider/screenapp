@@ -16,14 +16,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var screenIdTextField: UITextField!
     @IBOutlet weak var playButton: UIButton!
     
+    @IBOutlet weak var streamButton: UIButton!
+    
     var playlists: [Playlist] = []
     var selectedPlaylist: Playlist?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        streamButton.layer.cornerRadius = 3.0
         
         func printJson(json: RestEssentials.JSON) {
             let pl = restClient.parsePlaylists(json: json)
@@ -31,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.reloadData()
         }
         
-        restClient.get(url: "localhost:1337/playlist", callback: printJson)
+        restClient.get(url: "http://87.190.238.41/playlist", callback: printJson)
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,10 +12,13 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet weak var webView: UIWebView!
     
+    let endpoint: String = "http://87.190.238.41/screen/play/"
     var screenId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         guard screenId != nil else {
             return
@@ -23,7 +26,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
         webView.delegate = self
         
-        webView.loadRequest(URLRequest(url: URL(string: "http://127.0.0.1:1337/screen/play/" + screenId!)!))
+        webView.loadRequest(URLRequest(url: URL(string: endpoint + screenId!)!))
     }
 
 
